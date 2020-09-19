@@ -16,7 +16,7 @@
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
                     <h2 style="text-align:center;">THÔNG TIN CHI TIẾT DOANH NGHIỆP</h2>
-                    <h3 style="text-align:center;">DANH HIỆU SAO KHUÊ NĂM <span style="color:#3c8dbc;"><?php echo $year; ?></span></h3>
+                    <h3 style="text-align:center;">CHƯƠNG TRÌNH GIẢI THƯỞNG THÀNH PHỐ THÔNG MINH VIỆT NAM NĂM <span style="color:#3c8dbc;"><?php echo $year; ?></span></h3>
                 </div>
                 <hr>
                 <?php
@@ -219,6 +219,44 @@
                         </div>
                     </div>
                 </div>
+
+
+
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Tổng doanh thu lĩnh vực ứng cử (triệu VND)', 'candidate_income');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[0], 'candidate_income_1');
+                                echo form_error('candidate_income_1', '<div class="error">', '</div>');
+                                echo form_input('candidate_income_1', set_value('candidate_income_1'), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'candidate_income_2');
+                                echo form_error('candidate_income_2', '<div class="error">', '</div>');
+                                echo form_input('candidate_income_2', set_value('candidate_income_2'), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'candidate_income_3');
+                                echo form_error('candidate_income_3', '<div class="error">', '</div>');
+                                echo form_input('candidate_income_3', set_value('candidate_income_3'), 'class="form-control"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
@@ -320,10 +358,13 @@
                                     'Giáo dục' => 'Giáo dục',
                                     'Giao thông' => 'Giao thông',
                                     'Xây dựng' => 'Xây dựng',
-                                    'Sản xuất/dịch vụ cho DN' => 'Sản xuất/dịch vụ cho DN',
+                                    'Môi trường' => 'Môi trường',
+                                    'Năng lượng' => 'Năng lượng',
+                                    'Dịch vụ cho doanh nghiệp' => 'Dịch vụ cho doanh nghiệp',
                                     'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
                                     'Viễn thông' => 'Viễn thông',
                                     'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
+                                    'Sản xuất' => 'Sản xuất',
                                     'Tư vấn' => 'Tư vấn'
                                 );
                                 echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
@@ -371,7 +412,10 @@
                                         echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
                                         echo $key.'<br>';
                                     }
+                                    echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous_1"');
+                                    echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
                                     ?>
+                                    <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: none;">
                                 </div>
                                 <br>
                                 <strong style="margin-left: -15px">Quốc tế</strong>
@@ -382,8 +426,8 @@
                                     ?>
                                     &nbsp;&nbsp;&nbsp;
                                     <?php
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', false, 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu SP/Giải pháp';
+                                    echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp/Dịch vụ', false, 'class="btn-checkbox"');
+                                    echo 'Xuất khẩu SP/Giải pháp/Dịch vụ';
                                     ?>
                                     &nbsp;&nbsp;&nbsp;
                                     <?php
@@ -926,6 +970,19 @@
     $('.input-anonymous-service').change(function(){
         var anonymous = $(this).val();
         $('#anonymous-service').attr('value', anonymous);
+    });
+
+    $('#anonymous_1').click(function(){
+        if($(this).prop("checked") == true){
+            $('.input-anonymous_1').slideDown();
+        }else{
+            $('.input-anonymous_1').slideUp();
+        }
+    })
+
+    $('.input-anonymous_1').change(function(){
+        var anonymous = $(this).val();
+        $('#anonymous_1').attr('value', anonymous);
     });
     $('#company-form').submit(function(e){
         //disable the submit button

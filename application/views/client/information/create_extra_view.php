@@ -206,15 +206,15 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Link download PĐK của DN', 'link');
+                            echo form_label('Link upload hồ sơ của DN', 'link');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-xs-12">
-                            <p>Doanh nghiệp tải mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu và upload tại đây.</p>
+                            <p>Doanh nghiệp vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload hồ sơ tham gia (Phiếu đăng ký, Giấy phép kinh doanh, logo, profile DN&SP (nếu có)) vào ô dưới đây</p>
                             <?php  echo form_error('link', '<div class="error">', '</div>'); ?>
                             <div class="input-group">
                                 <?php echo form_input('link', set_value('link'), 'class="form-control" aria-describedby="basic-addon2" placeholder="Nhập Link phiếu đăng ký tại đây" '); ?>
-                              <span class="input-group-addon" id="basic-addon2" style="background: #f39c12 !important"><a style="color:#fff;font-weight: bold;" class="color-warning" href="<?php echo site_url('PDK2018_done.doc') ?>" target="_blank">Tải mẫu Phiếu đăng ký</a></span>
+                              <span class="input-group-addon" id="basic-addon2" style="background: #f39c12 !important"><a style="color:#fff;font-weight: bold;" class="color-warning" href="<?php echo site_url('PDK_SmartCity.docx') ?>" target="_blank">Tải mẫu Phiếu đăng ký</a></span>
                             </div>
                             <br>
                         </div>

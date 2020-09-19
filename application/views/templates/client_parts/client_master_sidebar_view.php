@@ -82,21 +82,18 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #3c8dbc">
                     <!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                    <h4 style="color:white;">Cảm ơn quý đơn vị đã đăng ký tham gia chương trình Danh hiệu Sao Khuê <?php echo $eventYear; ?>.</h4>
+                    <h4 style="color:white;">Cảm ơn quý đơn vị đã đăng ký tham gia chương trình Giải thưởng Thành phố Thông Minh Việt Nam <?php echo $eventYear; ?>.</h4>
                 </div>
                 <div class="modal-body">
-                    <h4 style="font-weight:bold !important;">Để hoàn tất hồ sơ, vui lòng gửi lại BTC các tài liệu sau qua đường bưu điện:</h4>
-                    <h4> 1. File Phiếu đăng ký theo mẫu đã tải (có dấu và chữ ký của lãnh đạo công ty)</h4>
-                    <h4> 2. Giấy đăng ký bản quyền sản phẩm/dịch vụ đề cử (bản photo)</h4>
-                    <h4> 3. Giấy phép đăng ký kinh doanh (bản photo)</h4>
-                    <h4> 4. Bằng khen, chứng chỉ (nếu có)</h4>
-                    <h4 style="text-decoration: underline !important;">Địa chỉ: </h4>
-                    <h4 style="font-weight:bold !important;"> Ms. Hoàng Minh Thư</h4>
+                    <h4 style=""text-decoration: underline !important;">Nếu có vấn đề gì liên quan đến chương trình, Doanh nghiệp vui lòng liên hệ người phụ trách để được hỗ trợ. </h4>
+                    
+                    <h4 style="text-decoration: underline !important;">Thông tin liên hệ: </h4>
+                    <h4 style="font-weight:bold !important;"> Ms. Lê Thị Ánh Tuyết</h4>
                     <h4 style="font-weight:bold !important;">Hiệp hội Phần mềm và Dịch vụ CNTT Việt Nam</h4>
                     <h4 style="font-weight:bold !important;">Tầng 11, tòa nhà Cung Trí thức thành phố</h4>
                     <h4 style="font-weight:bold !important;">Số 1 Tôn Thất Thuyết, Cầu Giấy, Hà Nội</h4>
-                    <h4 style="font-weight:bold !important;">Email: thuhm@vinasa.org.vn</h4>
-                    <h4 style="font-weight:bold !important;">Mobile: 0385796096/02435772336</h4>
+                    <h4 style="font-weight:bold !important;">Email: tuyetlta@vinasa.org.vn</h4>
+                    <h4 style="font-weight:bold !important;">Mobile: 0948117588 / 02435772336</h4>
 
                 </div>
                 <div class="modal-footer">

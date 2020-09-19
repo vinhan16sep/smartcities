@@ -217,6 +217,39 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            echo form_label('Tổng doanh thu lĩnh vực ứng cử (triệu VND)', 'candidate_income');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[0], 'candidate_income_1');
+                                echo form_error('candidate_income_1', '<div class="error">', '</div>');
+                                echo form_input('candidate_income_1', set_value('candidate_income_1', $company['candidate_income_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'candidate_income_2');
+                                echo form_error('candidate_income_2', '<div class="error">', '</div>');
+                                echo form_input('candidate_income_2', set_value('candidate_income_2', $company['candidate_income_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'candidate_income_3');
+                                echo form_error('candidate_income_3', '<div class="error">', '</div>');
+                                echo form_input('candidate_income_3', set_value('candidate_income_3', $company['candidate_income_3']), 'class="form-control"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
                             echo form_label('Tổng số lao động của doanh nghiệp', 'total_labor');
                             ?>
                         </div>
@@ -314,10 +347,13 @@
                                     'Giáo dục' => 'Giáo dục',
                                     'Giao thông' => 'Giao thông',
                                     'Xây dựng' => 'Xây dựng',
-                                    'Sản xuất/dịch vụ cho DN' => 'Sản xuất/dịch vụ cho DN',
+                                    'Môi trường' => 'Môi trường',
+                                    'Năng lượng' => 'Năng lượng',
+                                    'Dịch vụ cho doanh nghiệp' => 'Dịch vụ cho doanh nghiệp',
                                     'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
                                     'Viễn thông' => 'Viễn thông',
                                     'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
+                                    'Sản xuất' => 'Sản xuất',
                                     'Tư vấn' => 'Tư vấn'
                                 );
 
@@ -399,7 +435,7 @@
                                 'Nhật Bản' => 'Nhật Bản',
                                 'Các nước trong khu vực' => 'Các nước trong khu vực',
                                 'Gia công xuất khẩu' => 'Gia công xuất khẩu',
-                                'Xuất khẩu SP/Giải pháp' => 'Xuất khẩu SP/Giải pháp',
+                                'Xuất khẩu SP/Giải pháp/Dịch vụ' => 'Xuất khẩu SP/Giải pháp/Dịch vụ',
                                 'Xuất khẩu nhân lực CNTT' => 'Xuất khẩu nhân lực CNTT'
                             );
                             $check = false;
@@ -412,7 +448,16 @@
                                     }
                                 }
                             }
-                            // print_r($main_market);die;
+                            $check1 = false;
+                            if(!is_null($main_market) && $main_market != null){
+
+                                $check1 = array_diff($main_market, $domestic);
+                                if($check1){
+                                    foreach ($check1 as $key => $value) {
+                                        $new_check1[] = $value;
+                                    }
+                                }
+                            }
 
                             ?>
                         </div>
@@ -433,7 +478,28 @@
                                             echo $key.'<br>';
                                         }
                                     }
+                                    if($check1){
+                                        if($new_check1[0] != ''){
+                                            echo form_checkbox('main_market[]', '', true, 'class="btn-checkbox" id="anonymous_1"');
+                                            echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
+                                        }else{
+                                            echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous_1"');
+                                            echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
+                                        }
+                                    }else{
+                                        echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous_1"');
+                                        echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
+                                    }
                                     ?>
+                                    <?php if($check1): ?>
+                                        <?php if ($new_check1[0] != ''): ?>
+                                            <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: block;" value="<?php echo $new_check1[0] ?>">
+                                        <?php else: ?>
+                                            <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: none;">
+                                        <?php endif ?>
+                                    <?php else: ?>
+                                        <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: none;">
+                                    <?php endif ?>
                                 </div>
                                 <br>
                                 <strong style="margin-left: -15px">Quốc tế</strong>
@@ -450,11 +516,11 @@
                                     &nbsp;&nbsp;&nbsp;
                                     <?php
                                     if(!is_null($main_market) && $main_market != null){
-                                        echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', (in_array('Xuất khẩu SP/Giải pháp', $main_market, '')? true : false), 'class="btn-checkbox"');
-                                        echo 'Xuất khẩu SP/Giải pháp';
+                                        echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp/Dịch vụ', (in_array('Xuất khẩu SP/Giải pháp/Dịch vụ', $main_market, '')? true : false), 'class="btn-checkbox"');
+                                        echo 'Xuất khẩu SP/Giải pháp/Dịch vụ';
                                     }else{
-                                        echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', false, 'class="btn-checkbox"');
-                                        echo 'Xuất khẩu SP/Giải pháp';
+                                        echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp/Dịch vụ', false, 'class="btn-checkbox"');
+                                        echo 'Xuất khẩu SP/Giải pháp/Dịch vụ';
                                     }
                                     ?>
                                     &nbsp;&nbsp;&nbsp;
@@ -1056,5 +1122,21 @@
         var anonymous_service = $(this).val();
         $('#anonymous-service').attr('value', anonymous_service);
     })
+
+    $('#anonymous_1').click(function(){
+        if($(this).prop("checked") == true){
+            $('.input-anonymous_1').slideDown();
+        }else{
+            $('.input-anonymous_1').slideUp();
+        }
+    })
+    $('.input-anonymous_1').change(function(){
+        var anonymous = $(this).val();
+        $('#anonymous_1').attr('value', anonymous);
+    });
+    $('.input-anonymous_1').each(function(){
+        var anonymous = $(this).val();
+        $('#anonymous_1').attr('value', anonymous);
+    });
 
 </script>

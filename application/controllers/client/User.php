@@ -119,7 +119,7 @@ class User extends MY_Controller {
                 $this->status_model->insert('status', $status);
             }
             if($result){
-                $this->session->set_flashdata('register_success', 'Cảm ơn Qúy Công ty đã đăng ký tham gia Chương trình Danh hiệu Sao Khuê ' . $this->data['eventYear'] .'.
+                $this->session->set_flashdata('register_success', 'Cảm ơn Quý Công ty đã đăng ký tham gia Chương trình Giải thưởng thành phố thông minh Việt Nam ' . $this->data['eventYear'] .'.
                                                 Vui lòng truy cập email để kích hoạt tài khoản và khai hồ sơ.');
                 redirect('client/user/login', 'refresh');
                 $this->ion_auth->login($username, $password, false);
