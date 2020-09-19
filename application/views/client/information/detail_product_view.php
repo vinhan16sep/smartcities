@@ -15,11 +15,11 @@
                                     <!--<img src="<?php echo base_url('assets/upload/product/'. $product['certificate']); ?>" alt="" style="width: 200px;">-->
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-circle margin-r-5"></i> Tên Sản phẩm/giải pháp/dịch vụ</a> <br><p class="" style="padding-left:20px;"><?php echo $product['name']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Tên Sản phẩm/giải pháp/ứng dụng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['name']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <?php $service = json_decode($product['service']) ?>
-                                    <a><i class="fa fa-circle margin-r-5"></i> Đăng ký tham gia nhóm</a> <br>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Đăng ký tham gia lĩnh vực</a> <br>
                                     <?php if(!is_null($service) && $service != null){ ?>
                                         <?php foreach ($service as $key => $value): ?>
                                             <p class="" style="padding-left:20px;"><?php echo $value; ?></p>
@@ -52,31 +52,31 @@
                             <h4>Thông tin khác</h4>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-star margin-r-5"></i> Mô tả các công năng của sản phẩm</a> <br><p class="" style="padding-left:20px;"><?php echo $product['functional']; ?></p>
+                                    <a><i class="fa fa-star margin-r-5"></i> Mô tả các công năng của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['functional']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-star margin-r-5"></i> Các công nghệ và quy trình chất lượng sử dụng để phát triển sản phẩm</a> <br><p class="" style="padding-left:20px;"><?php echo $product['process']; ?></p>
+                                    <a><i class="fa fa-star margin-r-5"></i> Các công nghệ và quy trình chất lượng sử dụng để phát triển SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['process']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-user-secret margin-r-5"></i> Bảo mật của sản phẩm</a> <br><p class="" style="padding-left:20px;"><?php echo $product['security']; ?></p>
+                                    <a><i class="fa fa-user-secret margin-r-5"></i> Tính bảo mật của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['security']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-thumbs-o-up margin-r-5"></i> Các ưu điểm nổi trội của SP/GP/DV</a> <br><p class="" style="padding-left:20px;"><?php echo $product['positive']; ?></p>
+                                    <a><i class="fa fa-thumbs-o-up margin-r-5"></i> Các ưu điểm nổi trội của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['positive']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-star margin-r-5"></i> So sánh với các SP/GP/DV khác</a> <br><p class="" style="padding-left:20px;"><?php echo $product['compare']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm <?= (intval($eventYear) - 2) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 2) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm <?= (intval($eventYear) - 1) ?> (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯV năm <?= (intval($eventYear) - 1) ?> (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/GP/DV</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>
+                                    <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Giá SP/GP/DV</a> <p class="pull-right"><?php echo $product['price']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Giá SP/GP/ƯD</a> <p class="pull-right"><?php echo $product['price']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-users margin-r-5"></i> Thông tin khách hàng (Số lượng khách hàng cá nhân, khách hàng tổ chức/doanh nghiệp, kể tên một số khách hàng tiêu biểu)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['customer']; ?></p>
@@ -85,7 +85,7 @@
                                     <a><i class="fa fa-child margin-r-5"></i> Dịch vụ sau bán hàng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['after_sale']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Đội ngũ phát triển sản phẩm/giải pháp/dịch vụ (bao nhiêu người, trình độ, trong bao lâu...)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['team']; ?></p>
+                                    <a><i class="fa fa-users margin-r-5"></i> Đội ngũ phát triển SP/GP/ƯD (bao nhiêu người, trình độ, trong bao lâu...)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['team']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-trophy margin-r-5"></i> Các giải thưởng/DH đã nhận được</a> <br><p class="" style="padding-left:20px;"><?php echo $product['award']; ?></p>

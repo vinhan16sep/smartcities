@@ -388,7 +388,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <p style="color:red;">Ghi chú: Nếu chưa có giấy chứng nhận bản quyền, thì tải mẫu Cam kết bản quyền tại đây, khai thông tin, ký, đóng dấu và gửi lại bản cứng cho ban tổ chức.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('Cam-ket-ban-quyen.docx') ?>" target="_blank">Tải mẫu Cam kết bản quyền</a>
+                            <a class="btn btn-warning" href="<?php echo site_url('Camketbanquyen_SmartCity.docx') ?>" target="_blank">Tải mẫu Cam kết bản quyền</a>
                             <br>
                         </div>
                     </div>

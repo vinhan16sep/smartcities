@@ -238,6 +238,9 @@ class Information extends Client_Controller {
                         'export_income_1' => $this->input->post('export_income_1'),
                         'export_income_2' => $this->input->post('export_income_2'),
                         'export_income_3' => $this->input->post('export_income_3'),
+                        'candidate_income_1' => $this->input->post('candidate_income_1'),
+                        'candidate_income_2' => $this->input->post('candidate_income_2'),
+                        'candidate_income_3' => $this->input->post('candidate_income_3'),
                         'total_labor_1' => $this->input->post('total_labor_1'),
                         'total_labor_2' => $this->input->post('total_labor_2'),
                         'total_labor_3' => $this->input->post('total_labor_3'),
@@ -304,6 +307,9 @@ class Information extends Client_Controller {
                         'export_income_1' => $this->input->post('export_income_1'),
                         'export_income_2' => $this->input->post('export_income_2'),
                         'export_income_3' => $this->input->post('export_income_3'),
+                        'candidate_income_1' => $this->input->post('candidate_income_1'),
+                        'candidate_income_2' => $this->input->post('candidate_income_2'),
+                        'candidate_income_3' => $this->input->post('candidate_income_3'),
                         'total_labor_1' => $this->input->post('total_labor_1'),
                         'total_labor_2' => $this->input->post('total_labor_2'),
                         'total_labor_3' => $this->input->post('total_labor_3'),
@@ -379,6 +385,9 @@ class Information extends Client_Controller {
                         'export_income_1' => $this->input->post('export_income_1'),
                         'export_income_2' => $this->input->post('export_income_2'),
                         'export_income_3' => $this->input->post('export_income_3'),
+                        'candidate_income_1' => $this->input->post('candidate_income_1'),
+                        'candidate_income_2' => $this->input->post('candidate_income_2'),
+                        'candidate_income_3' => $this->input->post('candidate_income_3'),
                         'total_labor_1' => $this->input->post('total_labor_1'),
                         'total_labor_2' => $this->input->post('total_labor_2'),
                         'total_labor_3' => $this->input->post('total_labor_3'),
@@ -447,6 +456,9 @@ class Information extends Client_Controller {
                         'export_income_1' => $this->input->post('export_income_1'),
                         'export_income_2' => $this->input->post('export_income_2'),
                         'export_income_3' => $this->input->post('export_income_3'),
+                        'candidate_income_1' => $this->input->post('candidate_income_1'),
+                        'candidate_income_2' => $this->input->post('candidate_income_2'),
+                        'candidate_income_3' => $this->input->post('candidate_income_3'),
                         'total_labor_1' => $this->input->post('total_labor_1'),
                         'total_labor_2' => $this->input->post('total_labor_2'),
                         'total_labor_3' => $this->input->post('total_labor_3'),
@@ -550,7 +562,7 @@ class Information extends Client_Controller {
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
                         'positive' => $this->input->post('positive'),
-                        'compare' => $this->input->post('compare'),
+                        // 'compare' => $this->input->post('compare'),
                         'income_1' => $this->input->post('income_1'),
                         'income_2016' => $this->input->post('income_2016'),
                         'income_2017' => $this->input->post('income_2017'),
@@ -564,7 +576,7 @@ class Information extends Client_Controller {
                         'certificate' => $this->input->post('certificate'),
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
-                         'year' => $this->data['eventYear'],
+                        'year' => $this->data['eventYear'],
                         'created_at' => $this->author_info['created_at'],
                         'created_by' => $this->author_info['created_by'],
                         'modified_at' => $this->author_info['modified_at'],
@@ -608,7 +620,7 @@ class Information extends Client_Controller {
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
                         'positive' => $this->input->post('positive'),
-                        'compare' => $this->input->post('compare'),
+                        // 'compare' => $this->input->post('compare'),
                         'income_1' => $this->input->post('income_1'),
                         'income_2016' => $this->input->post('income_2016'),
                         'income_2017' => $this->input->post('income_2017'),
@@ -673,7 +685,7 @@ class Information extends Client_Controller {
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
                         'positive' => $this->input->post('positive'),
-                        'compare' => $this->input->post('compare'),
+                        // 'compare' => $this->input->post('compare'),
                         'income_1' => $this->input->post('income_1'),
                         'income_2016' => $this->input->post('income_2016'),
                         'income_2017' => $this->input->post('income_2017'),
@@ -729,7 +741,7 @@ class Information extends Client_Controller {
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
                         'positive' => $this->input->post('positive'),
-                        'compare' => $this->input->post('compare'),
+                        // 'compare' => $this->input->post('compare'),
                         'income_1' => $this->input->post('income_1'),
                         'income_2016' => $this->input->post('income_2016'),
                         'income_2017' => $this->input->post('income_2017'),
@@ -972,6 +984,21 @@ class Information extends Client_Controller {
             'numeric' => '%s phải là số.',
             'max_length' => 'Tối đa 10 chữ số'
         ));
+        $this->form_validation->set_rules('candidate_income_1', 'Tổng doanh thu lĩnh vực ứng cử ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[10]', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+            'max_length' => 'Tối đa 10 chữ số'
+        ));
+        $this->form_validation->set_rules('candidate_income_2', 'Tổng doanh thu lĩnh vực ứng cử ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[10]', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+            'max_length' => 'Tối đa 10 chữ số'
+        ));
+        $this->form_validation->set_rules('candidate_income_3', 'Tổng doanh thu lĩnh vực ứng cử ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[10]', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+            'max_length' => 'Tối đa 10 chữ số'
+        ));
         $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',
@@ -1077,6 +1104,18 @@ class Information extends Client_Controller {
             'numeric' => '%s phải là số.',
             'max_length' => 'Tối đa 10 chữ số'
         ));
+        $this->form_validation->set_rules('candidate_income_1', 'Tổng doanh thu lĩnh vực ứng cử ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[10]', array(
+            'numeric' => '%s phải là số.',
+            'max_length' => 'Tối đa 10 chữ số'
+        ));
+        $this->form_validation->set_rules('candidate_income_2', 'Tổng doanh thu lĩnh vực ứng cử ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[10]', array(
+            'numeric' => '%s phải là số.',
+            'max_length' => 'Tối đa 10 chữ số'
+        ));
+        $this->form_validation->set_rules('candidate_income_3', 'Tổng doanh thu lĩnh vực ứng cử ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[10]', array(
+            'numeric' => '%s phải là số.',
+            'max_length' => 'Tối đa 10 chữ số'
+        ));
         $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|numeric', array(
             'numeric' => '%s phải là số.',
         ));
@@ -1117,9 +1156,9 @@ class Information extends Client_Controller {
         $this->form_validation->set_rules('positive', 'Data', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('compare', 'Data', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
+        // $this->form_validation->set_rules('compare', 'Data', 'trim|required', array(
+        //     'required' => '%s không được trống.',
+        // ));
         $this->form_validation->set_rules('income_1', 'Data', 'trim|required|numeric|max_length[10]', array(
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',

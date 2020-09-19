@@ -87,6 +87,19 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu xuất khẩu <?php echo (int)($selectedYear - 1); ?> (USD)</a> <p class="pull-right"><?php echo $company['export_income_3'] ?></p>
                                 </li>
+
+
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu lĩnh vực ứng cử <?php echo (int)($selectedYear - 3); ?> (USD)</a> <p class="pull-right"><?php echo $company['candidate_income_1'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu lĩnh vực ứng cử <?php echo (int)($selectedYear - 2); ?> (USD)</a> <p class="pull-right"><?php echo $company['candidate_income_2'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu lĩnh vực ứng cử <?php echo (int)($selectedYear - 1); ?> (USD)</a> <p class="pull-right"><?php echo $company['candidate_income_3'] ?></p>
+                                </li>
+
+
                                 <li class="list-group-item">
                                     <a><i class="fa fa-users margin-r-5"></i> Tổng số lao động của doanh nghiệp <?php echo (int)($selectedYear - 3); ?></a> <p class="pull-right"><?php echo $company['total_labor_1'] ?></p>
                                 </li>
