@@ -51,9 +51,9 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_all_product_for_client($id, $limit = NULL, $start = NULL) {
+    public function get_all_product_for_client($id, $limit = NULL, $start = NULL, $table = 'product') {
         $this->db->select('*');
-        $this->db->from('product');
+        $this->db->from($table);
         $this->db->where('client_id', $id);
         $this->db->where('is_deleted', 0);
         $this->db->limit($limit, $start);
@@ -620,7 +620,7 @@ class Information_model extends CI_Model {
     public function update_product($type, $client_id, $id, $information){
         // $this->db->query("SET GLOBAL innodb_file_format=Barracuda;");
         // $this->db->query("SET GLOBAL innodb_file_per_table=ON;");
-        $this->db->query("ALTER TABLE product ENGINE = InnoDB ROW_FORMAT = DYNAMIC;");
+        $this->db->query("ALTER TABLE ".$type." ENGINE = InnoDB ROW_FORMAT = DYNAMIC;");
         $this->db->set($information)
             ->where('client_id', $client_id)
             ->where('id', $id)

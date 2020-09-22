@@ -636,8 +636,10 @@
     // });
     $('#product-form').submit(function(e){
         //disable the submit button
-        $("#submit").attr("disabled", true);
-        $("#tmpSubmit").attr("disabled", true);
+        setTimeout(function(){
+            $("#submit").attr("disabled", true);
+            $("#tmpSubmit").attr("disabled", true);
+        },1000)
     });
 
 </script>
