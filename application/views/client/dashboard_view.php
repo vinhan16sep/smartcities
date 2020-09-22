@@ -107,30 +107,33 @@
                                     <?php if(!$company_submitted): ?>
                                         <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin doanh nghiệp</p>
                                         <span>
-                                            <a href="<?php echo base_url('client/information/create_company?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                            <!-- UPDATE FOR SERVICE TYPE -->
+                                            <?php if ($user_service_type == '4'): ?>
+                                                <a href="<?php echo base_url('client/company/create?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                            <?php elseif ($user_service_type == '2' || $user_service_type == '3'): ?>
+                                                <a href="<?php echo base_url('client/company/create_2_3?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                            <?php else: ?>
+
+                                            <?php endif; ?>
                                         </span>
                                     <?php else: ?>
-                                        <!--                                        <span>-->
-                                        <!--                                            <a href="--><?php //echo base_url('client/information/company'); ?><!--" style="width:100%" class="btn btn-success btn-block"><b>Xem danh sách qua các năm đã đăng ký<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>-->
-                                        <!--                                        </span>-->
                                         <br>
                                         <?php foreach ($company_submitted as $value){ ?>
                                             <div>
-                                                <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-primary btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
+                                                <a style="display: inline;" href="<?php echo base_url('client/company/index?year=' . $value['year']) ?>" class="btn btn-primary btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
                                                 <?php if($status['is_final'] == 0){ ?>
                                                     <?php if(date('Y') <= $value['year']){ ?>
-                                                        <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
+                                                        <a style="display: inline;" href="<?php echo base_url('client/company/edit?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
                                                     <?php } ?>
                                                 <?php } ?>
                                             </div>
-                                            <!--                                            <hr style="width: 70%;">-->
                                         <?php } ?>
                                     <?php endif; ?>
                                 <?php else: ?>
                                     <br>
                                     <?php foreach ($company_submitted as $value){ ?>
                                         <div>
-                                            <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-primary btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
+                                            <a style="display: inline;" href="<?php echo base_url('client/company/index?year=' . $value['year']) ?>" class="btn btn-primary btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
                                         </div>
                                         <hr>
                                     <?php } ?>
@@ -224,29 +227,6 @@
 
     </div>
 </div>
-<!--<div id="myModal1" class="modal fade" role="dialog">-->
-<!--    <div class="modal-dialog">-->
-<!---->
-<!--        <!-- Modal content-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                <h4 class="modal-title">Chọn năm</h4>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <select class="form-control" id="selected_year">-->
-<!--                    --><?php //for(($i = date('Y') - 3); ($i <= date('Y') + 1); $i++){ ?>
-<!--                        <option value="--><?php //echo $i; ?><!--" --><?php //echo ($i == date('Y')) ? 'selected="selected"' : ''; ?><!--">--><?php //echo $i; ?><!--</option>-->
-<!--                    --><?php //} ?>
-<!--                </select>-->
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--                <a onclick="this.href='--><?php //echo base_url("client/information/create_company") ?>////?year='+document.getElementById('selected_year').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--    </div>-->
-<!--</div>-->
 <script>
     function confirmation() {
         if(confirm('Bạn vẫn muốn gửi?')){

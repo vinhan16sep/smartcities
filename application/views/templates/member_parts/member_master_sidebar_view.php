@@ -55,7 +55,7 @@
 <!--                    </a>-->
 <!--                </li>-->
 <!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
-<!--                    <a href="--><?php //echo base_url('client/information/company'); ?><!--">-->
+<!--                    <a href="--><?php //echo base_url('client/company/index'); ?><!--">-->
 <!--                        <i class="fa fa-bars" aria-hidden="true"></i>-->
 <!--                        <span>TT doanh nghiệp</span>-->
 <!--                        <span class="pull-right-container"></span>-->
