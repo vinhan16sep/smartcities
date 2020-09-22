@@ -64,6 +64,13 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
+                <li class="<?php echo ($active == 'product1')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product1/products'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin dự án bất động <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sản ứng cử</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
                 <li>
                     <a onclick="return openModal();" href="#"><b></b>
                         <i class="fa fa-exclamation" aria-hidden="true"></i>
