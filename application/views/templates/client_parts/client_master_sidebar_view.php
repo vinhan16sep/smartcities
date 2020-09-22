@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="<?php echo ($active == 'company')? 'active' : '' ?>">
-                    <a href="<?php echo base_url('client/information/company'); ?>">
+                    <a href="<?php echo base_url('client/company/index'); ?>">
                         <i class="fa fa-bar-chart" aria-hidden="true"></i>
                         <span>Thông tin doanh nghiệp</span>
                         <span class="pull-right-container"></span>
@@ -45,9 +45,9 @@
 <!--                        --><?php //if($company_submitted): ?>
 <!--                            --><?php //foreach ($company_submitted as $value){ ?>
 <!--                                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
-<!--                                    <a href="--><?php //echo base_url('client/information/company?year=' . $value['year']) ?><!--"> <i class="fa fa-minus" aria-hidden="true"></i> Năm --><?php //echo $value['year']; ?><!--</a>-->
+<!--                                    <a href="--><?php //echo base_url('client/company/index?year=' . $value['year']) ?><!--"> <i class="fa fa-minus" aria-hidden="true"></i> Năm --><?php //echo $value['year']; ?><!--</a>-->
 <!--                                    --><?php //if(date('Y') <= $value['year']){ ?>
-<!--                                        <a style="display: inline;" href="--><?php //echo base_url('client/information/edit_company?year=' . $value['year']); ?><!--"><b style="color: orange">- sửa -</b></a>-->
+<!--                                        <a style="display: inline;" href="--><?php //echo base_url('client/company/edit?year=' . $value['year']); ?><!--"><b style="color: orange">- sửa -</b></a>-->
 <!--                                    --><?php //} ?>
 <!--                                    <br>-->
 <!--                                </li>-->

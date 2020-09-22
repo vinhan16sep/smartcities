@@ -100,11 +100,11 @@
                                     </div>
                                     <?php if($hasCurrentYearCompanyData == 0){ ?>
                                         <div class="col-xs-12 col-md-6 pull-right">
-                                            <a href="<?php echo base_url('client/information/create_company?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Tiếp tục nhập thông tin chi tiết <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                            <a href="<?php echo base_url('client/company/create?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Tiếp tục nhập thông tin chi tiết <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         </div>
                                     <?php }else{ ?>
                                         <div class="col-xs-12 col-md-6 pull-right">
-                                            <a href="<?php echo base_url('client/information/company'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Xem thông tin doanh nghiệp đã đăng ký <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                            <a href="<?php echo base_url('client/company/index'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Xem thông tin doanh nghiệp đã đăng ký <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         </div>
                                     <?php } ?>
                                 </div>

@@ -81,7 +81,7 @@
                             <select name="service_type" class="form-control">
                                 <option value="" selected="selected">-- Chọn hạng mục --</option>
                                 <option value="1" disabled>Nhóm 1: Các thành phố thông minh</option>
-                                <option value="2" disabled>Nhóm 2: Các dự án BĐS thông minh</option>
+                                <option value="2">Nhóm 2: Các dự án BĐS thông minh</option>
                                 <option value="3" disabled>Nhóm 3: Các dự án BĐS Công nghiệp thông minh</option>
                                 <option value="4">Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh</option>
                             </select>

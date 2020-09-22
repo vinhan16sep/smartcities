@@ -80,7 +80,7 @@ class Information extends Client_Controller {
     public function company(){
         $this->data['submitted'] = $this->information_model->fetch_by_user_id('company', $this->data['user']->id);
 
-        $this->render('client/information/detail_company_view');
+        $this->render('client/company/detail_view');
     }
 
     public function create_company() {
@@ -102,7 +102,7 @@ class Information extends Client_Controller {
         $this->form_validation->set_rules('main_market', 'Data', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->render('client/information/create_company_view');
+            $this->render('client/company/create_view');
         } else {
             if ($this->input->post()) {
                 $data = array(
@@ -133,7 +133,7 @@ class Information extends Client_Controller {
                 }
                 $this->session->set_flashdata('message', 'Item added successfully');
 
-                redirect('client/information/company', 'refresh');
+                redirect('client/company/index', 'refresh');
             }
         }
     }

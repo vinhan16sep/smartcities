@@ -436,6 +436,7 @@ class Client_Controller extends MY_Controller {
             $this->data['eventYear'] - 2,
             $this->data['eventYear'] - 1
         );
+        $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
     }
 
 
