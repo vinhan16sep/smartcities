@@ -415,10 +415,7 @@
                                         echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
                                         echo $key.'<br>';
                                     }
-                                    echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous_1"');
-                                    echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
                                     ?>
-                                    <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: none;">
                                 </div>
                                 <br>
                                 <strong style="margin-left: -15px">Quốc tế</strong>
@@ -958,24 +955,6 @@
     $('.input-anonymous-service').change(function(){
         var anonymous = $(this).val();
         $('#anonymous-service').attr('value', anonymous);
-    });
-
-    $('#anonymous_1').click(function(){
-        if($(this).prop("checked") == true){
-            $('.input-anonymous_1').slideDown();
-        }else{
-            $('.input-anonymous_1').slideUp();
-        }
-    })
-
-    $('.input-anonymous_1').change(function(){
-        var anonymous = $(this).val();
-        $('#anonymous_1').attr('value', anonymous);
-    });
-    $('#company-form').submit(function(e){
-        //disable the submit button
-        $("#submit").attr("disabled", true);
-        $("#tmpSubmit").attr("disabled", true);
     });
 
 </script>

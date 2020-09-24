@@ -456,16 +456,6 @@
                                     }
                                 }
                             }
-                            $check1 = false;
-                            if(!is_null($main_market) && $main_market != null){
-
-                                $check1 = array_diff($main_market, $domestic);
-                                if($check1){
-                                    foreach ($check1 as $key => $value) {
-                                        $new_check1[] = $value;
-                                    }
-                                }
-                            }
 
                             ?>
                         </div>
@@ -486,28 +476,7 @@
                                             echo $key.'<br>';
                                         }
                                     }
-                                    if($check1){
-                                        if($new_check1[0] != ''){
-                                            echo form_checkbox('main_market[]', '', true, 'class="btn-checkbox" id="anonymous_1"');
-                                            echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
-                                        }else{
-                                            echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous_1"');
-                                            echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
-                                        }
-                                    }else{
-                                        echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous_1"');
-                                        echo 'Thị trường chính trong nước - Khác (nêu rõ)<br>';
-                                    }
                                     ?>
-                                    <?php if($check1): ?>
-                                        <?php if ($new_check1[0] != ''): ?>
-                                            <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: block;" value="<?php echo $new_check1[0] ?>">
-                                        <?php else: ?>
-                                            <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: none;">
-                                        <?php endif ?>
-                                    <?php else: ?>
-                                        <input type="text" name="anonymous_1" class="input-anonymous_1 form-control" style="display: none;">
-                                    <?php endif ?>
                                 </div>
                                 <br>
                                 <strong style="margin-left: -15px">Quốc tế</strong>
@@ -1115,21 +1084,5 @@
         var anonymous_service = $(this).val();
         $('#anonymous-service').attr('value', anonymous_service);
     })
-
-    $('#anonymous_1').click(function(){
-        if($(this).prop("checked") == true){
-            $('.input-anonymous_1').slideDown();
-        }else{
-            $('.input-anonymous_1').slideUp();
-        }
-    })
-    $('.input-anonymous_1').change(function(){
-        var anonymous = $(this).val();
-        $('#anonymous_1').attr('value', anonymous);
-    });
-    $('.input-anonymous_1').each(function(){
-        var anonymous = $(this).val();
-        $('#anonymous_1').attr('value', anonymous);
-    });
 
 </script>
