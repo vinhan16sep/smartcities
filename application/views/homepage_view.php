@@ -20,7 +20,7 @@
         <div class="register-area">
             <a class="btn-register register-for-city" href="http://smartcitiesvietnam.com/nhom-1-cac-do-thi-thong-minh/"></a>
             <a class="btn-register register-for-real-estate" href="<?php echo base_url('client/user/login') ?>"></a>
-            <a class="btn-register register-for-real-estate-and-industry" href="http://smartcitiesvietnam.com/nhom-3-cac-du-an-bds-cong-nghiep-thong-minh/"></a>
+            <a class="btn-register register-for-real-estate-and-industry" href="<?php echo base_url('client/user/login') ?>"></a>
             <a class="btn-register register-for-technology-solutions" href="<?php echo base_url('client/user/login') ?>"></a>
         </div>
         
