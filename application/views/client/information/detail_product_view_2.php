@@ -126,9 +126,9 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-circle margin-r-5"></i> Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được:</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_31']; ?></p>
                                 </li>
-                                <li class="list-group-item">
+                                <!-- <li class="list-group-item">
                                     <a><i class="fa fa-circle margin-r-5"></i> Ngày tháng năm:</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_32']; ?>/<?php echo $product['field_33']; ?>/2020</p>
-                                </li>
+                                </li> -->
 
 
                                 

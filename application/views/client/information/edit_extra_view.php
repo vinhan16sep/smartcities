@@ -213,7 +213,7 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-xs-12">
-                            <p>Doanh nghiệp vui lòng khai đầy đủ thông tin PĐK, upload hồ sơ tham gia (Phiếu đăng ký, Giấy phép kinh doanh, logo, profile DN&SP (nếu có)) vào ô dưới đây.</p>
+                            <p>Doanh nghiệp vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia (Phiếu đăng ký, Giấy phép kinh doanh, logo, profile DN&SP (nếu có)) vào ô dưới đây</p>
                             <?php  echo form_error('link', '<div class="error">', '</div>'); ?>
                             <div class="input-group link">
                                 <?php echo form_input('link', set_value('link', $extra['link']), 'class="form-control" aria-describedby="basic-addon2" placeholder="Nhập Link phiếu đăng ký tại đây" '); ?>

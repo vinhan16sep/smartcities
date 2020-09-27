@@ -57,6 +57,7 @@
 <!--                        --><?php //endif; ?>
 <!--                    </ul>-->
                 </li>
+                <?php if($user_service_type == '4'): ?>
                 <li class="<?php echo ($active == 'products')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/products'); ?>">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -64,6 +65,7 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
+                <?php elseif ($user_service_type == '2'): ?>
                 <li class="<?php echo ($active == 'product1')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/product1/products'); ?>">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -71,6 +73,7 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
+                <?php endif; ?>
                 <li>
                     <a onclick="return openModal();" href="#"><b></b>
                         <i class="fa fa-exclamation" aria-hidden="true"></i>

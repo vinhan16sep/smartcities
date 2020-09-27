@@ -21,6 +21,9 @@ class MY_Controller extends CI_Controller {
         $this->data['icon_active'] = $this->uri->segment(4);
 
         $this->data['eventYear'] = date('Y');
+        if ($this->ion_auth->user()->row() !== null){
+            $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
+        }
     }
 
     protected function render($the_view = NULL, $template = 'master') {
