@@ -440,6 +440,13 @@ class Client_Controller extends MY_Controller {
             $this->data['eventYear'] - 1
         );
         $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
+        if ($this->data['user_service_type'] == '4') {
+            $this->data['product_url'] =  'client/information/';
+        } elseif ($this->data['user_service_type'] == '2') {
+            $this->data['product_url'] =  'client/product1/';
+        } elseif ($this->data['user_service_type'] == '3') {
+            $this->data['product_url'] =  'client/product2/';
+        }
     }
 
 

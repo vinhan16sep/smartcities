@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                                if($user_service_type == '2'){
+                                if($user_service_type == '2' || $user_service_type == '3'){
                                     echo form_label('Giới thiệu ngắn về Chủ đầu tư (tối đa 500 từ)', 'description');
                                 }else{
                                   echo form_label('Giới thiệu chung về doanh nghiệp (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo doanh nghiệp, định hướng phát triển/chiến lược của doanh nghiệp, thế mạnh của doanh nghiệp...)', 'description');
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <hr style="border-bottom: 1px solid white;">
-                <?php if($user_service_type != '2'): ?>
+                <?php if($user_service_type != '2' && $user_service_type != '3'): ?>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-3 col-md-3 col-sx-12">

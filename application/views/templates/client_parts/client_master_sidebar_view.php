@@ -73,6 +73,14 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
+                <?php elseif ($user_service_type == '3'): ?>
+                <li class="<?php echo ($active == 'product2')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product2/products'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin dự án bất động <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sản công nghiệp</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
                 <?php endif; ?>
                 <li>
                     <a onclick="return openModal();" href="#"><b></b>

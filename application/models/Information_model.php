@@ -205,6 +205,17 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
+    public function count_product2($id, $year) {
+        $query = $this->db->select('*')
+            ->from('product2')
+            ->where('client_id', $id)
+            ->where('year', $year)
+            ->where('is_deleted', 0)
+            ->get();
+
+        return $query->num_rows();
+    }
+
     public function fetch_by_id($type, $id){
         $query = $this->db->select('*')
             ->from($type)
