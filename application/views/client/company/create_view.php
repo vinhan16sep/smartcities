@@ -22,6 +22,65 @@
                 <?php
                 echo form_open_multipart('client/company/create?year=' . $eventYear, array('class' => 'form-horizontal', 'id' => 'company-form'));
                 ?>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            if($user_service_type == '2'){
+                                echo form_label('Giới thiệu ngắn về Chủ đầu tư (tối đa 500 từ)', 'description');
+                            }else{
+                              echo form_label('Giới thiệu chung về doanh nghiệp (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo doanh nghiệp, định hướng phát triển/chiến lược của doanh nghiệp, thế mạnh của doanh nghiệp...)', 'description');
+                            }
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('description', '<div class="error">', '</div>');
+                                echo form_textarea('description', set_value('description'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Lĩnh vực kinh doanh (tối đa 200 từ)', 'linhvuckd');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('linhvuckd', '<div class="error">', '</div>');
+                                echo form_textarea('linhvuckd', set_value('linhvuckd'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Thế mạnh (tối đa 200 từ)', 'themanh');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('themanh', '<div class="error">', '</div>');
+                                echo form_textarea('themanh', set_value('themanh'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -30,13 +89,15 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'equity_2');
-                                echo form_error('equity_1', '<div class="error">', '</div>');
-                                echo form_input('equity_1', set_value('equity_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'equity_2');
+                                    echo form_error('equity_1', '<div class="error">', '</div>');
+                                    echo form_input('equity_1', set_value('equity_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'equity_2');
@@ -54,55 +115,61 @@
                         </div>
                     </div>
                 </div>
-                <hr style="border-bottom: 1px solid white;">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng tài sản (triệu VNĐ)', 'owner_equity');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
+                <?php if($user_service_type != '2'): ?>
+                    <hr style="border-bottom: 1px solid white;">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-sx-12">
                                 <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'owner_equity_1');
-                                echo form_error('owner_equity_1', '<div class="error">', '</div>');
-                                echo form_input('owner_equity_1', set_value('owner_equity_1'), 'class="form-control"');
+                                echo form_label('Tổng tài sản (triệu VNĐ)', 'owner_equity');
                                 ?>
                             </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'owner_equity_2');
-                                echo form_error('owner_equity_2', '<div class="error">', '</div>');
-                                echo form_input('owner_equity_2', set_value('owner_equity_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'owner_equity_3');
-                                echo form_error('owner_equity_3', '<div class="error">', '</div>');
-                                echo form_input('owner_equity_3', set_value('owner_equity_3'), 'class="form-control"');
-                                ?>
+                            <div class="col-sm-9 col-md-9 col-sx-12">
+                                <?php if($user_service_type == '4'): ?>
+                                    <div class="row">
+                                        <?php
+                                        echo form_label('Năm ' . $rule3Year[0], 'owner_equity_1');
+                                        echo form_error('owner_equity_1', '<div class="error">', '</div>');
+                                        echo form_input('owner_equity_1', set_value('owner_equity_1'), 'class="form-control"');
+                                        ?>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[1], 'owner_equity_2');
+                                    echo form_error('owner_equity_2', '<div class="error">', '</div>');
+                                    echo form_input('owner_equity_2', set_value('owner_equity_2'), 'class="form-control"');
+                                    ?>
+                                </div>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[2], 'owner_equity_3');
+                                    echo form_error('owner_equity_3', '<div class="error">', '</div>');
+                                    echo form_input('owner_equity_3', set_value('owner_equity_3'), 'class="form-control"');
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tổng doanh thu doanh nghiệp (triệu VNĐ)', 'total_income');
+                            echo form_label('Tổng doanh thu (triệu VNĐ)', 'total_income');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'total_income_1');
-                                echo form_error('total_income_1', '<div class="error">', '</div>');
-                                echo form_input('total_income_1', set_value('total_income_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'total_income_1');
+                                    echo form_error('total_income_1', '<div class="error">', '</div>');
+                                    echo form_input('total_income_1', set_value('total_income_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'total_income_2');
@@ -131,13 +198,15 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'software_income_1');
-                                echo form_error('software_income_1', '<div class="error">', '</div>');
-                                echo form_input('software_income_1', set_value('software_income_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'software_income_1');
+                                    echo form_error('software_income_1', '<div class="error">', '</div>');
+                                    echo form_input('software_income_1', set_value('software_income_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'software_income_2');
@@ -164,13 +233,15 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'it_income_1');
-                                echo form_error('it_income_1', '<div class="error">', '</div>');
-                                echo form_input('it_income_1', set_value('it_income_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'it_income_1');
+                                    echo form_error('it_income_1', '<div class="error">', '</div>');
+                                    echo form_input('it_income_1', set_value('it_income_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'it_income_2');
@@ -197,13 +268,15 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'export_income_1');
-                                echo form_error('export_income_1', '<div class="error">', '</div>');
-                                echo form_input('export_income_1', set_value('export_income_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'export_income_1');
+                                    echo form_error('export_income_1', '<div class="error">', '</div>');
+                                    echo form_input('export_income_1', set_value('export_income_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'export_income_2');
@@ -231,13 +304,15 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'candidate_income_1');
-                                echo form_error('candidate_income_1', '<div class="error">', '</div>');
-                                echo form_input('candidate_income_1', set_value('candidate_income_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'candidate_income_1');
+                                    echo form_error('candidate_income_1', '<div class="error">', '</div>');
+                                    echo form_input('candidate_income_1', set_value('candidate_income_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'candidate_income_2');
@@ -260,17 +335,19 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tổng số lao động của doanh nghiệp', 'total_labor');
+                            echo form_label('Tổng số lao động', 'total_labor');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'total_labor_1');
-                                echo form_error('total_labor_1', '<div class="error">', '</div>');
-                                echo form_input('total_labor_1', set_value('total_labor_1'), 'class="form-control"');
-                                ?>
-                            </div>
+                            <?php if($user_service_type == '4'): ?>
+                                <div class="row">
+                                    <?php
+                                    echo form_label('Năm ' . $rule3Year[0], 'total_labor_1');
+                                    echo form_error('total_labor_1', '<div class="error">', '</div>');
+                                    echo form_input('total_labor_1', set_value('total_labor_1'), 'class="form-control"');
+                                    ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'total_labor_2');
@@ -325,24 +402,6 @@
                 </div>
                 <hr style="border-bottom: 1px solid white;">
                 <?php endif; ?> <!-- Hide when user_service_type == 2 OR 3 -->
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Giới thiệu chung về doanh nghiệp (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo doanh nghiệp, định hướng phát triển/chiến lược của doanh nghiệp, thế mạnh của doanh nghiệp...)', 'description');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_error('description', '<div class="error">', '</div>');
-                                echo form_textarea('description', set_value('description'), 'class="form-control tinymce-area"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
                 <!-- Hide when user_service_type == 2 OR 3 -->
                 <?php if ($user_service_type == '4'): ?>
                 <div class="form-group">

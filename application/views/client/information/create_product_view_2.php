@@ -3,6 +3,12 @@
     .error{
         color: red;
     }
+    .form-group > h2{
+        text-transform:uppercase;
+        font-size:16px;
+        font-weight:bold;
+        color: blue;
+    }
 </style>
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content">
@@ -35,7 +41,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('2. Hạng mục đăng ký tham gia <span style="color:red;">(Chọn 1 trong 3 hạng mục, điền "X" vào hạng mục tương ứng)<span>', 'field_2');
+                            echo form_label('2. Hạng mục đăng ký tham gia', 'field_2');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -54,7 +60,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('3. Hồ sơ pháp lý gửi kèm <span style="color:red;">(Có thể chọn nhiều nếu có, điền "X" vào ô tương ứng)<span>', 'field_3');
+                            echo form_label('3. Hồ sơ pháp lý gửi kèm', 'field_3');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -70,8 +76,9 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
+                    <hr style="border-top: 1px solid #ccc;">
+                    <h2>Mô tả dự án</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
@@ -201,6 +208,8 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <hr style="border-top: 1px solid #ccc;">
+                    <h2>Tình hình/mức độ triển khai dự án</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
@@ -261,6 +270,8 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <hr style="border-top: 1px solid #ccc;">
+                    <h2>Thông tin triển khai các ứng dụng CNTT trong dự án (Mỗi mục giới thiệu tối đa 300 từ)</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
@@ -577,6 +588,8 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <hr style="border-top: 1px solid #ccc;">
+                    <h2>Thông tin các tiêu chuẩn, chính sách ưu đãi, thế mạnh, và các danh hiệu, giải thưởng đạt được</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
@@ -618,7 +631,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12 d-inline" style="line-height: 35px;">
                             <div style="float: right;display: flex;">
@@ -641,7 +654,7 @@
                                             
                         </div>
                     </div>
-                </div>
+                </div> -->
                 
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">

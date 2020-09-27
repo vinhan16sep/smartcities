@@ -10,32 +10,47 @@
 
 <link rel="stylesheet" href="<?php echo site_url('assets/public/css/homepage.css'); ?>">
 
-<section class="main_content container-fluid">
-    <div class="megatron">
-        <div class="container" style="width: 100%;">
-            <img src="<?php echo site_url('assets/public/img/banner_smcity.jpg') ?>" style="width: 100%;">
-<!--            <h1>Cổng đăng ký danh hiệu Sao Khuê</h1>-->
-            <p></p>
-            <ul class="nav nav-pills nav-justified">
-<!--                <li style="border-right:1px solid orange;">-->
-<!--                    <a href="--><?php //echo base_url('admin/user/login') ?><!--"><h4>Admin</h4></a>-->
-<!--                </li>-->
-                <li>
-                    <a href="<?php echo base_url('member/user/login') ?>"><h4>Hội đồng đánh giá</h4></a>
-                </li>
-                <li class="company-border" style="border-left:1px solid orange;">
-                    <a href="<?php echo base_url('client/user/login') ?>"><h4>Doanh nghiệp</h4></a>
-                </li>
-            </ul>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <img src="<?php echo site_url('assets/public/img/footer_sk.jpg') ?>" style="width: 100%;">
+<section class="main_content">
+    <div class="home-page">
+        <div class="header-area">
+            <img class='img-header' src="assets/public/img/logo_smartcities_vietnam.png">
+            <div class='tilte-header'>CỔNG ĐĂNG KÝ</div>
+        </div>
+        
+        <div class="register-area">
+            <a class="btn-register register-for-city" href="http://smartcitiesvietnam.com/nhom-1-cac-do-thi-thong-minh/"></a>
+            <a class="btn-register register-for-real-estate" href="<?php echo base_url('client/user/login') ?>"></a>
+            <a class="btn-register register-for-real-estate-and-industry" href="http://smartcitiesvietnam.com/nhom-3-cac-du-an-bds-cong-nghiep-thong-minh/"></a>
+            <a class="btn-register register-for-technology-solutions" href="<?php echo base_url('client/user/login') ?>"></a>
+        </div>
+        
+        <div class="footer-area">
+            <p>© COPYRIGHT VIETNAM SMART CITY AWARD|ALL RIGHT RESERVED. VINASA</p>
         </div>
     </div>
-</section>
+</session>
+
+
+<!--<link rel="stylesheet" href="<?php echo site_url('assets/public/css/homepage.css'); ?>">-->
+
+<!--<section class="main_content">-->
+<!--    <div class="home-page">-->
+<!--        <div class="header-area">-->
+<!--            <img class='img-header' src="assets/public/img/logo_smartcities_vietnam.png">-->
+<!--            <div class='tilte-header'>CỔNG BÌNH CHỌN VÀ ĐÁNH GIÁ</div>-->
+<!--        </div>-->
+        
+<!--        <div class="register-area">-->
+<!--            <a class="btn-register register-for-council" href="<?php echo base_url('#') ?>"></a>-->
+<!--        </div>-->
+        
+<!--        <div class="footer-area">-->
+<!--            <p>© COPYRIGHT VIETNAM SMART CITY AWARD|ALL RIGHT RESERVED. VINASA</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</session>-->
+
+
+<!--<a href="--><?php echo base_url('admin/user/login') ?><!--"><h4>Admin</h4></a>-->
+<!--<a href="<?php echo base_url('member/user/login') ?>"><h4>Hội đồng đánh giá</h4></a>-->
+<!--<a href="<?php echo base_url('client/user/login') ?>"><h4>Doanh nghiệp</h4></a>-->

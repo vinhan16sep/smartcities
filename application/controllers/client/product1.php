@@ -42,7 +42,7 @@ class Product1 extends Client_Controller {
             '6' => 'Giấy phép xây dựng cơ sở hạ tầng cơ bản, giấy phép phần thân, phần móng đối với căn hộ căn cư',
             '7' => 'Văn bản thông báo đủ điều kiện huy động vốn',
             '8' => 'Thông báo bảo lãnh ngân hàng',
-            '9' => 'Các loại giấy phép: phòng cháy chữa cháy, hồ sơ chuyển nhượng dự án, bảo vệ môi trường,…',
+            '9' => 'Các loại giấy phép: phòng cháy chữa cháy, hồ sơ chuyển nhượng dự án, bảo vệ môi trường,…',
             '10' => 'Các văn bản pháp lý khác theo quy định của địa phương',
         ];
         $this->data['folder_name'] = 'product'.($this->data['user_service_type'] - 1);
@@ -148,8 +148,8 @@ class Product1 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -223,8 +223,8 @@ class Product1 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -305,8 +305,8 @@ class Product1 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
@@ -380,8 +380,8 @@ class Product1 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
@@ -518,6 +518,9 @@ class Product1 extends Client_Controller {
         $this->form_validation->set_rules('field_14', 'Mức độ triển khai (%) hoặc giai đoạn thực hiện dự án', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
+        
+        
+        // check require
         $this->form_validation->set_rules('field_15', 'Kiến trúc tổng thể CNTT của khu/toà nhà', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
@@ -563,24 +566,86 @@ class Product1 extends Client_Controller {
         $this->form_validation->set_rules('field_29', 'Các tiện ích thông minh khác', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
+        
+        // check word + require
+        // $this->form_validation->set_rules('field_15', 'Kiến trúc tổng thể CNTT của khu/toà nhà', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_16', 'Hạ tầng dữ liệu', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_17', 'Các tiện ích thông minh của dự án/khu đô thị/toà nhà:', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_18', 'Thiết bị điện và chiếu sáng', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_19', 'Môi trường/cây xanh/không khí', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_20', 'Cấp nước', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_21', 'Xử lý nước và chất thải', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_22', 'Cung cấp năng lượng, Điện', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_23', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_24', 'Phòng cháy chữa cháy', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_25', 'Theo dõi, giám sát, cứu nạn', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_26', 'Bảo mật, an toàn thông tin', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_27', 'Mạng xã hội cho dân cư', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_28', 'Các ứng dụng quản lý dân cư', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_29', 'Các tiện ích thông minh khác', 'trim|required|max_word[300]', array(
+        //     'required' => '%s không được trống.',
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
         $this->form_validation->set_rules('field_30', 'Các tiêu chuẩn kỹ thuật, an toàn, môi trường đang áp dụng', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
         $this->form_validation->set_rules('field_31', 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được:', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(
-            'required' => '%s không được trống.',
-            'numeric' => '%s phải là số.',
-            'min_length' => '%s ít nhất 1 chữ số',
-            'max_length' => '%s nhiều nhất 2 chữ số.',
-        ));
-        $this->form_validation->set_rules('field_33', 'Tháng', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(
-            'required' => '%s không được trống.',
-            'numeric' => '%s phải là số.',
-            'min_length' => '%s ít nhất 1 chữ số.',
-            'max_length' => '%s nhiều nhất 2 chữ số.',
-        ));
+        // $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(
+        //     'required' => '%s không được trống.',
+        //     'numeric' => '%s phải là số.',
+        //     'min_length' => '%s ít nhất 1 chữ số',
+        //     'max_length' => '%s nhiều nhất 2 chữ số.',
+        // ));
+        // $this->form_validation->set_rules('field_33', 'Tháng', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(
+        //     'required' => '%s không được trống.',
+        //     'numeric' => '%s phải là số.',
+        //     'min_length' => '%s ít nhất 1 chữ số.',
+        //     'max_length' => '%s nhiều nhất 2 chữ số.',
+        // ));
     }
 
     private function validate_product_temporary(){
@@ -593,16 +658,61 @@ class Product1 extends Client_Controller {
         $this->form_validation->set_rules('field_3[]', 'Hồ sơ pháp lý gửi kèm', 'trim|required', array(
             'required' => '%s không được trống.'
         ));
-        $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|min_length[1]|max_length[2]', array(
-            'numeric' => '%s phải là số.',
-            'min_length' => '%s ít nhất 1 chữ số',
-            'max_length' => '%s nhiều nhất 2 chữ số.',
-        ));
-        $this->form_validation->set_rules('field_33', 'Tháng', 'trim|numeric|min_length[1]|max_length[2]', array(
-            'numeric' => '%s phải là số.',
-            'min_length' => '%s ít nhất 1 chữ số.',
-            'max_length' => '%s nhiều nhất 2 chữ số.',
-        ));
+        // $this->form_validation->set_rules('field_15', 'Kiến trúc tổng thể CNTT của khu/toà nhà', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_16', 'Hạ tầng dữ liệu', 'trim|required|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_17', 'Các tiện ích thông minh của dự án/khu đô thị/toà nhà:', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_18', 'Thiết bị điện và chiếu sáng', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_19', 'Môi trường/cây xanh/không khí', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_20', 'Cấp nước', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_21', 'Xử lý nước và chất thải', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_22', 'Cung cấp năng lượng, Điện', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_23', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_24', 'Phòng cháy chữa cháy', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_25', 'Theo dõi, giám sát, cứu nạn', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_26', 'Bảo mật, an toàn thông tin', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_27', 'Mạng xã hội cho dân cư', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_28', 'Các ứng dụng quản lý dân cư', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_29', 'Các tiện ích thông minh khác', 'trim|max_word[300]', array(
+        //     'max_word' => '%s Tối đa 300 từ'
+        // ));
+        // $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|min_length[1]|max_length[2]', array(
+        //     'numeric' => '%s phải là số.',
+        //     'min_length' => '%s ít nhất 1 chữ số',
+        //     'max_length' => '%s nhiều nhất 2 chữ số.',
+        // ));
+        // $this->form_validation->set_rules('field_33', 'Tháng', 'trim|numeric|min_length[1]|max_length[2]', array(
+        //     'numeric' => '%s phải là số.',
+        //     'min_length' => '%s ít nhất 1 chữ số.',
+        //     'max_length' => '%s nhiều nhất 2 chữ số.',
+        // ));
     }
 
 

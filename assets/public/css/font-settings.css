@@ -8,6 +8,11 @@
 	src: url(../library/fonts/OpenSans-Bold.ttf);
 }
 
+@font-face{
+	font-family: 'Serpens Light';
+	src: url(../library/fonts/unicode.serpensl.ttf);
+}
+
 body{
 	font-family: 'Itim', cursive;
 	color: #515151;

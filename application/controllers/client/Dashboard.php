@@ -30,11 +30,19 @@ class Dashboard extends Client_Controller {
         $this->load->model('information_model');
         $this->data['information_submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
         $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity_and_year($this->data['user']->username, $this->data['eventYear']);
-        $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
+        if($this->data['user_service_type'] == '4'){
+            $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
+        } elseif ($this->data['user_service_type'] == '2'){
+            $this->data['count_product'] = $this->information_model->count_product1($this->data['user']->id, $this->data['eventYear']);
+        }
 
         $checkInformation = $this->information_model->checkExist('information', $this->data['user']->username);
         $checkCompany = $this->information_model->checkExist('company', $this->data['user']->username);
-        $checkProduct = $this->information_model->checkExist('product', $this->data['user']->username);
+        if($this->data['user_service_type'] == '4'){
+            $checkProduct = $this->information_model->checkExistProduct('product', $this->data['user']->username);
+        } elseif ($this->data['user_service_type'] == '2'){
+            $checkProduct = $this->information_model->checkExistProduct('product1', $this->data['user']->username);
+        }
         $this->data['complete'] = 0;
         if($checkInformation > 0 && $checkCompany > 0 && $checkProduct > 0){
             $this->data['complete'] = 1;
