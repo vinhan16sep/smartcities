@@ -286,7 +286,7 @@ class Company extends Client_Controller {
             'numeric' => '%s phải là số.',
             'max_length' => 'Tối đa 10 chữ số'
         ));
-        if($this->data['user_service_type'] != '2') {
+        if($this->data['user_service_type'] != '2' && $this->data['user_service_type'] != '3') {
             if($this->data['user_service_type'] == '4') {
                 $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[10]', array(
                     'required' => '%s không được trống.',

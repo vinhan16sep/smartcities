@@ -148,12 +148,12 @@
                                 <?php if(!$count_product || $count_product < 1): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin về Sản phẩm / Dịch vụ đề cử</p>
                                     <span>
-                                        <a href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                                        <a href="<?php echo base_url($product_url . 'create_product') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
                                     </span>
                                 <?php else: ?>
                                     <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
                                     <span>
-                                        <a href="<?php echo base_url('client/information/products') ?>" class="btn btn-primary btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
+                                        <a href="<?php echo base_url($product_url . 'products') ?>" class="btn btn-primary btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
                                     </span>
                                 <?php endif; ?>
                             <?php }else{

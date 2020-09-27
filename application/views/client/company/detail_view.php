@@ -58,7 +58,7 @@
                                         <a><i class="fa fa-money margin-r-5"></i> Tổng tài sản <?php echo (int)($selectedYear - 3); ?> (triệu VNĐ)</a> <p class="pull-right"><?php echo $company['owner_equity_1'] ?></p>
                                     </li>
                                 <?php endif; ?>
-                                <?php if($user_service_type != '2'): ?>
+                                <?php if($user_service_type != '2' && $user_service_type != '3'): ?>
                                     <li class="list-group-item">
                                         <a><i class="fa fa-money margin-r-5"></i> Tổng tài sản <?php echo (int)($selectedYear - 2); ?> (triệu VNĐ)</a> <p class="pull-right"><?php echo $company['owner_equity_2'] ?></p>
                                     </li>
@@ -180,7 +180,9 @@
                                     <div class="col-xs-12 col-md-4 pull-right">
                                         <?php if ($user_service_type == '2'): ?>
                                             <a href="<?php echo base_url('client/product1/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
-                                        <?php else: ?><a href="<?php echo base_url('client/information/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                        <?php elseif ($user_service_type == '3'): ?>
+                                            <a href="<?php echo base_url('client/product2/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                        <?php else: ?>
                                             <a href="<?php echo base_url('client/information/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         <?php endif ?>
                                     </div>
