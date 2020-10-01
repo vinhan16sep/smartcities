@@ -724,6 +724,19 @@ class Information_model extends CI_Model {
         return false;
     }
 
+    public function fetch_list_city_by_identity($identity){
+        $query = $this->db->select('*')
+            ->from('city')
+            ->where('identity', $identity)
+            ->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }
+
+        return false;
+    }
+
     public function fetch_list_company_by_identity_and_year($identity, $year){
         $query = $this->db->select('*')
             ->from('company')
@@ -747,9 +760,28 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
+    public function count_city($identity) {
+        $query = $this->db->select('*')
+            ->from('city')
+            ->where('identity', $identity)
+            ->get();
+
+        return $query->num_rows();
+    }
+
     public function getCurrentYearCompany($identity, $eventYear){
         $query = $this->db->select('*')
             ->from('company')
+            ->where('identity', $identity)
+            ->where('year', $eventYear)
+            ->get();
+
+        return $query->num_rows();
+    }
+
+    public function getCurrentYearCity($identity, $eventYear){
+        $query = $this->db->select('*')
+            ->from('city')
             ->where('identity', $identity)
             ->where('year', $eventYear)
             ->get();

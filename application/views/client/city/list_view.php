@@ -45,14 +45,14 @@
                                             foreach ($companies as $key => $value):
                                                 echo '<tr>';
                                                 echo '<td>' . ($key + 1) . '</td>';
-                                                echo '<td><a href="' . base_url('client/company/index?year=' . $value['year']) . '">' . $value['year'] . '</a></td>';
+                                                echo '<td><a href="' . base_url('client/city/index?year=' . $value['year']) . '">' . $value['year'] . '</a></td>';
                                                 if($eventYear == $value['year']){ ?>
                                                     <td style="text-align: center;width:110px;">
-                                                        <a style="width:132px;" href="<?php echo base_url('client/company/index?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Xem thông tin</a>
+                                                        <a style="width:132px;" href="<?php echo base_url('client/city/index?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Xem thông tin</a>
                                                     </td>
                                                     <?php if($status['is_final'] == 0){ ?>
                                                     <td style="text-align: center;width:110px;">
-                                                        <a style="width:132px;" href="<?php echo base_url('client/company/edit?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Sửa thông tin</a>
+                                                        <a style="width:132px;" href="<?php echo base_url('client/city/edit?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Sửa thông tin</a>
                                                     </td>
                                                     <?php } ?>
                                                 <?php
@@ -74,7 +74,7 @@
                             <?php endif; ?>
                             <?php if($reg_status['is_final'] == 0): ?>
                                 <?php if($hasCurrentYearCompanyData == 0){ ?>
-                                <a href="<?php echo base_url('client/company/create?year=' . $eventYear); ?>" class="btn btn-primary btn-block"><b>Thêm thông tin</b></a>
+                                <a href="<?php echo base_url('client/city/create?year=' . $eventYear); ?>" class="btn btn-primary btn-block"><b>Thêm thông tin</b></a>
                                 <?php } ?>
                             <?php else: ?>
                                 <h4 style="color:red">Thông tin đã được gửi</h4>

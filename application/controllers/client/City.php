@@ -36,13 +36,14 @@ class City extends Client_Controller {
     public function index() {
         if($this->input->get('year')){
             $this->data['selectedYear'] = $this->input->get('year');
-            $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
-            $this->render('client/company/detail_view');
+            // Called company but get from table city
+            $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('city', $this->data['user']->username, $this->input->get('year'));
+            $this->render('client/city/detail_view');
         }else{
             $this->load->library('pagination');
             $config = array();
-            $base_url = base_url() . 'client/company/index';
-            $total_rows = $this->information_model->count_companies($this->data['user']->username);
+            $base_url = base_url() . 'client/city/index';
+            $total_rows = $this->information_model->count_city($this->data['user']->username);
             $per_page = 10;
             $uri_segment = 4;
             foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
@@ -51,9 +52,9 @@ class City extends Client_Controller {
             $this->pagination->initialize($config);
             $this->data['page_links'] = $this->pagination->create_links();
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $this->data['companies'] =  $this->information_model->fetch_list_company_by_identity($this->data['user']->username);
-            $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCompany($this->data['user']->username, $this->data['eventYear']);
-            $this->render('client/company/list_view');
+            $this->data['companies'] =  $this->information_model->fetch_list_city_by_identity($this->data['user']->username);
+            $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCity($this->data['user']->username, $this->data['eventYear']);
+            $this->render('client/city/list_view');
         }
     }
 
@@ -70,15 +71,15 @@ class City extends Client_Controller {
                     redirect('client/information/create_extra', 'refresh');
                 }
                 if($this->data['eventYear'] != $this->input->get('year')){
-                    redirect('client/company/index', 'refresh');
+                    redirect('client/city/index', 'refresh');
                 }
                 $this->data['year'] = $this->input->get('year');
-                $this->render('client/company/create_view');
+                $this->render('client/city/create_view');
             } else {
                 if ($this->input->post()) {
                     $data = $this->generate_data('create', $this->input->post());
 
-                    $insert = $this->information_model->insert_company('company', $data);
+                    $insert = $this->information_model->insert_company('city', $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
                     }
@@ -86,7 +87,7 @@ class City extends Client_Controller {
                     $this->status_model->update('status', $this->data['user']->id, array('is_company' => 1));
                     $this->session->set_flashdata('message', 'Item added successfully');
 
-                    redirect('client/company/index?year=' . $this->data['eventYear'], 'refresh');
+                    redirect('client/city/index?year=' . $this->data['eventYear'], 'refresh');
                 }
             }
         }else{
@@ -99,22 +100,22 @@ class City extends Client_Controller {
                     redirect('client/information/create_extra', 'refresh');
                 }
                 if($this->data['eventYear'] != $this->input->get('year')){
-                    redirect('client/company/index', 'refresh');
+                    redirect('client/city/index', 'refresh');
                 }
                 $this->data['year'] = $this->input->get('year');
-                $this->render('client/company/create_view');
+                $this->render('client/city/create_view');
             }else{
                 if ($this->input->post()) {
                     $data = $this->generate_data('create', $this->input->post());
 
-                    $insert = $this->information_model->insert_company('company', $data);
+                    $insert = $this->information_model->insert_company('city', $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
                     }
                     $this->load->model('status_model');
                     $this->session->set_flashdata('message', 'Item added successfully');
 
-                    redirect('client/company/index?year=' . $this->data['eventYear'], 'refresh');
+                    redirect('client/city/index?year=' . $this->data['eventYear'], 'refresh');
                 }
             }
         }
@@ -129,17 +130,19 @@ class City extends Client_Controller {
 
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
-                $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
+                // Called company but get from table city
+                $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('city', $this->data['user']->username, $this->input->get('year'));
+                $this->data['year'] = $this->input->get('year');
                 if (!$this->data['company']) {
-                    redirect('client/company/index', 'refresh');
+                    redirect('client/city/index', 'refresh');
                 }
                 if($this->data['reg_status'] == 1){
                     redirect('client/information', 'refresh');
                 }
                 if($this->data['eventYear'] != $this->input->get('year')){
-                    redirect('client/company/index', 'refresh');
+                    redirect('client/city/index', 'refresh');
                 }
-                $this->render('client/company/edit_view');
+                $this->render('client/city/edit_view');
             } else {
                 if ($this->input->post()) {
                     $data = $this->generate_data('edit', $this->input->post());
@@ -153,7 +156,7 @@ class City extends Client_Controller {
                         $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                     }
 
-                    redirect('client/company/index?year=' . $this->data['eventYear'], 'refresh');
+                    redirect('client/city/index?year=' . $this->data['eventYear'], 'refresh');
                 }
             }
         }else{
@@ -161,17 +164,19 @@ class City extends Client_Controller {
             $this->validate_company_temporary();
 
             if ($this->form_validation->run() == FALSE) {
-                $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
+                // Called company but get from table city
+                $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('city', $this->data['user']->username, $this->input->get('year'));
+                $this->data['year'] = $this->input->get('year');
                 if (!$this->data['company']) {
-                    redirect('client/company/index', 'refresh');
+                    redirect('client/city/index', 'refresh');
                 }
                 if($this->data['reg_status'] == 1){
                     redirect('client/information', 'refresh');
                 }
                 if($this->data['eventYear'] != $this->input->get('year')){
-                    redirect('client/company/index', 'refresh');
+                    redirect('client/city/index', 'refresh');
                 }
-                $this->render('client/company/edit_view');
+                $this->render('client/city/edit_view');
             } else {
                 if ($this->input->post()) {
 
@@ -183,7 +188,7 @@ class City extends Client_Controller {
                         $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                     }
 
-                    redirect('client/company/index?year=' . $this->data['eventYear'], 'refresh');
+                    redirect('client/city/index?year=' . $this->data['eventYear'], 'refresh');
                 }
             }
         }
@@ -224,41 +229,26 @@ class City extends Client_Controller {
     }
 
     private function generate_data($mode, $post_requests){
-        $main_service = isset($post_requests['main_service']) ? json_encode($post_requests['main_service']) : null;
-        $main_market = isset($post_requests['main_market']) ? json_encode($post_requests['main_market']) : null;
         $data = array(
-            'equity_1' => isset($post_requests['equity_1']) ? $post_requests['equity_1'] : null,
-            'equity_2' => isset($post_requests['equity_2']) ? $post_requests['equity_2'] : null,
-            'equity_3' => isset($post_requests['equity_3']) ? $post_requests['equity_3'] : null,
-            'owner_equity_1' => isset($post_requests['owner_equity_1']) ? $post_requests['owner_equity_1'] : null,
-            'owner_equity_2' => isset($post_requests['owner_equity_2']) ? $post_requests['owner_equity_2'] : null,
-            'owner_equity_3' => isset($post_requests['owner_equity_3']) ? $post_requests['owner_equity_3'] : null,
-            'total_income_1' => isset($post_requests['total_income_1']) ? $post_requests['total_income_1'] : null,
-            'total_income_2' => isset($post_requests['total_income_2']) ? $post_requests['total_income_2'] : null,
-            'total_income_3' => isset($post_requests['total_income_3']) ? $post_requests['total_income_3'] : null,
-            'software_income_1' => isset($post_requests['software_income_1']) ? $post_requests['software_income_1'] : null,
-            'software_income_2' => isset($post_requests['software_income_2']) ? $post_requests['software_income_2'] : null,
-            'software_income_3' => isset($post_requests['software_income_3']) ? $post_requests['software_income_3'] : null,
-            'it_income_1' => isset($post_requests['it_income_1']) ? $post_requests['it_income_1'] : null,
-            'it_income_2' => isset($post_requests['it_income_2']) ? $post_requests['it_income_2'] : null,
-            'it_income_3' => isset($post_requests['it_income_3']) ? $post_requests['it_income_3'] : null,
-            'export_income_1' => isset($post_requests['export_income_1']) ? $post_requests['export_income_1'] : null,
-            'export_income_2' => isset($post_requests['export_income_2']) ? $post_requests['export_income_2'] : null,
-            'export_income_3' => isset($post_requests['export_income_3']) ? $post_requests['export_income_3'] : null,
-            'candidate_income_1' => isset($post_requests['candidate_income_1']) ? $post_requests['candidate_income_1'] : null,
-            'candidate_income_2' => isset($post_requests['candidate_income_2']) ? $post_requests['candidate_income_2'] : null,
-            'candidate_income_3' => isset($post_requests['candidate_income_3']) ? $post_requests['candidate_income_3'] : null,
-            'total_labor_1' => isset($post_requests['total_labor_1']) ? $post_requests['total_labor_1'] : null,
-            'total_labor_2' => isset($post_requests['total_labor_2']) ? $post_requests['total_labor_2'] : null,
-            'total_labor_3' => isset($post_requests['total_labor_3']) ? $post_requests['total_labor_3'] : null,
-            'total_ltv_1' => isset($post_requests['total_ltv_1']) ? $post_requests['total_ltv_1'] : null,
-            'total_ltv_2' => isset($post_requests['total_ltv_2']) ? $post_requests['total_ltv_2'] : null,
-            'total_ltv_3' => isset($post_requests['total_ltv_3']) ? $post_requests['total_ltv_3'] : null,
-            'description' => isset($post_requests['description']) ? $post_requests['description'] : null,
-            'linhvuckd' => isset($post_requests['linhvuckd']) ? $post_requests['linhvuckd'] : null,
-            'themanh' => isset($post_requests['themanh']) ? $post_requests['themanh'] : null,
-            'main_service' => $main_service,
-            'main_market' => $main_market,
+            'field_1' => isset($post_requests['field_1']) ? $post_requests['field_1'] : null,
+            'field_2' => isset($post_requests['field_2']) ? $post_requests['field_2'] : null,
+            'field_3' => isset($post_requests['field_3']) ? $post_requests['field_3'] : null,
+            'field_4' => isset($post_requests['field_4']) ? $post_requests['field_4'] : null,
+            'field_5' => isset($post_requests['field_5']) ? $post_requests['field_5'] : null,
+            'field_6' => isset($post_requests['field_6']) ? $post_requests['field_6'] : null,
+            'field_7' => isset($post_requests['field_7']) ? $post_requests['field_7'] : null,
+            'field_8' => isset($post_requests['field_8']) ? $post_requests['field_8'] : null,
+            'field_9' => isset($post_requests['field_9']) ? $post_requests['field_9'] : null,
+            'field_10' => isset($post_requests['field_10']) ? $post_requests['field_10'] : null,
+            'field_11' => isset($post_requests['field_11']) ? $post_requests['field_11'] : null,
+            'field_12' => isset($post_requests['field_12']) ? $post_requests['field_12'] : null,
+            'field_13' => isset($post_requests['field_13']) ? $post_requests['field_13'] : null,
+            'field_14' => isset($post_requests['field_14']) ? $post_requests['field_14'] : null,
+            'field_15' => isset($post_requests['field_15']) ? $post_requests['field_15'] : null,
+            'field_16' => isset($post_requests['field_16']) ? $post_requests['field_16'] : null,
+            'field_17' => isset($post_requests['field_17']) ? $post_requests['field_17'] : null,
+            'field_18' => isset($post_requests['field_18']) ? $post_requests['field_18'] : null,
+            'field_19' => isset($post_requests['field_19']) ? $post_requests['field_19'] : null,
             'modified_at' => $this->author_info['modified_at'],
             'modified_by' => $this->author_info['modified_by']
         );
@@ -357,82 +347,6 @@ class City extends Client_Controller {
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',
         ));
-        // When user select user_service_type = 2
-        // if($this->data['user_service_type'] == '2') {
-        //     $this->form_validation->set_rules('linhvuckd', 'Lĩnh vực kinh doanh ' . $this->data['rule3Year'][1], 'trim|max_word[200]', array(
-        //         'max_word' => '%s Tối đa 200 từ'
-        //     ));
-        //     $this->form_validation->set_rules('themanh', 'Thế mạnh ' . $this->data['rule3Year'][2], 'trim|max_word[200]', array(
-        //         'max_word' => '%s Tối đa 200 từ'
-        //     ));
-        // }
-        // When user select user_service_type = 4
-        if($this->data['user_service_type'] == '4') {
-            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[10]', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-                'max_length' => 'Tối đa 10 chữ số'
-            ));
-            $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|required|integer', array(
-                'required' => '%s không được trống.',
-                'integer' => '%s phải là số nguyên.',
-            ));
-            $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|required|integer', array(
-                'required' => '%s không được trống.',
-                'integer' => '%s phải là số nguyên.',
-            ));
-            $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|integer', array(
-                'required' => '%s không được trống.',
-                'integer' => '%s phải là số nguyên.',
-            ));
-            $this->form_validation->set_rules('main_service[]', 'Sản phẩm dịch vụ chính của doanh nghiệp', 'trim|required', array(
-                'required' => '%s không được trống.'
-            ));
-            $this->form_validation->set_rules('main_market[]', 'Thị trường chính', 'trim|required', array(
-                'required' => '%s không được trống.'
-            ));
-        }
-        // When user select user_service_type = 4
     }
 
     private function validate_company_temporary(){

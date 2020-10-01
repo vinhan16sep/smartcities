@@ -15,502 +15,350 @@
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
-                    <h2 style="text-align:center;">THÔNG TIN CHI TIẾT DOANH NGHIỆP</h2>
                     <h3 style="text-align:center;">CHƯƠNG TRÌNH GIẢI THƯỞNG THÀNH PHỐ THÔNG MINH VIỆT NAM NĂM <span style="color:#3c8dbc;"><?php echo $year; ?></span></h3>
                 </div>
                 <hr>
                 <?php
-                echo form_open_multipart('client/company/create?year=' . $eventYear, array('class' => 'form-horizontal', 'id' => 'company-form'));
+                echo form_open_multipart('client/city/create?year=' . $eventYear, array('class' => 'form-horizontal', 'id' => 'company-form'));
                 ?>
-                
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            if($user_service_type == '2' || $user_service_type == '3'){
-                                echo form_label('Giới thiệu ngắn về Chủ đầu tư (tối đa 500 từ)', 'description');
-                            }else{
-                              echo form_label('Giới thiệu chung về doanh nghiệp (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo doanh nghiệp, định hướng phát triển/chiến lược của doanh nghiệp, thế mạnh của doanh nghiệp...)', 'description');
-                            }
+                                echo form_label('Tên Đô thị (thành phố/thị xã/thị trấn/xã phường)', 'field_1');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('description', '<div class="error">', '</div>');
-                                echo form_textarea('description', set_value('description'), 'class="form-control tinymce-area"');
+                                    echo form_error('field_1', '<div class="error">', '</div>');
+                                    echo form_input('field_1', set_value('field_1'), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!---------------------------------------------------------------------->
                 <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                                echo form_label('Lĩnh vực kinh doanh (tối đa 200 từ)', 'linhvuckd');
+                                echo form_label('Giới thiệu ngắn về Đô thị (Tối đa 500 từ)', 'field_2');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('linhvuckd', '<div class="error">', '</div>');
-                                echo form_textarea('linhvuckd', set_value('linhvuckd'), 'class="form-control tinymce-area"');
+                                echo form_error('field_2', '<div class="error">', '</div>');
+                                echo form_textarea('field_2', set_value('field_2'), 'class="form-control tinymce-area"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!---------------------------------------------------------------------->
                 <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                                echo form_label('Thế mạnh (tối đa 200 từ)', 'themanh');
+                                echo form_label('Vị trí địa lý, diện tích', 'field_3');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('themanh', '<div class="error">', '</div>');
-                                echo form_textarea('themanh', set_value('themanh'), 'class="form-control tinymce-area"');
+                                echo form_error('field_3', '<div class="error">', '</div>');
+                                echo form_textarea('field_3', set_value('field_3'), 'class="form-control tinymce-area"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!---------------------------------------------------------------------->
                 <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Vốn điều lệ (triệu VNĐ)', 'equity_1');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'equity_2');
-                                    echo form_error('equity_1', '<div class="error">', '</div>');
-                                    echo form_input('equity_1', set_value('equity_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'equity_2');
-                                echo form_error('equity_2', '<div class="error">', '</div>');
-                                echo form_input('equity_2', set_value('equity_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'equity_3');
-                                echo form_error('equity_3', '<div class="error">', '</div>');
-                                echo form_input('equity_3', set_value('equity_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php if($user_service_type != '2' && $user_service_type != '3'): ?>
-                    <hr style="border-bottom: 1px solid white;">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-sx-12">
-                                <?php
-                                echo form_label('Tổng tài sản (triệu VNĐ)', 'owner_equity');
-                                ?>
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-sx-12">
-                                <?php if($user_service_type == '4'): ?>
-                                    <div class="row">
-                                        <?php
-                                        echo form_label('Năm ' . $rule3Year[0], 'owner_equity_1');
-                                        echo form_error('owner_equity_1', '<div class="error">', '</div>');
-                                        echo form_input('owner_equity_1', set_value('owner_equity_1'), 'class="form-control"');
-                                        ?>
-                                    </div>
-                                <?php endif; ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[1], 'owner_equity_2');
-                                    echo form_error('owner_equity_2', '<div class="error">', '</div>');
-                                    echo form_input('owner_equity_2', set_value('owner_equity_2'), 'class="form-control"');
-                                    ?>
-                                </div>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[2], 'owner_equity_3');
-                                    echo form_error('owner_equity_3', '<div class="error">', '</div>');
-                                    echo form_input('owner_equity_3', set_value('owner_equity_3'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <hr style="border-bottom: 1px solid white;">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng doanh thu (triệu VNĐ)', 'total_income');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'total_income_1');
-                                    echo form_error('total_income_1', '<div class="error">', '</div>');
-                                    echo form_input('total_income_1', set_value('total_income_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'total_income_2');
-                                echo form_error('total_income_2', '<div class="error">', '</div>');
-                                echo form_input('total_income_2', set_value('total_income_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'total_income_3');
-                                echo form_error('total_income_3', '<div class="error">', '</div>');
-                                echo form_input('total_income_3', set_value('total_income_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
-                <!-- Hide when user_service_type == 2 OR 3 -->
-                <?php if ($user_service_type == '4'): ?>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng doanh thu lĩnh vực sản xuất phần mềm (triệu VNĐ)', 'software_income');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'software_income_1');
-                                    echo form_error('software_income_1', '<div class="error">', '</div>');
-                                    echo form_input('software_income_1', set_value('software_income_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'software_income_2');
-                                echo form_error('software_income_2', '<div class="error">', '</div>');
-                                echo form_input('software_income_2', set_value('software_income_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'software_income_3');
-                                echo form_error('software_income_3', '<div class="error">', '</div>');
-                                echo form_input('software_income_3', set_value('software_income_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng doanh thu dịch vụ CNTT (triệu VNĐ)', 'it_income');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'it_income_1');
-                                    echo form_error('it_income_1', '<div class="error">', '</div>');
-                                    echo form_input('it_income_1', set_value('it_income_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'it_income_2');
-                                echo form_error('it_income_2', '<div class="error">', '</div>');
-                                echo form_input('it_income_2', set_value('it_income_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'it_income_3');
-                                echo form_error('it_income_3', '<div class="error">', '</div>');
-                                echo form_input('it_income_3', set_value('it_income_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng doanh thu xuất khẩu (USD)', 'export_income');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'export_income_1');
-                                    echo form_error('export_income_1', '<div class="error">', '</div>');
-                                    echo form_input('export_income_1', set_value('export_income_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'export_income_2');
-                                echo form_error('export_income_2', '<div class="error">', '</div>');
-                                echo form_input('export_income_2', set_value('export_income_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'export_income_3');
-                                echo form_error('export_income_3', '<div class="error">', '</div>');
-                                echo form_input('export_income_3', set_value('export_income_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
-                <?php endif; ?> <!-- Hide when user_service_type == 2 OR 3 -->
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng doanh thu ' . (($user_service_type == '4') ? 'lĩnh vực' : 'dự án') . ' ứng cử (triệu VND)', 'candidate_income');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'candidate_income_1');
-                                    echo form_error('candidate_income_1', '<div class="error">', '</div>');
-                                    echo form_input('candidate_income_1', set_value('candidate_income_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'candidate_income_2');
-                                echo form_error('candidate_income_2', '<div class="error">', '</div>');
-                                echo form_input('candidate_income_2', set_value('candidate_income_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'candidate_income_3');
-                                echo form_error('candidate_income_3', '<div class="error">', '</div>');
-                                echo form_input('candidate_income_3', set_value('candidate_income_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng số lao động', 'total_labor');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php if($user_service_type == '4'): ?>
-                                <div class="row">
-                                    <?php
-                                    echo form_label('Năm ' . $rule3Year[0], 'total_labor_1');
-                                    echo form_error('total_labor_1', '<div class="error">', '</div>');
-                                    echo form_input('total_labor_1', set_value('total_labor_1'), 'class="form-control"');
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'total_labor_2');
-                                echo form_error('total_labor_2', '<div class="error">', '</div>');
-                                echo form_input('total_labor_2', set_value('total_labor_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'total_labor_3');
-                                echo form_error('total_labor_3', '<div class="error">', '</div>');
-                                echo form_input('total_labor_3', set_value('total_labor_3'), 'class="form-control"');
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-bottom: 1px solid white;">
-                <!-- Hide when user_service_type == 2 OR 3 -->
-                <?php if ($user_service_type == '4'): ?>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tổng số lập trình viên', 'total_ltv');
+                                echo form_label('Dân số, mật độ dân số', 'field_4');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_label('Năm ' . $rule3Year[0], 'total_ltv_1');
-                                echo form_error('total_ltv_1', '<div class="error">', '</div>');
-                                echo form_input('total_ltv_1', set_value('total_ltv_1'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[1], 'total_ltv_2');
-                                echo form_error('total_ltv_2', '<div class="error">', '</div>');
-                                echo form_input('total_ltv_2', set_value('total_ltv_2'), 'class="form-control"');
-                                ?>
-                            </div>
-                            <div class="row">
-                                <?php
-                                echo form_label('Năm ' . $rule3Year[2], 'total_ltv_3');
-                                echo form_error('total_ltv_3', '<div class="error">', '</div>');
-                                echo form_input('total_ltv_3', set_value('total_ltv_3'), 'class="form-control"');
+                                echo form_error('field_4', '<div class="error">', '</div>');
+                                echo form_textarea('field_4', set_value('field_4'), 'class="form-control tinymce-area"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!---------------------------------------------------------------------->
                 <hr style="border-bottom: 1px solid white;">
-                <?php endif; ?> <!-- Hide when user_service_type == 2 OR 3 -->
-                <!-- Hide when user_service_type == 2 OR 3 -->
-                <?php if ($user_service_type == '4'): ?>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('SP dịch vụ chính của doanh nghiệp', 'main_service');
+                                echo form_label('Tổng số quận, huyện, thị trấn, thị xã…', 'field_5');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                $options = array(
-                                    'Chính phủ điện tử' => 'Chính phủ điện tử',
-                                    'Y tế' => 'Y tế',
-                                    'Giáo dục' => 'Giáo dục',
-                                    'Giao thông' => 'Giao thông',
-                                    'Xây dựng' => 'Xây dựng',
-                                    'Môi trường' => 'Môi trường',
-                                    'Năng lượng' => 'Năng lượng',
-                                    'Dịch vụ cho doanh nghiệp' => 'Dịch vụ cho doanh nghiệp',
-                                    'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
-                                    'Viễn thông' => 'Viễn thông',
-                                    'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
-                                    'Sản xuất' => 'Sản xuất',
-                                    'Tư vấn' => 'Tư vấn'
-                                );
-                                echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
-                                echo form_error('main_service[]', '<div class="error"  style="margin-left: -15px">', '</div>');
-                                foreach ($options as $key => $value) {
-                                    echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
-                                    echo $key.'<br>';
-                                }
-                                echo form_checkbox('main_service[]', '', false, 'class="btn-checkbox" id="anonymous-service"');
-                                echo 'Khác (nêu rõ)<br>';
-                                // echo form_dropdown('main_service', $options, '', 'class="form-control"');
+                                echo form_error('field_5', '<div class="error">', '</div>');
+                                echo form_textarea('field_5', set_value('field_5'), 'class="form-control tinymce-area"');
                                 ?>
-                                <input type="text" name="anonymous-service" class="input-anonymous-service form-control" style="display: none;">
                             </div>
                         </div>
                     </div>
                 </div>
+                <!---------------------------------------------------------------------->
                 <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Thị trường chính', 'main_market');
-                            $domestic = array(
-                                'Thị trường Chính phủ' => 'Thị trường Chính phủ',
-                                'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
-                                'Thị trường người tiêu dùng' => 'Thị trường người tiêu dùng'
-                            );
-                            $target = array(
-                                'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
-                                'Châu Âu' => 'Châu Âu',
-                                'Nhật Bản' => 'Nhật Bản',
-                                'Các nước trong khu vực' => 'Các nước trong khu vực'
-                            );
+                                echo form_label('GDP/đầu người', 'field_6');
                             ?>
                         </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
+                        <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
-                                <label style="margin-left: -15px" id="main_market[]-error" class="error" for="main_market[]"></label><br />
-                                <?php echo form_error('main_market[]', '<div class="error"  style="margin-left: -15px">', '</div>'); ?>
-                                <strong style="margin-left: -15px">Trong nước</strong>
-                                <div class="row" style="margin-left: 20px">
-                                    <?php
-                                    foreach ($domestic as $key => $value) {
-                                        echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
-                                        echo $key.'<br>';
-                                    }
-                                    ?>
-                                </div>
-                                <br>
-                                <strong style="margin-left: -15px">Quốc tế</strong>
-                                <div class="row" style="margin-left: 20px">
-                                    <?php
-                                    echo form_checkbox('main_market[]', 'Gia công xuất khẩu', false, 'class="btn-checkbox"');
-                                    echo 'Gia công xuất khẩu';
-                                    ?>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <?php
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp/Dịch vụ', false, 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu SP/Giải pháp/Dịch vụ';
-                                    ?>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <?php
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', false, 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu nhân lực CNTT';
-                                    ?>
-                                </div>
-                                <div class="row" style="margin-left: 20px">
-                                    <strong>Xuất khẩu mục tiêu</strong><br>
-                                    <?php
-                                    foreach ($target as $key => $value) {
-                                        echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
-                                        echo $key.'<br>';
-                                    }
-                                    echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous"');
-                                    echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
-                                    ?>
-                                    <input type="text" name="anonymous" class="input-anonymous form-control" style="display: none;">
-                                </div>
+                                <?php
+                                echo form_error('field_6', '<div class="error">', '</div>');
+                                echo form_textarea('field_6', set_value('field_6'), 'class="form-control tinymce-area"');
+                                ?>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php endif; ?> <!-- Hide when user_service_type == 2 OR 3 -->
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('GRDP', 'field_7');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_7', '<div class="error">', '</div>');
+                                echo form_textarea('field_7', set_value('field_7'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Các ngành kinh tế mũi nhọn', 'field_8');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_8', '<div class="error">', '</div>');
+                                echo form_textarea('field_8', set_value('field_8'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Số lượng các dự án bất động sản thông minh, khu công nghiệp, công nghệ, công nghệ cao, khu chế xuất trong tỉnh/thành phố hiện tại', 'field_9');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_9', '<div class="error">', '</div>');
+                                echo form_textarea('field_9', set_value('field_9'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Điểm mạnh/Lợi thế', 'field_10');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_10', '<div class="error">', '</div>');
+                                echo form_textarea('field_10', set_value('field_10'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Định hướng phát triển của đô thị đến năm 2025, định hướng 2030…', 'field_11');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_11', '<div class="error">', '</div>');
+                                echo form_textarea('field_11', set_value('field_11'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Các văn bản pháp lý liên quan đến chính sách, chương trình, dự án, đề án thành phố thông minh của tỉnh, thành phố', 'field_12');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_12', '<div class="error">', '</div>');
+                                echo form_textarea('field_12', set_value('field_12'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Tổng quan về đề án, dự án, chương trình, hoạt động về thành phố, đô thị thông minh của Tỉnh/thành phố và các kết quả đạt được (nêu tóm tắt thông tin, số liệu và gửi kèm đề án)', 'field_13');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_13', '<div class="error">', '</div>');
+                                echo form_textarea('field_13', set_value('field_13'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Tổng kinh phí của thành phố/đô thị cho các chương trình, dự án… thành phố thông minh năm 2018, 2019', 'field_14');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_14', '<div class="error">', '</div>');
+                                echo form_textarea('field_14', set_value('field_14'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Tổng thu ngân sách (triệu VNĐ)', 'field_15');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'field_15');
+                                echo form_error('field_15', '<div class="error">', '</div>');
+                                echo form_input('field_15', set_value('field_15'), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'field_16');
+                                echo form_error('field_16', '<div class="error">', '</div>');
+                                echo form_input('field_16', set_value('field_16'), 'class="form-control"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Tốc độ tăng trưởng kinh tế (triệu VNĐ)', 'field_17');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'field_17');
+                                echo form_error('field_17', '<div class="error">', '</div>');
+                                echo form_input('field_17', set_value('field_17'), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'field_18');
+                                echo form_error('field_18', '<div class="error">', '</div>');
+                                echo form_input('field_18', set_value('field_18'), 'class="form-control"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
+                <hr style="border-bottom: 1px solid white;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                                echo form_label('Các thông tin khác: ', 'field_19');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <div class="row">
+                                <?php
+                                echo form_error('field_19', '<div class="error">', '</div>');
+                                echo form_textarea('field_19', set_value('field_19'), 'class="form-control tinymce-area"');
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------------------------------------->
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">
                     </div>

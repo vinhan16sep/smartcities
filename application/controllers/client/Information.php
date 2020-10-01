@@ -31,7 +31,11 @@ class Information extends Client_Controller {
 
     public function index() {
         $this->data['submitted'] = $this->information_model->fetch_by_user_id('information', $this->data['user']->id);
-        $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCompany($this->data['user']->username, $this->data['eventYear']);
+        if ($this->data['user']->service_type != 1) {
+            $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCompany($this->data['user']->username, $this->data['eventYear']);
+        } else {
+            $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCity($this->data['user']->username, $this->data['eventYear']);
+        }
 
         $this->render('client/information/detail_extra_view');
     }
