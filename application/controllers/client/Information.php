@@ -83,7 +83,7 @@ class Information extends Client_Controller {
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
-                if ($avatar) {
+                if (!empty($avatar)) {
                     $data['avatar'] = $avatar;
                 }
                 $exist = $this->information_model->check_exist_information($this->data['user']->username);

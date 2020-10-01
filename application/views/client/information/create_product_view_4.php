@@ -1,7 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <style>
     .error{
         color: red;
+    }
+    .form-group > h1{
+        text-transform:uppercase;
+        font-size:20px;
+        font-weight:bold;
+        color: blue;
     }
 </style>
 <div class="content-wrapper" style="min-height: 916px;">
@@ -9,24 +16,38 @@
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
-                    <h1 style="text-align:center;">THÔNG TIN SẢN PHẨM</h1>
-                    <h2 style="text-align:center;"><?= $user_service_types ?></h2>
+                    <h1 style="text-align:center;"><?= $user_service_types ?></h1>
+                    <div class="form-group">
+                        <div class="row">
+                            <strong style="font-size: 17px;">Lưu ý:</strong>
+                            <div style="margin-top: 10px;">
+                                <p>Các thông tin chi tiết chỉ nêu liên quan đến lĩnh vực đăng ký xét trao Giải thưởng. Vd: đăng ký cho lĩnh vực “Thành phố du lịch thông minh” thì hồ sơ sẽ chỉ tập chung vào các thông tin cho lĩnh vực du lịch thông minh.  
+                                <p>Nếu thành phố/đô thị đăng ký lĩnh vực <em><strong>“Thành phố hấp dẫn Khởi nghiệp ĐMST”</strong></em> chỉ cần cung cấp thông tin tại Mục 8 và <strong>Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được</strong> (đặc biệt là liên quan đến lĩnh vực thành phố thông minh)</p>
+                            </div>
+                        </div>
+                    </div>
                     <br>
                 </div>
                 <?php
-                echo form_open_multipart('client/information/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
+                echo form_open_multipart('client/'.$folder_name.'/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tên sản phẩm/giải pháp/ứng dụng đăng ký', 'name');
+                            echo form_label('1. Lĩnh vực đăng ký', 'field_1');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('name', '<div class="error">', '</div>');
-                            echo form_input('name', set_value('name'), 'class="form-control"');
+                                echo form_error('field_1', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'field_1',
+                                    'id' => 'field_1',
+                                    'value' => set_value('field_1'),
+                                    'rows' => '3',
+                                    'class' => "form-control tinymce-area"
+                                ));
                             ?>
                         </div>
                     </div>
@@ -35,50 +56,19 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Đăng ký tham gia lĩnh vực', 'service');
+                            echo form_label('2. Hành lang pháp lý: các văn bản pháp lý liên quan đến lĩnh vực đăng ký tham gia Giải thưởng', 'field_2');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            $options_1 = array(
-                                '1' => 'Giải pháp cho Chính quyền số',
-                                '2' => 'Giải pháp Quy hoạch thành phố thông minh',
-                                '3' => 'Giải pháp cho hạ tầng kỹ thuật thành phố thông minh',
-                                '4' => 'Giải pháp hạ tầng số cho thành phố thông minh',
-                                '5' => 'Giải pháp/ứng dụng cho công dân/cộng đồng thông minh',
-                                '6' => 'Giải pháp An toàn thông tin',
-                                '7' => 'Giải pháp du lịch thông minh',
-                                '8' => 'Giải pháp thanh toán thông minh',
-                                '9' => 'Giải pháp giao thông thông minh',
-                                '10' => 'Giải pháp giáo dục thông minh',
-                                '11' => 'Giải pháp nông nghiệp thông minh',
-                                '12' => 'Giải pháp an ninh, an toàn, cấp cứu, cứu nạn',
-                                '13' => 'Giải pháp y tế thông minh',
-                                '14' => 'Giải pháp năng lượng thông minh',
-                                '15' => 'Giải pháp môi trường thông minh',
-                                '16' => 'Giải pháp xây dựng thông minh',
-                                '17' => 'Giải pháp cấp, thoát và xử lý nước thông minh',
-                                '18' => 'Giải pháp cho nhà máy thông minh',
-                                '19' => 'Giải pháp cho toà nhà/căn hộ thông minh',
-                                '20' => 'Giải pháp cho khu công nghiệp thông minh',
-                            );
-                            $options_4 = array(
-                                'Gia công xuất khẩu phần mềm' => 'Gia công xuất khẩu phần mềm',
-                                'BPO' => 'BPO',
-                                'Data Center' => 'Data Center',
-                                'Đào tạo CNTT' => 'Đào tạo CNTT',
-                                'Nội dung số' => 'Nội dung số',
-                                'Điện toán đám mây và Big Data' => 'Điện toán đám mây và Big Data',
-                                'An toàn thông tin' => 'An toàn thông tin',
-                                'Chuyển đổi Số' => 'Chuyển đổi Số',
-                                'Các lĩnh vực khác' => 'Các lĩnh vực khác'
-                            );
-                            echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
-                            echo form_error('service[]', '<div class="error">', '</div>');
-                            foreach ($options_1 as $key => $value) {
-                                echo form_checkbox('service[]', $key, false, 'class="btn-checkbox"');
-                                echo $value.'<br>';
-                            }
+                                echo form_error('field_2', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'field_2',
+                                    'id' => 'field_2',
+                                    'value' => set_value('field_2'),
+                                    'rows' => '3',
+                                    'class' => "form-control tinymce-area"
+                                ));
                             ?>
                         </div>
                     </div>
@@ -87,16 +77,100 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Mô tả công năng sản phẩm: <br><i>(Nêu rõ chức năng, tính hiệu quả của SP/GP/ƯD; Khả năng ảnh hưởng tích cực đến kinh tế, xã hội, văn hóa, giáo dục, môi trường, tiết kiệm năng lượng, đô thị thông minh, ứng dụng chuyển đổi số, IoT, dữ liệu lớn, SMAC, AI, AR, VR, robotics… nếu có. Có thể đính kèm các bảng biểu, số liệu, tài liệu,… để chứng minh)</i> ', 'functional');
+                            echo form_label('3. Thực tế triển khai các đề án, dự án, chương trình ứng dụng CNTT (của lĩnh vực đăng ký xét trao Giải thưởng) của tỉnh/thành phố (mức độ triển khai, hoàn thành của các đề án, dự án, chương trình…) ', 'field_3');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('functional', '<div class="error">', '</div>');
+                                echo form_error('field_3', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'field_3',
+                                    'id' => 'field_3',
+                                    'value' => set_value('field_3'),
+                                    'rows' => '3',
+                                    'class' => "form-control tinymce-area"
+                                ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('4. Các ứng dụng công nghệ, tiện ích thông minh cho người dân và doanh nghiệp trong lĩnh vực đăng ký xét trao Giải (vd: lĩnh vực quy hoạch/ điều hành/ dịch vụ công/ giao thông, logistics/ y tế/ giáo dục/ môi trường/ năng lượng/ cấp thoát nước/ du lịch/ bảo mật, an ninh, an toàn…): nêu chi tiết các thiết bị, giải pháp, ứng dụng và dịch vụ công nghệ, tổng kinh phí, số lượng người dùng, số lượng tương tác, đo lường hiệu quả…');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                                echo form_error('field_4', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'field_4',
+                                    'id' => 'field_4',
+                                    'value' => set_value('field_4'),
+                                    'rows' => '3',
+                                    'class' => "form-control tinymce-area"
+                                ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('5. Quy mô và tỉ lệ đầu tư cho xây dựng Hạ tầng dữ liệu/hạ tầng số của tỉnh/thành phố trên tổng mức đầu tư cho xây dựng và phát triển thành phố thông minh; tỉ lệ  CNTT trong các dự án đầu tư ');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                                echo form_error('field_5', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'field_5',
+                                    'id' => 'field_5',
+                                    'value' => set_value('field_5'),
+                                    'rows' => '3',
+                                    'class' => "form-control tinymce-area"
+                                ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('6. Mức độ hoàn thiện của chính quyền điện tử/chính quyền số');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                                echo form_error('field_6', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'field_6',
+                                    'id' => 'field_6',
+                                    'value' => set_value('field_6'),
+                                    'rows' => '3',
+                                    'class' => "form-control tinymce-area"
+                                ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('7. Bảo mật an toàn thông tin, an ninh cho người dân (các ứng dụng, giải pháp cho bảo mật, an toàn thông tin cho các cơ quan quản lý; các thiết bị IoT, giám sát, hệ thống báo cáo, phản ánh hiện trường; tổng mức đầu tư, vận hành; thành tích, kết quả đạt được) ');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('field_7', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'functional',
-                                'id' => 'functional',
-                                'value' => set_value('functional'),
+                                'name' => 'field_7',
+                                'id' => 'field_7',
+                                'value' => set_value('field_7'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -108,16 +182,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các công nghệ và quy trình chất lượng sử dụng để phát triển SP/GP/ƯD <br><i>(Nêu rõ khả năng đáp ứng các tiêu chuẩn, các chứng chỉ chất lượng như: ISO 9001:2000/2008, ISO 2700, CMMI, Chứng chỉ khác…)</i>', 'process');
+                            echo form_label('8. Khả năng tiếp cận cơ hội số của người dân, cộng đồng và doanh nghiệp tại thành phố (các phương tiện, công cụ giao tiếp với người dân, doanh nghiệp; mức độ tiếp cận thông tin, dữ liệu (trung tâm dữ liệu mở) của thành phố/đô thị; số lượng tương tác của người dân/doanh nghiệp cho các dịch vụ công, các phương tiện phản ánh;…) ');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('process', '<div class="error">', '</div>');
+                            echo form_error('field_8', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'process',
-                                'id' => 'process',
-                                'value' => set_value('process'),
+                                'name' => 'field_8',
+                                'id' => 'field_8',
+                                'value' => set_value('field_8'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -129,16 +203,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tính năng Bảo mật của SP/GP/ƯD', 'security');
+                            echo form_label('9. Các chính sách, chương trình, hoạt động khuyến khích khởi nghiệp đổi mới sáng tạo của tỉnh, thành phố (cung cấp thông tin nếu đăng ký lĩnh vực “Thành phố hấp dẫn Khởi nghiệp ĐMST”), gồm:');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('security', '<div class="error">', '</div>');
+                            echo form_error('field_9', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'security',
-                                'id' => 'security',
-                                'value' => set_value('security'),
+                                'name' => 'field_9',
+                                'id' => 'field_9',
+                                'value' => set_value('field_9'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -150,74 +224,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các ưu điểm nổi trội của SP/GP/ƯD so với SP cùng loại: <br><i>(về tính độc đáo, hiệu quả, công năng, công nghệ, tiện ích sử dụng, khả năng tương thích, mô hình kinh doanh, quy trình quản lý, dịch vụ hậu mãi… so với các đối thủ khác trên thị trường)</i>', 'positive');
+                            echo form_label('10. Số lượng DN thành lập mới năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('positive', '<div class="error">', '</div>');
+                            echo form_error('field_10', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'positive',
-                                'id' => 'positive',
-                                'value' => set_value('positive'),
-                                'rows' => '3',
-                                'class' => "form-control tinymce-area"
-                            ));
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('So sánh với các SP/GP/DV khác', 'compare');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('compare', '<div class="error">', '</div>');
-                            echo form_textarea(array(
-                                'name' => 'compare',
-                                'id' => 'compare',
-                                'value' => set_value('compare'),
-                                'rows' => '3',
-                                'class' => "form-control tinymce-area"
-                            ));
-                            ?>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Ngày thương mại hoá ra thị trường', 'open_date');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('open_date', '<div class="error">', '</div>');
-                            echo form_input('open_date', set_value('open_date'), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Giá SP/GP/ƯD: <i>((ghi rõ đơn giá bán ra thị trường, ĐVT: Triệu Việt Nam đồng)</i>', 'price');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('price', '<div class="error">', '</div>');
-//                            echo form_input('price', set_value('price'), 'class="form-control"');
-                            echo form_textarea(array(
-                                'name' => 'price',
-                                'id' => 'price',
-                                'value' => set_value('price'),
+                                'name' => 'field_10',
+                                'id' => 'field_10',
+                                'value' => set_value('field_10'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -229,82 +245,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/ƯD năm ' . (intval($eventYear) - 3) . ' (triệu đồng)', 'income_1');
+                            echo form_label('11. Các chính sách của tỉnh/thành phố cho startups');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('income_1', '<div class="error">', '</div>');
-                            echo form_input('income_1', set_value('income_1'), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Doanh thu của SP/GP/ƯD năm ' . (intval($eventYear) - 2) . ' (triệu đồng)', 'income_2016');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('income_2016', '<div class="error">', '</div>');
-                            echo form_input('income_2016', set_value('income_2016'), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Doanh thu của SP/GP/ƯD năm ' . (intval($eventYear) - 1) . ' (triệu đồng', 'income_2017');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('income_2017', '<div class="error">', '</div>');
-                            echo form_input('income_2017', set_value('income_2017'), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Thông tin khách hàng (Số lượng khách hàng cá nhân, khách hàng tổ chức/doanh nghiệp, kể tên một số khách hàng tiêu biểu)', 'customer');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('customer', '<div class="error">', '</div>');
+                            echo form_error('field_11', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'customer',
-                                'id' => 'customer',
-                                'value' => set_value('customer'),
-                                'rows' => '5',
-                                'class' => "form-control tinymce-area"
-                            ));
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Thị phần của SP/GP/ƯD', 'area');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('area', '<div class="error">', '</div>');
-                            echo form_textarea(array(
-                                'name' => 'area',
-                                'id' => 'area',
-                                'value' => set_value('area'),
+                                'name' => 'field_11',
+                                'id' => 'field_11',
+                                'value' => set_value('field_11'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -316,16 +266,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Dịch vụ sau bán hàng', 'after_sale');
+                            echo form_label('12. Các chương trình hỗ trợ, thúc đẩy startups năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('after_sale', '<div class="error">', '</div>');
+                            echo form_error('field_12', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'after_sale',
-                                'id' => 'after_sale',
-                                'value' => set_value('after_sale'),
+                                'name' => 'field_12',
+                                'id' => 'field_12',
+                                'value' => set_value('field_12'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -337,16 +287,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Đội ngũ phát triển SP/GP/ƯD (bao nhiêu người, trình độ, trong bao lâu...)', 'team');
+                            echo form_label('13. Tổng ngân sách cho hỗ trợ, thúc đẩy startups năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('team', '<div class="error">', '</div>');
+                            echo form_error('field_13', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'team',
-                                'id' => 'team',
-                                'value' => set_value('team'),
+                                'name' => 'field_13',
+                                'id' => 'field_13',
+                                'value' => set_value('field_13'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -358,16 +308,16 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được', 'award');
+                            echo form_label('14. Các đơn vị phụ trách, vườn ươm, trung tâm hỗ trợ/thúc đẩy khởi nghiệp');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('award', '<div class="error">', '</div>');
+                            echo form_error('field_14', '<div class="error">', '</div>');
                             echo form_textarea(array(
-                                'name' => 'award',
-                                'id' => 'award',
-                                'value' => set_value('award'),
+                                'name' => 'field_14',
+                                'id' => 'field_14',
+                                'value' => set_value('field_14'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -379,13 +329,19 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('File mô tả chi tiết sản phẩm <br> <span style="color: red">(*.doc, *.docx, *.xlsx, *.pdf, file <= 2Mb)</span>', 'file');
+                            echo form_label('15. Kết quả đạt được trong 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('file', '<div class="error">', '</div>');
-                            echo form_upload('file', set_value('file'), 'class="form-control"');
+                            echo form_error('field_15', '<div class="error">', '</div>');
+                            echo form_textarea(array(
+                                'name' => 'field_15',
+                                'id' => 'field_15',
+                                'value' => set_value('field_15'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
                             ?>
                         </div>
                     </div>
@@ -394,13 +350,40 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Số giấy chứng nhận bản quyền', 'copyright_certificate');
+                            echo form_label('16. Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm:');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('copyright_certificate', '<div class="error">', '</div>');
-                            echo form_input('copyright_certificate', set_value('copyright_certificate'), 'class="form-control"');
+                            echo form_error('field_16', '<div class="error">', '</div>');
+                            echo form_textarea(array(
+                                'name' => 'field_16',
+                                'id' => 'field_16',
+                                'value' => set_value('field_16'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('17. Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('field_17', '<div class="error">', '</div>');
+                            echo form_textarea(array(
+                                'name' => 'field_17',
+                                'id' => 'field_17',
+                                'value' => set_value('field_17'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
                             ?>
                         </div>
                     </div>
@@ -410,22 +393,67 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Giấy chứng nhận bản quyền/cam kết bản quyền', 'certificate');
+                            echo form_label('18. Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019');
                             ?>
                         </div>
-
-                        <div class="col-sm-9 col-md-9 col-xs-12">
-                            <p>Ghi chú: Nếu chưa có giấy chứng nhận bản quyền, thì tải mẫu Cam kết bản quyền tại đây, khai đầy đủ thông tin, ký, đóng dấu và upload tại đây.</p>
-                            <?php  echo form_error('certificate', '<div class="error">', '</div>'); ?>
-                            <div class="input-group">
-                                <?php echo form_input('certificate', set_value('certificate'), 'class="form-control" aria-describedby="basic-addon2" placeholder="Nhập Link tại đây" '); ?>
-                              <span class="input-group-addon" id="basic-addon2" style="background: #f39c12 !important"><a style="color:#fff;font-weight: bold;" class="color-warning" href="<?php echo site_url('Cam-ket-ban-quyen.docx') ?>" target="_blank">Tải mẫu Cam kết bản quyền</a></span>
-                            </div>
-                            <br>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('field_18', '<div class="error">', '</div>');
+                            echo form_textarea(array(
+                                'name' => 'field_18',
+                                'id' => 'field_18',
+                                'value' => set_value('field_18'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
+                            ?>
                         </div>
                     </div>
                 </div>
-                <br>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('19. Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('field_19', '<div class="error">', '</div>');
+                            echo form_textarea(array(
+                                'name' => 'field_19',
+                                'id' => 'field_19',
+                                'value' => set_value('field_19'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('20. Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh):');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('field_20', '<div class="error">', '</div>');
+                            echo form_textarea(array(
+                                'name' => 'field_20',
+                                'id' => 'field_20',
+                                'value' => set_value('field_20'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">
                     </div>
@@ -447,14 +475,15 @@
     // }else{
     //     $('.submit-extra-form').hide();
     // };
+
     $('.btn-group-1').click(function(){
         if($(this).prop("checked") == true){
             $('.group-1').slideDown();
         }else{
             $('.group-1').slideUp();
         }
-
     });
+
     $('.btn-group-4').click(function(){
         if($(this).prop("checked") == true){
             $('.group-4').slideDown();
@@ -640,6 +669,8 @@
             $("#submit").attr("disabled", true);
             $("#tmpSubmit").attr("disabled", true);
         },1000)
+            
     });
 
 </script>
+
