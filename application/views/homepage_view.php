@@ -18,10 +18,10 @@
         </div>
         
         <div class="register-area">
-            <a class="btn-register register-for-city" href="http://smartcitiesvietnam.com/nhom-1-cac-do-thi-thong-minh/"></a>
-            <a class="btn-register register-for-real-estate" href="<?php echo base_url('client/user/login') ?>"></a>
-            <a class="btn-register register-for-real-estate-and-industry" href="<?php echo base_url('client/user/login') ?>"></a>
-            <a class="btn-register register-for-technology-solutions" href="<?php echo base_url('client/user/login') ?>"></a>
+            <a class="btn-register register-for-city" href="<?php echo base_url('client/user/login?type=1') ?>"></a>
+            <a class="btn-register register-for-real-estate" href="<?php echo base_url('client/user/login?type=2') ?>"></a>
+            <a class="btn-register register-for-real-estate-and-industry" href="<?php echo base_url('client/user/login?type=3') ?>"></a>
+            <a class="btn-register register-for-technology-solutions" href="<?php echo base_url('client/user/login?type=4') ?>"></a>
         </div>
         
         <div class="footer-area">

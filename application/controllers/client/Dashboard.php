@@ -36,6 +36,9 @@ class Dashboard extends Client_Controller {
             $this->data['count_product'] = $this->information_model->count_product1($this->data['user']->id, $this->data['eventYear']);
         } elseif ($this->data['user_service_type'] == '3'){
             $this->data['count_product'] = $this->information_model->count_product2($this->data['user']->id, $this->data['eventYear']);
+        } else {
+            // TODO
+            $this->data['count_product'] = 0;
         }
 
         $checkInformation = $this->information_model->checkExist('information', $this->data['user']->username);
