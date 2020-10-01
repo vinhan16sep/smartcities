@@ -111,7 +111,7 @@
                             <?php if($identity != ''){ ?>
                                 <?php if($reg_status['is_final'] == 0): ?>
                                     <?php if(!$company_submitted): ?>
-                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin</p>
+                                        <p style="color:red;">Cần điền đầy đủ thông tin</p>
                                         <span>
                                             <!-- UPDATE FOR SERVICE TYPE -->
                                             <?php if ($user_service_type == '4'): ?>
