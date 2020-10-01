@@ -40,7 +40,7 @@ class Product3 extends Client_Controller {
             '3' => 'Quyết định phê duyệt quy hoạch 1:500',
             '4' => 'Các giấy phép khác',
         ];
-        $this->data['folder_name'] = 'product'.($this->data['user_service_type'] - 1);
+        $this->data['folder_name'] = 'product'.($this->data['user_service_type'] + 2);
     }
 
     public function maintenance(){
@@ -64,12 +64,12 @@ class Product3 extends Client_Controller {
         $this->data['allYear'] = $this->information_model->getAllProductYears();
         $this->data['products'] = $this->information_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page'], 'product2');
 
-        $this->render('client/information/list_product_view_'.$this->data['user_service_type']);
+        $this->render('client/information/list_product_view_4');
     }
 
     public function detail_product($id = NULL){
         $this->data['product'] = $this->information_model->fetch_product_by_user_and_id($this->data['folder_name'], $this->data['user']->id, $id);
-        $this->render('client/information/detail_product_view_' . $this->data['user']->service_type);
+        $this->render('client/information/detail_product_view_4');
     }
 
     public function remove_product($id = null){
@@ -105,7 +105,7 @@ class Product3 extends Client_Controller {
             // VALIDATION
             $this->validate_product_complete();
             if ($this->form_validation->run() == FALSE) {
-                $this->render('client/information/create_product_view_' . $this->data['user_service_type']);
+                $this->render('client/information/create_product_view_4');
             } else {
                 if ($this->input->post()) {
                     // if(!empty($_FILES['file']['name'])){
@@ -180,7 +180,7 @@ class Product3 extends Client_Controller {
             // var_dump($this->form_validation->run());die;
 
             if ($this->form_validation->run() == FALSE) {
-                $this->render('client/information/create_product_view_'.$this->data['user_service_type']);
+                $this->render('client/information/create_product_view_4');
             } else {
                 if ($this->input->post()) {
 
@@ -264,7 +264,7 @@ class Product3 extends Client_Controller {
                 if (!$this->data['product']) {
                     redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
                 }
-                $this->render('client/information/edit_product_view_' . $this->data['user']->service_type);
+                $this->render('client/information/edit_product_view_4');
             } else {
                 if ($this->input->post()) {
                     // if(!empty($_FILES['file']['name'])){
@@ -336,7 +336,7 @@ class Product3 extends Client_Controller {
                 if (!$this->data['product']) {
                     redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
                 }
-                $this->render('client/information/edit_product_view_' . $this->data['user']->service_type);
+                $this->render('client/information/edit_product_view_4');
             } else {
                 if ($this->input->post()) {
                     // if(!empty($_FILES['file']['name'])){

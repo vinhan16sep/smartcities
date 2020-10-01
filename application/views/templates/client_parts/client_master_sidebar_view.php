@@ -30,7 +30,7 @@
                 </li>
                 <?php else: ?>
                 <li class="<?php echo ($active == 'city')? 'active' : '' ?>">
-                    <a href="<?php echo base_url('client/city/maintenance'); ?>">
+                    <a href="<?php echo base_url('client/city/index'); ?>">
                         <i class="fa fa-bar-chart" aria-hidden="true"></i>
                         <span>Thông tin chung</span>
                         <span class="pull-right-container"></span>
@@ -68,7 +68,7 @@
                 </li>
                 <?php else: ?>
                 <li class="<?php echo ($active == 'product3')? 'active' : '' ?>">
-                    <a href="<?php echo base_url('client/product3/maintenance'); ?>">
+                    <a href="<?php echo base_url('client/product3/products'); ?>">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span>Thông tin lĩnh vực đăng <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ký tham gia</span>
                         <span class="pull-right-container"></span>
