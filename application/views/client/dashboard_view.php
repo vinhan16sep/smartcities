@@ -111,7 +111,7 @@
                             <?php if($identity != ''){ ?>
                                 <?php if($reg_status['is_final'] == 0): ?>
                                     <?php if(!$company_submitted): ?>
-                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin</p>
+                                        <p style="color:red;">Cần điền đầy đủ thông tin</p>
                                         <span>
                                             <!-- UPDATE FOR SERVICE TYPE -->
                                             <?php if ($user_service_type == '4'): ?>
@@ -119,7 +119,7 @@
                                             <?php elseif ($user_service_type == '2' || $user_service_type == '3'): ?>
                                                 <a href="<?php echo base_url('client/company/create_2_3?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                             <?php else: ?>
-                                                <a href="<?php echo base_url('client/city/maintenance?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block">
+                                                <a href="<?php echo base_url('client/city/index?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block">
                                                     <b>Nhập thông tin chung<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b>
                                                 </a>
                                             <?php endif; ?>

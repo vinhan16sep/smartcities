@@ -29,7 +29,11 @@ class Dashboard extends Client_Controller {
 
         $this->load->model('information_model');
         $this->data['information_submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
-        $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity_and_year($this->data['user']->username, $this->data['eventYear']);
+        if ($this->data['user']->service_type != 1) {
+            $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity_and_year($this->data['user']->username, $this->data['eventYear']);
+        } else {
+            $this->data['company_submitted'] = $this->information_model->fetch_list_city_by_identity_and_year($this->data['user']->username, $this->data['eventYear']);
+        }
         if($this->data['user_service_type'] == '4'){
             $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
         } elseif ($this->data['user_service_type'] == '2'){
@@ -37,18 +41,23 @@ class Dashboard extends Client_Controller {
         } elseif ($this->data['user_service_type'] == '3'){
             $this->data['count_product'] = $this->information_model->count_product2($this->data['user']->id, $this->data['eventYear']);
         } else {
-            // TODO
-            $this->data['count_product'] = 0;
+            $this->data['count_product'] = $this->information_model->count_product3($this->data['user']->id, $this->data['eventYear']);
         }
 
         $checkInformation = $this->information_model->checkExist('information', $this->data['user']->username);
-        $checkCompany = $this->information_model->checkExist('company', $this->data['user']->username);
+        if ($this->data['user']->service_type != 1) {
+            $checkCompany = $this->information_model->checkExist('company', $this->data['user']->username);
+        } else {
+            $checkCompany = $this->information_model->checkExist('city', $this->data['user']->username);
+        }
         if($this->data['user_service_type'] == '4'){
             $checkProduct = $this->information_model->checkExistProduct('product', $this->data['user']->username);
         } elseif ($this->data['user_service_type'] == '2'){
             $checkProduct = $this->information_model->checkExistProduct('product1', $this->data['user']->username);
         } elseif ($this->data['user_service_type'] == '3'){
             $checkProduct = $this->information_model->checkExistProduct('product2', $this->data['user']->username);
+        } else {
+            $checkProduct = $this->information_model->checkExistProduct('product3', $this->data['user']->username);
         }
         $this->data['complete'] = 0;
         if($checkInformation > 0 && $checkCompany > 0 && $checkProduct > 0){

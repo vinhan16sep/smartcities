@@ -11,7 +11,7 @@
  Target Server Version : 100132
  File Encoding         : utf-8
 
- Date: 09/28/2020 01:38:53 AM
+ Date: 10/01/2020 22:21:25 PM
 */
 
 SET NAMES utf8mb4;
@@ -74,5 +74,12 @@ CREATE TABLE `product2` (
   `field_33` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+--  Records of `product2`
+-- ----------------------------
+BEGIN;
+INSERT INTO `product2` VALUES ('7', '6', null, null, '0', '0', '2020-09-27 23:48:10', 'vinhan16sep4@gmail.com', '2020-09-27 23:48:10', 'vinhan16sep4@gmail.com', null, '11111111116', '', '0', '', '', '2020', 'Data123456', '1', '[\"1\",\"2\"]', '123', '123', '123', '<p>sdca</p>', '<p>&aacute;d</p>', '<p>&aacute;d</p>', '<p>&aacute;d</p>', '23', '123', '2', '2', '123', '<p>sad</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưeqwe</p>', '<p>qưeq</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>', '<p>qưe</p>');
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
