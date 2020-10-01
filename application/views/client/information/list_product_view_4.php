@@ -13,7 +13,7 @@
                                     <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
                                 </div>
                             <?php endif ?>
-                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM <i class="fa fa-arrow-right" aria-hidden="true"></i> THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP' : 'Danh sách dự án bất động sản công nghiệp' ?></h4>
+                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM <i class="fa fa-arrow-right" aria-hidden="true"></i> THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP' : 'Danh sách các thành phố thông minh' ?></h4>
                             <?php if (!empty($products)): ?>
                                 <?php foreach($allYear as $index => $year): ?>
                                 <hr>
@@ -24,7 +24,7 @@
                                         echo '<table class="table table-hover table-bordered table-condensed">';
                                         echo '<tr>';
                                         echo '<td><b>STT</b></td>';
-                                        echo '<td><b>Tên dự án BDS</b></td>';
+                                        echo '<td><b>Lĩnh vực đăng ký</b></td>';
                                         echo '<td><b style="text-align: center !important;">Thông tin</b></td>';
                                         if($reg_status['is_final'] == 0){
                                             echo '<td colspan="2" ><b style="text-align: center !important;">Thao tác</b></td>';

@@ -2,66 +2,44 @@
 
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content">
+        <h4>Thông tin dự án bất động sản ứng cử</h4>
         <div class="row">
             <div class="col-md-6">
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
-                            <h4>Thông tin sản phẩm cơ bản</h4>
                             <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item" style="text-align: center;">
+                                <!-- <li class="list-group-item" style="text-align: center;"> -->
 <!--                                    <a>Giấy chứng nhận bản quyền/cam kết bản quyền</a>-->
 <!--                                    <br>-->
-                                    <!--<img src="<?php echo base_url('assets/upload/product/'. $product['certificate']); ?>" alt="" style="width: 200px;">-->
+                                    <!--<img src="<?php //echo base_url('assets/upload/product/'. $product['certificate']); ?>" alt="" style="width: 200px;">-->
+                                <!-- </li> -->
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-circle margin-r-5"></i> Lĩnh vực đăng ký</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_1']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-circle margin-r-5"></i> Tên Sản phẩm/giải pháp/ứng dụng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['name']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Hành lang pháp lý: các văn bản pháp lý liên quan đến lĩnh vực đăng ký tham gia Giải thưởng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_2']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <?php $service = json_decode($product['service']) ?>
-                                    <a><i class="fa fa-circle margin-r-5"></i> Đăng ký tham gia lĩnh vực</a> <br>
-                                    <?php if(!is_null($service) && $service != null){ 
-                                        $options_1 = array(
-                                            '1' => 'Giải pháp cho Chính quyền số',
-                                            '2' => 'Giải pháp Quy hoạch thành phố thông minh',
-                                            '3' => 'Giải pháp cho hạ tầng kỹ thuật thành phố thông minh',
-                                            '4' => 'Giải pháp hạ tầng số cho thành phố thông minh',
-                                            '5' => 'Giải pháp/ứng dụng cho công dân/cộng đồng thông minh',
-                                            '6' => 'Giải pháp An toàn thông tin',
-                                            '7' => 'Giải pháp du lịch thông minh',
-                                            '8' => 'Giải pháp thanh toán thông minh',
-                                            '9' => 'Giải pháp giao thông thông minh',
-                                            '10' => 'Giải pháp giáo dục thông minh',
-                                            '11' => 'Giải pháp nông nghiệp thông minh',
-                                            '12' => 'Giải pháp an ninh, an toàn, cấp cứu, cứu nạn',
-                                            '13' => 'Giải pháp y tế thông minh',
-                                            '14' => 'Giải pháp năng lượng thông minh',
-                                            '15' => 'Giải pháp môi trường thông minh',
-                                            '16' => 'Giải pháp xây dựng thông minh',
-                                            '17' => 'Giải pháp cấp, thoát và xử lý nước thông minh',
-                                            '18' => 'Giải pháp cho nhà máy thông minh',
-                                            '19' => 'Giải pháp cho toà nhà/căn hộ thông minh',
-                                            '20' => 'Giải pháp cho khu công nghiệp thông minh',
-                                        );
-                                    ?>
-                                        <?php foreach ($service as $key => $value): ?>
-                                            <p class="" style="padding-left:20px;"><?php echo $options_1[$value]; ?></p>
-                                        <?php endforeach ?>
-                                    <?php } ?>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Thực tế triển khai các đề án, dự án, chương trình ứng dụng CNTT (của lĩnh vực đăng ký xét trao Giải thưởng) của tỉnh/thành phố (mức độ triển khai, hoàn thành của các đề án, dự án, chương trình…)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_3']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-calendar margin-r-5"></i> Số giấy chứng nhận bản quyền</a> <p class="pull-right"><?php echo $product['copyright_certificate']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các ứng dụng công nghệ, tiện ích thông minh cho người dân và doanh nghiệp trong lĩnh vực đăng ký xét trao Giải (vd: lĩnh vực quy hoạch/ điều hành/ dịch vụ công/ giao thông, logistics/ y tế/ giáo dục/ môi trường/ năng lượng/ cấp thoát nước/ du lịch/ bảo mật, an ninh, an toàn…): nêu chi tiết các thiết bị, giải pháp, ứng dụng và dịch vụ công nghệ, tổng kinh phí, số lượng người dùng, số lượng tương tác, đo lường hiệu quả…</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_4']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-calendar margin-r-5"></i> Ngày thương mại hoá ra thị trường</a> <p class="pull-right"><?php echo $product['open_date']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Quy mô và tỉ lệ đầu tư cho xây dựng Hạ tầng dữ liệu/hạ tầng số của tỉnh/thành phố trên tổng mức đầu tư cho xây dựng và phát triển thành phố thông minh; tỉ lệ  CNTT trong các dự án đầu tư</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_5']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <?php if ( $product['file'] != "" && filesize('assets/upload/file/' . $product['file']) ): ?>
-                                        <a href="<?php echo base_url('assets/upload/file/' . $product['file']) ?>" download><i class="fa fa-file-excel-o margin-r-5" aria-hidden="true"></i> File mô tả chi tiết sản phẩm<p class="pull-right">Click để tải file</p></a>
-                                    <?php else: ?>
-                                        <p>Chưa có File mô tả chi tiết sản phẩm</p>
-                                    <?php endif ?>
-                                    
+                                    <a><i class="fa fa-circle margin-r-5"></i> Mức độ hoàn thiện của chính quyền điện tử/chính quyền số</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_6']; ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-circle margin-r-5"></i> Bảo mật an toàn thông tin, an ninh cho người dân (các ứng dụng, giải pháp cho bảo mật, an toàn thông tin cho các cơ quan quản lý; các thiết bị IoT, giám sát, hệ thống báo cáo, phản ánh hiện trường; tổng mức đầu tư, vận hành; thành tích, kết quả đạt được)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_7']; ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-circle margin-r-5"></i> Khả năng tiếp cận cơ hội số của người dân, cộng đồng và doanh nghiệp tại thành phố (các phương tiện, công cụ giao tiếp với người dân, doanh nghiệp; mức độ tiếp cận thông tin, dữ liệu (trung tâm dữ liệu mở) của thành phố/đô thị; số lượng tương tác của người dân/doanh nghiệp cho các dịch vụ công, các phương tiện phản ánh;…)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_8']; ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các chính sách, chương trình, hoạt động khuyến khích khởi nghiệp đổi mới sáng tạo của tỉnh, thành phố (cung cấp thông tin nếu đăng ký lĩnh vực “Thành phố hấp dẫn Khởi nghiệp ĐMST”), gồm:</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_9']; ?></p>
                                 </li>
                             </ul>
                         </div>
@@ -72,50 +50,44 @@
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
-                            <h4>Thông tin khác</h4>
                             <ul class="list-group list-group-unbordered">
+
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-star margin-r-5"></i> Mô tả các công năng của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['functional']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Số lượng DN thành lập mới năm 2018, 2019</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_10']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-star margin-r-5"></i> Các công nghệ và quy trình chất lượng sử dụng để phát triển SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['process']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các chính sách của tỉnh/thành phố cho startups</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_11']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-user-secret margin-r-5"></i> Tính bảo mật của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['security']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các chương trình hỗ trợ, thúc đẩy startups năm 2018, 2019</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_12']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-thumbs-o-up margin-r-5"></i> Các ưu điểm nổi trội của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['positive']; ?></p>
-                                </li>
-                                <!-- <li class="list-group-item">
-                                    <a><i class="fa fa-star margin-r-5"></i> So sánh với các SP/GP/DV khác</a> <br><p class="" style="padding-left:20px;"><?php echo $product['compare']; ?></p>
-                                </li> -->
-                                <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 3) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_1']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Tổng ngân sách cho hỗ trợ, thúc đẩy startups năm 2018, 2019</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_13']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 2) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các đơn vị phụ trách, vườn ươm, trung tâm hỗ trợ/thúc đẩy khởi nghiệp</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_14']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 1) ?> (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Kết quả đạt được trong 2018, 2019</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_15']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm:</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_16']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Giá SP/GP/ƯD</a> <p class="pull-right"><?php echo $product['price']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_17']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Thông tin khách hàng (Số lượng khách hàng cá nhân, khách hàng tổ chức/doanh nghiệp, kể tên một số khách hàng tiêu biểu)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['customer']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_18']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-child margin-r-5"></i> Dịch vụ sau bán hàng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['after_sale']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_19']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Đội ngũ phát triển SP/GP/ƯD (bao nhiêu người, trình độ, trong bao lâu...)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['team']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh):</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_20']; ?></p>
                                 </li>
-                                <li class="list-group-item">
-                                    <a><i class="fa fa-trophy margin-r-5"></i> Các giải thưởng/DH đã nhận được</a> <br><p class="" style="padding-left:20px;"><?php echo $product['award']; ?></p>
-                                </li>
+
+
+                                
                             </ul>
 <!--                            --><?php //if(!$submitted || $submitted['is_submit'] != 1): ?>
 <!--                                <a href="--><?php //echo base_url('client/information/create_extra'); ?><!--" class="btn btn-primary btn-block"><b>Chỉnh sửa thông tin</b></a>-->
