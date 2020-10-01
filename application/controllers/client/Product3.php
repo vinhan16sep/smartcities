@@ -51,7 +51,7 @@ class Product3 extends Client_Controller {
         $this->load->library('pagination');
         $config = array();
         $base_url = base_url() . 'client/information/products';
-        $total_rows = $this->information_model->count_product2($this->data['user']->id, $this->data['eventYear']);
+        $total_rows = $this->information_model->count_product3($this->data['user']->id, $this->data['eventYear']);
         $per_page = 10;
         $uri_segment = 4;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
@@ -62,7 +62,7 @@ class Product3 extends Client_Controller {
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $this->data['allYear'] = $this->information_model->getAllProductYears();
-        $this->data['products'] = $this->information_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page'], 'product2');
+        $this->data['products'] = $this->information_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page'], 'product3');
 
         $this->render('client/information/list_product_view_4');
     }
@@ -120,7 +120,7 @@ class Product3 extends Client_Controller {
 
                         'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
-                        'field_3' => json_encode($this->input->post('field_3')),
+                        'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
                         'field_5' => $this->input->post('field_5'),
                         'field_6' => $this->input->post('field_6'),
@@ -138,19 +138,6 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
-                        'field_21' => $this->input->post('field_21'),
-                        'field_22' => $this->input->post('field_22'),
-                        'field_23' => $this->input->post('field_23'),
-                        'field_24' => $this->input->post('field_24'),
-                        'field_25' => $this->input->post('field_25'),
-                        'field_26' => $this->input->post('field_26'),
-                        'field_27' => $this->input->post('field_27'),
-                        'field_28' => $this->input->post('field_28'),
-                        'field_29' => $this->input->post('field_29'),
-                        'field_30' => $this->input->post('field_30'),
-                        'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -195,7 +182,7 @@ class Product3 extends Client_Controller {
 
                         'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
-                        'field_3' => json_encode($this->input->post('field_3')),
+                        'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
                         'field_5' => $this->input->post('field_5'),
                         'field_6' => $this->input->post('field_6'),
@@ -213,19 +200,6 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
-                        'field_21' => $this->input->post('field_21'),
-                        'field_22' => $this->input->post('field_22'),
-                        'field_23' => $this->input->post('field_23'),
-                        'field_24' => $this->input->post('field_24'),
-                        'field_25' => $this->input->post('field_25'),
-                        'field_26' => $this->input->post('field_26'),
-                        'field_27' => $this->input->post('field_27'),
-                        'field_28' => $this->input->post('field_28'),
-                        'field_29' => $this->input->post('field_29'),
-                        'field_30' => $this->input->post('field_30'),
-                        'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -254,6 +228,7 @@ class Product3 extends Client_Controller {
     public function edit_product($request_id = NULL) {
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->data['user_service_types'] = $this->data['service_types'][$this->data['user']->service_type];
         if($this->input->post('submit') == 'Hoàn thành') {
             // VALIDATION
             $this->validate_product_complete();
@@ -277,7 +252,7 @@ class Product3 extends Client_Controller {
                         
                         'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
-                        'field_3' => json_encode($this->input->post('field_3')),
+                        'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
                         'field_5' => $this->input->post('field_5'),
                         'field_6' => $this->input->post('field_6'),
@@ -295,19 +270,6 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
-                        'field_21' => $this->input->post('field_21'),
-                        'field_22' => $this->input->post('field_22'),
-                        'field_23' => $this->input->post('field_23'),
-                        'field_24' => $this->input->post('field_24'),
-                        'field_25' => $this->input->post('field_25'),
-                        'field_26' => $this->input->post('field_26'),
-                        'field_27' => $this->input->post('field_27'),
-                        'field_28' => $this->input->post('field_28'),
-                        'field_29' => $this->input->post('field_29'),
-                        'field_30' => $this->input->post('field_30'),
-                        'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
@@ -352,7 +314,7 @@ class Product3 extends Client_Controller {
 
                         'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
-                        'field_3' => json_encode($this->input->post('field_3')),
+                        'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
                         'field_5' => $this->input->post('field_5'),
                         'field_6' => $this->input->post('field_6'),
@@ -370,19 +332,6 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
-                        'field_21' => $this->input->post('field_21'),
-                        'field_22' => $this->input->post('field_22'),
-                        'field_23' => $this->input->post('field_23'),
-                        'field_24' => $this->input->post('field_24'),
-                        'field_25' => $this->input->post('field_25'),
-                        'field_26' => $this->input->post('field_26'),
-                        'field_27' => $this->input->post('field_27'),
-                        'field_28' => $this->input->post('field_28'),
-                        'field_29' => $this->input->post('field_29'),
-                        'field_30' => $this->input->post('field_30'),
-                        'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
@@ -477,246 +426,101 @@ class Product3 extends Client_Controller {
 
 
     private function validate_product_complete(){
-        $this->form_validation->set_rules('field_1', 'Tên dự án BĐS CN', 'trim|required', array(
+        $this->form_validation->set_rules('field_1', 'Lĩnh vực đăng ký', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_2', 'Hạng mục đăng ký tham gia', 'trim|required', array(
+        $this->form_validation->set_rules('field_2', 'Hành lang pháp lý: các văn bản pháp lý liên quan đến lĩnh vực đăng ký tham gia Giải thưởng', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_3[]', 'Hồ sơ pháp lý gửi kèm', 'trim|required', array(
+        $this->form_validation->set_rules('field_3', 'Thực tế triển khai các đề án, dự án, chương trình ứng dụng CNTT (của lĩnh vực đăng ký xét trao Giải thưởng) của tỉnh/thành phố (mức độ triển khai, hoàn thành của các đề án, dự án, chương trình…)', 'trim|required', array(
             'required' => '%s không được trống.'
         ));
-        $this->form_validation->set_rules('field_4', 'Tổng diện tích dự án', 'trim|required', array(
+        $this->form_validation->set_rules('field_4', 'Các ứng dụng công nghệ, tiện ích thông minh cho người dân và doanh nghiệp trong lĩnh vực đăng ký xét trao Giải (vd: lĩnh vực quy hoạch/ điều hành/ dịch vụ công/ giao thông, logistics/ y tế/ giáo dục/ môi trường/ năng lượng/ cấp thoát nước/ du lịch/ bảo mật, an ninh, an toàn…): nêu chi tiết các thiết bị, giải pháp, ứng dụng và dịch vụ công nghệ, tổng kinh phí, số lượng người dùng, số lượng tương tác, đo lường hiệu quả…', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_5', 'Vị trí dự án', 'trim|required', array(
+        $this->form_validation->set_rules('field_5', 'Quy mô và tỉ lệ đầu tư cho xây dựng Hạ tầng dữ liệu/hạ tầng số của tỉnh/thành phố trên tổng mức đầu tư cho xây dựng và phát triển thành phố thông minh; tỉ lệ  CNTT trong các dự án đầu tư', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_6', 'Tổng mức đầu tư', 'trim|required', array(
+        $this->form_validation->set_rules('field_6', 'Mức độ hoàn thiện của chính quyền điện tử/chính quyền số', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_7', 'Hạ tầng kỹ thuật', 'trim|required', array(
+        $this->form_validation->set_rules('field_7', 'Bảo mật an toàn thông tin, an ninh cho người dân (các ứng dụng, giải pháp cho bảo mật, an toàn thông tin cho các cơ quan quản lý; các thiết bị IoT, giám sát, hệ thống báo cáo, phản ánh hiện trường; tổng mức đầu tư, vận hành; thành tích, kết quả đạt được)', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_8', 'Danh mục các dịch vụ và tiện ích đang cung cấp', 'trim|required', array(
+        $this->form_validation->set_rules('field_8', 'Khả năng tiếp cận cơ hội số của người dân, cộng đồng và doanh nghiệp tại thành phố (các phương tiện, công cụ giao tiếp với người dân, doanh nghiệp; mức độ tiếp cận thông tin, dữ liệu (trung tâm dữ liệu mở) của thành phố/đô thị; số lượng tương tác của người dân/doanh nghiệp cho các dịch vụ công, các phương tiện phản ánh;…)', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_9', 'Ưu điểm khác', 'trim|required', array(
+        $this->form_validation->set_rules('field_9', 'Các chính sách, chương trình, hoạt động khuyến khích khởi nghiệp đổi mới sáng tạo của tỉnh, thành phố (cung cấp thông tin nếu đăng ký lĩnh vực “Thành phố hấp dẫn Khởi nghiệp ĐMST”), gồm:', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_10', 'Các thông tin khác', 'trim|required', array(
+        $this->form_validation->set_rules('field_10', 'Số lượng DN thành lập mới năm 2018, 2019', 'trim|required', array(
             'required' => '%s không được trống.'
         ));
-        $this->form_validation->set_rules('field_11', 'Phê duyệt (Đã hoặc Đang trình)', 'trim|required', array(
+        $this->form_validation->set_rules('field_11', 'Các chính sách của tỉnh/thành phố cho startups', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_12', 'Tỷ lệ giải phóng mặt bằng (%)', 'trim|required', array(
+        $this->form_validation->set_rules('field_12', 'Các chương trình hỗ trợ, thúc đẩy startups năm 2018, 2019', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_13', 'Tỷ lệ lấp đầy (%)', 'trim|required', array(
+        $this->form_validation->set_rules('field_13', 'Tổng ngân sách cho hỗ trợ, thúc đẩy startups năm 2018, 2019', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_14', 'Hạ tầng kỹ thuật: (Đã/Đang/Chưa hoàn thiện)', 'trim|required', array(
+        $this->form_validation->set_rules('field_14', 'Các đơn vị phụ trách, vườn ươm, trung tâm hỗ trợ/thúc đẩy khởi nghiệp', 'trim|required', array(
             'required' => '%s không được trống.'
         ));
         
         
         // check require
-        $this->form_validation->set_rules('field_15', 'Đang mở rộng và phát triển thêm', 'trim|required', array(
+        $this->form_validation->set_rules('field_15', 'Kết quả đạt được trong 2018, 2019', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_16', 'Kiến trúc tổng thể CNTT của khu', 'trim|required', array(
+        $this->form_validation->set_rules('field_16', 'Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm:', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_17', 'Hạ tầng dữ liệu', 'trim|required', array(
+        $this->form_validation->set_rules('field_17', 'Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_18', 'Các tiện ích thông minh của dự án', 'trim|required', array(
+        $this->form_validation->set_rules('field_18', 'Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_19', 'Thiết bị điện và chiếu sáng', 'trim|required', array(
+        $this->form_validation->set_rules('field_19', 'Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_20', 'Môi trường/cây xanh/không khí', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_21', 'Cấp nước', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_22', 'Xử lý nước và chất thải', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_23', 'Cung cấp năng lượng, Điện', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_24', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_25', 'Phòng cháy chữa cháy', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_26', 'Theo dõi, giám sát, cứu nạn', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_27', 'Bảo mật, an toàn thông tin', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_28', 'Xây dựng nhà xưởng thông minh', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_29', 'Các dịch vụ hỗ trợ doanh nghiệp, nhà đầu tưCác tiện ích thông minh khác', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_30', 'Các tiện ích thông minh khác', 'trim|required', array(
+        $this->form_validation->set_rules('field_20', 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh):', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
         
         // check word + require
-        // $this->form_validation->set_rules('field_15', 'Kiến trúc tổng thể CNTT của khu/toà nhà', 'trim|required|max_word[300]', array(
+        // $this->form_validation->set_rules('field_15', 'Kết quả đạt được trong 2018, 2019', 'trim|required|max_word[300]', array(
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
         // ));
-        // $this->form_validation->set_rules('field_16', 'Hạ tầng dữ liệu', 'trim|required|max_word[300]', array(
+        // $this->form_validation->set_rules('field_16', 'Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm:', 'trim|required|max_word[300]', array(
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
         // ));
-        // $this->form_validation->set_rules('field_17', 'Các tiện ích thông minh của dự án/khu đô thị/toà nhà:', 'trim|required|max_word[300]', array(
+        // $this->form_validation->set_rules('field_17', 'Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019', 'trim|required|max_word[300]', array(
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
         // ));
-        // $this->form_validation->set_rules('field_18', 'Thiết bị điện và chiếu sáng', 'trim|required|max_word[300]', array(
+        // $this->form_validation->set_rules('field_18', 'Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019', 'trim|required|max_word[300]', array(
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
         // ));
-        // $this->form_validation->set_rules('field_19', 'Môi trường/cây xanh/không khí', 'trim|required|max_word[300]', array(
+        // $this->form_validation->set_rules('field_19', 'Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)', 'trim|required|max_word[300]', array(
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
         // ));
-        // $this->form_validation->set_rules('field_20', 'Cấp nước', 'trim|required|max_word[300]', array(
+        // $this->form_validation->set_rules('field_20', 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh):', 'trim|required|max_word[300]', array(
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_21', 'Xử lý nước và chất thải', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_22', 'Cung cấp năng lượng, Điện', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_23', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_24', 'Phòng cháy chữa cháy', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_25', 'Theo dõi, giám sát, cứu nạn', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_26', 'Bảo mật, an toàn thông tin', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_27', 'Mạng xã hội cho dân cư', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_28', 'Các ứng dụng quản lý dân cư', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_29', 'Các tiện ích thông minh khác', 'trim|required|max_word[300]', array(
-        //     'required' => '%s không được trống.',
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        $this->form_validation->set_rules('field_31', 'Các tiêu chuẩn kỹ thuật, an toàn, phòng cháy chữa cháy, môi trường đang áp dụng', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_33', 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        // $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(
-        //     'required' => '%s không được trống.',
-        //     'numeric' => '%s phải là số.',
-        //     'min_length' => '%s ít nhất 1 chữ số',
-        //     'max_length' => '%s nhiều nhất 2 chữ số.',
-        // ));
-        // $this->form_validation->set_rules('field_33', 'Tháng', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(
-        //     'required' => '%s không được trống.',
-        //     'numeric' => '%s phải là số.',
-        //     'min_length' => '%s ít nhất 1 chữ số.',
-        //     'max_length' => '%s nhiều nhất 2 chữ số.',
         // ));
     }
 
     private function validate_product_temporary(){
-        $this->form_validation->set_rules('field_1', 'Tên dự án BĐS', 'trim|required', array(
+        $this->form_validation->set_rules('field_1', 'Lĩnh vực đăng ký', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_2', 'Hạng mục đăng ký tham gia', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_3[]', 'Hồ sơ pháp lý gửi kèm', 'trim|required', array(
-            'required' => '%s không được trống.'
-        ));
-        // $this->form_validation->set_rules('field_15', 'Kiến trúc tổng thể CNTT của khu/toà nhà', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_16', 'Hạ tầng dữ liệu', 'trim|required|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_17', 'Các tiện ích thông minh của dự án/khu đô thị/toà nhà:', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_18', 'Thiết bị điện và chiếu sáng', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_19', 'Môi trường/cây xanh/không khí', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_20', 'Cấp nước', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_21', 'Xử lý nước và chất thải', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_22', 'Cung cấp năng lượng, Điện', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_23', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_24', 'Phòng cháy chữa cháy', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_25', 'Theo dõi, giám sát, cứu nạn', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_26', 'Bảo mật, an toàn thông tin', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_27', 'Mạng xã hội cho dân cư', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_28', 'Các ứng dụng quản lý dân cư', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_29', 'Các tiện ích thông minh khác', 'trim|max_word[300]', array(
-        //     'max_word' => '%s Tối đa 300 từ'
-        // ));
-        // $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|min_length[1]|max_length[2]', array(
-        //     'numeric' => '%s phải là số.',
-        //     'min_length' => '%s ít nhất 1 chữ số',
-        //     'max_length' => '%s nhiều nhất 2 chữ số.',
-        // ));
-        // $this->form_validation->set_rules('field_33', 'Tháng', 'trim|numeric|min_length[1]|max_length[2]', array(
-        //     'numeric' => '%s phải là số.',
-        //     'min_length' => '%s ít nhất 1 chữ số.',
-        //     'max_length' => '%s nhiều nhất 2 chữ số.',
-        // ));
     }
 
 
