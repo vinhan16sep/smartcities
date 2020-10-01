@@ -446,6 +446,8 @@ class Client_Controller extends MY_Controller {
             $this->data['product_url'] =  'client/product1/';
         } elseif ($this->data['user_service_type'] == '3') {
             $this->data['product_url'] =  'client/product2/';
+        } else {
+            $this->data['product_url'] =  'client/product3/';
         }
     }
 

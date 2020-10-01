@@ -79,11 +79,11 @@
                             <?php echo form_label('Hạng mục: ', 'service_type'); ?>
                             <?php echo form_error('service_type', '<div class="error">', '</div>'); ?>
                             <select name="service_type" class="form-control">
-                                <option value="" selected="selected">-- Chọn hạng mục --</option>
-                                <option value="1" disabled>Nhóm 1: Các thành phố thông minh</option>
-                                <option value="2">Nhóm 2: Các dự án BĐS thông minh</option>
-                                <option value="3">Nhóm 3: Các dự án BĐS Công nghiệp thông minh</option>
-                                <option value="4">Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh</option>
+                                <option value="">-- Chọn hạng mục --</option>
+                                <option value="1" <?php echo ($this->input->get('type', TRUE) == 1) ? 'selected' : ''; ?>>Nhóm 1: Các thành phố thông minh</option>
+                                <option value="2" <?php echo ($this->input->get('type', TRUE) == 2) ? 'selected' : ''; ?>>Nhóm 2: Các dự án BĐS thông minh</option>
+                                <option value="3" <?php echo ($this->input->get('type', TRUE) == 3) ? 'selected' : ''; ?>>Nhóm 3: Các dự án BĐS Công nghiệp thông minh</option>
+                                <option value="4" <?php echo ($this->input->get('type', TRUE) == 4) ? 'selected' : ''; ?>>Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh</option>
                             </select>
                         </div>
                         <div class="form-group">

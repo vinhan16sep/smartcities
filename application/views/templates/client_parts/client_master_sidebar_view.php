@@ -2,21 +2,6 @@
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar" style="height: auto;">
-            <!-- Sidebar user panel -->
-<!--            <div class="user-panel">-->
-<!--                <div class="pull-left image">-->
-<!--                    <img src="--><?php //echo site_url('assets/admin/'); ?><!--dist/img/admin.png" class="img-circle" alt="User Image">-->
-<!--                </div>-->
-<!--                <div class="pull-left info">-->
-<!--                    <p>MN Tuổi Thần Tiên</p>-->
-<!--                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- search form -->
-
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-
 
 
             <ul class="sidebar-menu tree" data-widget="tree">
@@ -35,28 +20,28 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
+                <?php if($user_service_type != '1'): ?>
                 <li class="<?php echo ($active == 'company')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/company/index'); ?>">
                         <i class="fa fa-bar-chart" aria-hidden="true"></i>
                         <span>Thông tin doanh nghiệp</span>
                         <span class="pull-right-container"></span>
                     </a>
-<!--                    <ul class="">-->
-<!--                        --><?php //if($company_submitted): ?>
-<!--                            --><?php //foreach ($company_submitted as $value){ ?>
-<!--                                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
-<!--                                    <a href="--><?php //echo base_url('client/company/index?year=' . $value['year']) ?><!--"> <i class="fa fa-minus" aria-hidden="true"></i> Năm --><?php //echo $value['year']; ?><!--</a>-->
-<!--                                    --><?php //if(date('Y') <= $value['year']){ ?>
-<!--                                        <a style="display: inline;" href="--><?php //echo base_url('client/company/edit?year=' . $value['year']); ?><!--"><b style="color: orange">- sửa -</b></a>-->
-<!--                                    --><?php //} ?>
-<!--                                    <br>-->
-<!--                                </li>-->
-<!--                            --><?php //} ?>
-<!--                        --><?php //else: ?>
-<!--                            <p style="color: white">Chưa có thông tin</p>-->
-<!--                        --><?php //endif; ?>
-<!--                    </ul>-->
                 </li>
+                <?php else: ?>
+                <li class="<?php echo ($active == 'city')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/city/maintenance'); ?>">
+                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                        <span>Thông tin chung</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+
+                <?php endif; ?>
+
+
+
+
                 <?php if($user_service_type == '4'): ?>
                 <li class="<?php echo ($active == 'products')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/products'); ?>">
@@ -78,6 +63,14 @@
                     <a href="<?php echo base_url('client/product2/products'); ?>">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span>Thông tin dự án bất động <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sản công nghiệp</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+                <?php else: ?>
+                <li class="<?php echo ($active == 'product2')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product3/maintenance'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin lĩnh vực đăng <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ký tham gia</span>
                         <span class="pull-right-container"></span>
                     </a>
                 </li>

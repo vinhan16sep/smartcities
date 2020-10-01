@@ -101,11 +101,17 @@
                             <?php endif; ?>
                         </div>
                         <div class="post">
+                            <!-- //////////////// user_service_type != 1 //////////////// -->
+                            <?php if($user_service_type != 1): ?>
                             <h4 style="font-weight: bold">Thông tin doanh nghiệp</h4>
+                            <!-- //////////////// user_service_type = 1 //////////////// -->
+                            <?php else: ?>
+                            <h4 style="font-weight: bold">THÔNG TIN CHUNG THÀNH PHỐ, ĐÔ THỊ </h4>
+                            <?php endif; ?>
                             <?php if($identity != ''){ ?>
                                 <?php if($reg_status['is_final'] == 0): ?>
                                     <?php if(!$company_submitted): ?>
-                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin doanh nghiệp</p>
+                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin</p>
                                         <span>
                                             <!-- UPDATE FOR SERVICE TYPE -->
                                             <?php if ($user_service_type == '4'): ?>
@@ -113,7 +119,9 @@
                                             <?php elseif ($user_service_type == '2' || $user_service_type == '3'): ?>
                                                 <a href="<?php echo base_url('client/company/create_2_3?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                             <?php else: ?>
-
+                                                <a href="<?php echo base_url('client/city/maintenance?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block">
+                                                    <b>Nhập thông tin chung<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b>
+                                                </a>
                                             <?php endif; ?>
                                         </span>
                                     <?php else: ?>
@@ -142,24 +150,47 @@
                                 echo '<p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký phía trên</p>';
                             } ?>
                         </div>
-                        <div class="post">
-                            <h4 style="font-weight: bold">Thông tin Sản phẩm / Dịch vụ đề cử</h4>
-                            <?php if($identity != ''){ ?>
-                                <?php if(!$count_product || $count_product < 1): ?>
-                                    <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin về Sản phẩm / Dịch vụ đề cử</p>
-                                    <span>
-                                        <a href="<?php echo base_url($product_url . 'create_product') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
-                                    </span>
-                                <?php else: ?>
-                                    <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
-                                    <span>
-                                        <a href="<?php echo base_url($product_url . 'products') ?>" class="btn btn-primary btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
-                                    </span>
-                                <?php endif; ?>
-                            <?php }else{
-                                echo '<p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký phía trên</p>';
-                            } ?>
-                        </div>
+                        <!-- //////////////// user_service_type != 1 //////////////// -->
+                        <?php if($user_service_type != 1): ?>
+                            <div class="post">
+                                <h4 style="font-weight: bold">Thông tin Sản phẩm / Dịch vụ đề cử</h4>
+                                <?php if($identity != ''){ ?>
+                                    <?php if(!$count_product || $count_product < 1): ?>
+                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin</p>
+                                        <span>
+                                            <a href="<?php echo base_url($product_url . 'create_product') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                                        </span>
+                                    <?php else: ?>
+                                        <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
+                                        <span>
+                                            <a href="<?php echo base_url($product_url . 'products') ?>" class="btn btn-primary btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
+                                        </span>
+                                    <?php endif; ?>
+                                <?php }else{
+                                    echo '<p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký phía trên</p>';
+                                } ?>
+                            </div>
+                        <!-- //////////////// user_service_type = 1 //////////////// -->
+                        <?php else: ?>
+                            <div class="post">
+                                <h4 style="font-weight: bold">THÔNG TIN LĨNH VỰC ĐĂNG KÝ THAM GIA GIẢI THƯỞNG</h4>
+                                <?php if($identity != ''){ ?>
+                                    <?php if(!$count_product || $count_product < 1): ?>
+                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin</p>
+                                        <span>
+                                            <a href="<?php echo base_url($product_url . 'maintenance') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                                        </span>
+                                    <?php else: ?>
+                                        <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
+                                        <span>
+                                            <a href="<?php echo base_url($product_url . 'products') ?>" class="btn btn-primary btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
+                                        </span>
+                                    <?php endif; ?>
+                                <?php }else{
+                                    echo '<p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký phía trên</p>';
+                                } ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <!-- /.tab-content -->
                 </div>
