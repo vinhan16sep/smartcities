@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <?php else: ?>
-                <li class="<?php echo ($active == 'product2')? 'active' : '' ?>">
+                <li class="<?php echo ($active == 'product3')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/product3/maintenance'); ?>">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span>Thông tin lĩnh vực đăng <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ký tham gia</span>
