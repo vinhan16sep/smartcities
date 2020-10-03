@@ -41,6 +41,12 @@ class Product3 extends Client_Controller {
             '4' => 'Các giấy phép khác',
         ];
         $this->data['folder_name'] = 'product'.($this->data['user_service_type'] + 2);
+
+        // Kiểm tra lĩnh vực đã được chọn hay chưa, nếu đã chọn, disable radio button
+        $this->data['check_choose_type'] = $this->information_model->check_choose_type($this->data['user']->id, $this->data['eventYear']);
+        
+        // echo '<pre>';
+        // print_r($this->data['check_choose_type']);die;
     }
 
     public function maintenance(){
@@ -138,6 +144,7 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
+                        'field_21' => $this->input->post('field_21'),
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -200,6 +207,7 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
+                        'field_21' => $this->input->post('field_21'),
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -229,16 +237,19 @@ class Product3 extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->data['user_service_types'] = $this->data['service_types'][$this->data['user']->service_type];
+
+        $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
+        $this->data['product'] = $this->information_model->fetch_product_by_user_id($this->data['folder_name'], $this->data['user']->id, $id);
+        if (!$this->data['product']) {
+            redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
+        }
+        // echo '<pre>';
+        // print_r($this->data['type_smart_city']);die;
+
         if($this->input->post('submit') == 'Hoàn thành') {
             // VALIDATION
             $this->validate_product_complete();
-
-            $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
-                $this->data['product'] = $this->information_model->fetch_product_by_user_id($this->data['folder_name'], $this->data['user']->id, $id);
-                if (!$this->data['product']) {
-                    redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
-                }
                 $this->render('client/information/edit_product_view_4');
             } else {
                 if ($this->input->post()) {
@@ -270,6 +281,7 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
+                        'field_21' => $this->input->post('field_21'),
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
@@ -292,12 +304,7 @@ class Product3 extends Client_Controller {
         }else{
             // VALIDATION
             $this->validate_product_temporary();
-            $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
-                $this->data['product'] = $this->information_model->fetch_product_by_user_id($this->data['folder_name'], $this->data['user']->id, $id);
-                if (!$this->data['product']) {
-                    redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
-                }
                 $this->render('client/information/edit_product_view_4');
             } else {
                 if ($this->input->post()) {
@@ -332,6 +339,7 @@ class Product3 extends Client_Controller {
                         'field_18' => $this->input->post('field_18'),
                         'field_19' => $this->input->post('field_19'),
                         'field_20' => $this->input->post('field_20'),
+                        'field_21' => $this->input->post('field_21'),
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],

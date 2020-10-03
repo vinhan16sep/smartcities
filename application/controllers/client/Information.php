@@ -200,7 +200,7 @@ class Information extends Client_Controller {
     public function detail_product($id = NULL){
         $this->data['product'] = $this->information_model->fetch_product_by_user_and_id('product', $this->data['user']->id, $id);
 
-        $this->render('client/information/detail_product_view_' . $this->data['user']->service_type);
+        $this->render('client/information/detail_product_view');
     }
 
     public function remove_product($id = null){
@@ -236,7 +236,7 @@ class Information extends Client_Controller {
             $this->validate_product_complete();
 
             if ($this->form_validation->run() == FALSE) {
-                $this->render('client/information/create_product_view_' . $this->data['user']->service_type);
+                $this->render('client/information/create_product_view');
             } else {
                 if ($this->input->post()) {
                     if(!empty($_FILES['file']['name'])){
@@ -294,7 +294,7 @@ class Information extends Client_Controller {
             // var_dump($this->form_validation->run());die;
 
             if ($this->form_validation->run() == FALSE) {
-                $this->render('client/information/create_product_view_' . $this->data['user']->service_type);
+                $this->render('client/information/create_product_view');
             } else {
                 if ($this->input->post()) {
                     $service = json_encode($this->input->post('service'));
@@ -361,7 +361,7 @@ class Information extends Client_Controller {
                 if (!$this->data['product']) {
                     redirect('client/information/product', 'refresh');
                 }
-                $this->render('client/information/edit_product_view_' . $this->data['user']->service_type);
+                $this->render('client/information/edit_product_view');
             } else {
                 if ($this->input->post()) {
                     if(!empty($_FILES['file']['name'])){
@@ -417,7 +417,7 @@ class Information extends Client_Controller {
                 if (!$this->data['product']) {
                     redirect('client/information/product', 'refresh');
                 }
-                $this->render('client/information/edit_product_view_' . $this->data['user']->service_type);
+                $this->render('client/information/edit_product_view');
             } else {
                 if ($this->input->post()) {
                     if(!empty($_FILES['file']['name'])){
