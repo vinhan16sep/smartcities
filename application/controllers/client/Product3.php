@@ -394,9 +394,6 @@ class Product3 extends Client_Controller {
         $this->form_validation->set_rules('field_21', 'Lĩnh vực đăng ký', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_1', 'Lĩnh vực đăng ký', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
         $this->form_validation->set_rules('field_2', 'Hành lang pháp lý: các văn bản pháp lý liên quan đến lĩnh vực đăng ký tham gia Giải thưởng', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
