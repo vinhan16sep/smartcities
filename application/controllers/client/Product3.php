@@ -44,9 +44,6 @@ class Product3 extends Client_Controller {
 
         // Kiểm tra lĩnh vực đã được chọn hay chưa, nếu đã chọn, disable radio button
         $this->data['check_choose_type'] = $this->information_model->check_choose_type($this->data['user']->id, $this->data['eventYear']);
-        
-        // echo '<pre>';
-        // print_r($this->data['check_choose_type']);die;
     }
 
     public function maintenance(){
@@ -114,17 +111,8 @@ class Product3 extends Client_Controller {
                 $this->render('client/information/create_product_view_4');
             } else {
                 if ($this->input->post()) {
-                    // if(!empty($_FILES['file']['name'])){
-                    //     $this->check_file($_FILES['file']['name']);
-                    //     $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->vn_to_str($this->input->post('name')) . '_' . date('d-m-Y'));
-                    // }
-
-                    // $service = json_encode($this->input->post('service'));
                     $data = array(
                         'client_id' => $this->data['user']->id,
-                        // 'service' => $service,
-
-                        'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
                         'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
@@ -171,23 +159,13 @@ class Product3 extends Client_Controller {
         }else{
             // VALIDATION
             $this->validate_product_temporary();
-            // var_dump($this->form_validation->run());die;
 
             if ($this->form_validation->run() == FALSE) {
                 $this->render('client/information/create_product_view_4');
             } else {
                 if ($this->input->post()) {
-
-                    // if(!empty($_FILES['file']['name'])){
-                    //     $this->check_file($_FILES['file']['name']);
-                    //     $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->vn_to_str($this->input->post('name')) . '_' . date('d-m-Y'));
-                    // }
-                    // $image = $this->upload_image('certificate', $_FILES['certificate']['name'], 'assets/upload/product', 'assets/upload/product/thumbs');
                     $data = array(
                         'client_id' => $this->data['user']->id,
-                        // 'service' => $service,
-
-                        'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
                         'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
@@ -243,8 +221,6 @@ class Product3 extends Client_Controller {
         if (!$this->data['product']) {
             redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
         }
-        // echo '<pre>';
-        // print_r($this->data['type_smart_city']);die;
 
         if($this->input->post('submit') == 'Hoàn thành') {
             // VALIDATION
@@ -253,15 +229,7 @@ class Product3 extends Client_Controller {
                 $this->render('client/information/edit_product_view_4');
             } else {
                 if ($this->input->post()) {
-                    // if(!empty($_FILES['file']['name'])){
-                    //     $this->check_file($_FILES['file']['name']);
-                    //     $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->vn_to_str($this->input->post('name')) . '_' . date('d-m-Y'));
-                    // }
-                    // $service = json_encode($this->input->post('service'));
                     $data = array(
-                        // 'service' => $service,
-                        
-                        'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
                         'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
@@ -308,18 +276,7 @@ class Product3 extends Client_Controller {
                 $this->render('client/information/edit_product_view_4');
             } else {
                 if ($this->input->post()) {
-                    // if(!empty($_FILES['file']['name'])){
-                    //     $this->check_file($_FILES['file']['name']);
-                    //     $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->vn_to_str($this->input->post('name')) . '_' . date('d-m-Y'));
-                    // }
-                    // $service = json_encode($this->input->post('service'));
-                    // echo "<pre>";
-                    // print_r($this->input->post());
-                    // echo "<pre>";die;
                     $data = array(
-                        // 'service' => $service,
-
-                        'field_1' => $this->input->post('field_1'),
                         'field_2' => $this->input->post('field_2'),
                         'field_3' => $this->input->post('field_3'),
                         'field_4' => $this->input->post('field_4'),
@@ -434,6 +391,9 @@ class Product3 extends Client_Controller {
 
 
     private function validate_product_complete(){
+        $this->form_validation->set_rules('field_21', 'Lĩnh vực đăng ký', 'trim|required', array(
+            'required' => '%s không được trống.',
+        ));
         $this->form_validation->set_rules('field_1', 'Lĩnh vực đăng ký', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
@@ -526,7 +486,7 @@ class Product3 extends Client_Controller {
     }
 
     private function validate_product_temporary(){
-        $this->form_validation->set_rules('field_1', 'Lĩnh vực đăng ký', 'trim|required', array(
+        $this->form_validation->set_rules('field_21', 'Lĩnh vực đăng ký', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
     }

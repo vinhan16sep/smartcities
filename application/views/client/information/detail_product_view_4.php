@@ -2,20 +2,15 @@
 
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content">
-        <h4>Thông tin dự án bất động sản ứng cử</h4>
+        <h4>Thông tin Thành phố thông minh</h4>
         <div class="row">
             <div class="col-md-6">
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <ul class="list-group list-group-unbordered">
-                                <!-- <li class="list-group-item" style="text-align: center;"> -->
-<!--                                    <a>Giấy chứng nhận bản quyền/cam kết bản quyền</a>-->
-<!--                                    <br>-->
-                                    <!--<img src="<?php //echo base_url('assets/upload/product/'. $product['certificate']); ?>" alt="" style="width: 200px;">-->
-                                <!-- </li> -->
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-circle margin-r-5"></i> Lĩnh vực đăng ký</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_1']; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Lĩnh vực đăng ký</a> <br><p class="" style="padding-left:20px;"><?php echo $type_smart_city[$product['field_21']]; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-circle margin-r-5"></i> Hành lang pháp lý: các văn bản pháp lý liên quan đến lĩnh vực đăng ký tham gia Giải thưởng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_2']; ?></p>
