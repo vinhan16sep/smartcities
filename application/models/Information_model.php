@@ -871,4 +871,19 @@ class Information_model extends CI_Model {
             ->group_by('year');
         return $query->get()->result_array();
     }
+
+    function check_choose_type($client_id, $year){
+        $query = $this->db->select('field_21')
+            ->from('product3')
+            ->where('client_id', $client_id)
+            ->where('year', $year)
+            ->where('is_deleted', 0);
+        $result = $query->get()->result_array();
+        $arr = [];
+        foreach($result as $value){
+            $arr[$value['field_21']] = $value['field_21'];
+        }
+
+        return $arr;
+    }
 }

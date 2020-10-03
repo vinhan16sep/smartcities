@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tên Sản phẩm/giải pháp/dịch vụ', 'name');
+                            echo form_label('Tên Sản phẩm/giải pháp/ứng dụng', 'name');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -33,38 +33,33 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Đăng ký tham gia nhóm', 'service');
+                            echo form_label('Đăng ký tham gia lĩnh vực', 'service');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             $service = json_decode($product['service']);
-                            // print_r($series);die;
                             $options_1 = array(
-                                'Chính phủ điện tử' => 'Chính phủ điện tử',
-                                'Quản lý doanh nghiệp' => 'Quản lý doanh nghiệp',
-                                'Kế toán, tài chính, ngân hàng' => 'Kế toán, tài chính, ngân hàng',
-                                'Quản lý bán hàng, phân phối, bán lẻ và chuỗi cung ứng' => 'Quản lý bán hàng, phân phối, bán lẻ và chuỗi cung ứng',
-                                'Bất động sản' => 'Bất động sản',
-                                'Quảng cáo, tiếp thị và truyền thông số' => 'Quảng cáo, tiếp thị và truyền thông số',
-                                'Y tế, chăm sóc sức khỏe và làm đẹp' => 'Y tế, chăm sóc sức khỏe và làm đẹp',
-                                'Giáo dục, đào tạo' => 'Giáo dục, đào tạo',
-                                'Giao thông vận tải' => 'Giao thông vận tải',
-                                'Công nghiệp và sản xuất' => 'Công nghiệp và sản xuất',
-                                'Nông nghiệp và chế biến thực phẩm' => 'Nông nghiệp và chế biến thực phẩm',
-                                'Du lịch, quản lý nhà hàng/khách sạn' => 'Du lịch, quản lý nhà hàng/khách sạn',
-                                'Công tác nhân sự, văn phòng' => 'Công tác nhân sự, văn phòng',
-                                'Viễn thông' => 'Viễn thông',
-                                'Tài nguyên, Năng lượng và Tiện ích' => 'Tài nguyên, Năng lượng và Tiện ích',
-                                'Cơ khí và xây dựng' => 'Cơ khí và xây dựng',
-                                'Nền tảng và Công cụ ứng dụng' => 'Nền tảng và Công cụ ứng dụng',
-                                'Thanh toán điện tử' => 'Thanh toán điện tử ',
-                                'Thương mại điện tử' => 'Thương mại điện tử',
-                                'Truyền thông và Giải trí điện tử' => 'Truyền thông và Giải trí điện tử',
-                                'Bảo mật và an toàn thông tin' => 'Bảo mật và an toàn thông tin',
-                                'Bảo vệ môi trường và phát triển bền vững' => 'Bảo vệ môi trường và phát triển bền vững',
-                                'Nghiên cứu và phát triển' => 'Nghiên cứu và phát triển',
-                                'Các lĩnh vực khác' => 'Các lĩnh vực khác'
+                                '1' => 'Giải pháp cho Chính quyền số',
+                                '2' => 'Giải pháp Quy hoạch thành phố thông minh',
+                                '3' => 'Giải pháp cho hạ tầng kỹ thuật thành phố thông minh',
+                                '4' => 'Giải pháp hạ tầng số cho thành phố thông minh',
+                                '5' => 'Giải pháp/ứng dụng cho công dân/cộng đồng thông minh',
+                                '6' => 'Giải pháp An toàn thông tin',
+                                '7' => 'Giải pháp du lịch thông minh',
+                                '8' => 'Giải pháp thanh toán thông minh',
+                                '9' => 'Giải pháp giao thông thông minh',
+                                '10' => 'Giải pháp giáo dục thông minh',
+                                '11' => 'Giải pháp nông nghiệp thông minh',
+                                '12' => 'Giải pháp an ninh, an toàn, cấp cứu, cứu nạn',
+                                '13' => 'Giải pháp y tế thông minh',
+                                '14' => 'Giải pháp năng lượng thông minh',
+                                '15' => 'Giải pháp môi trường thông minh',
+                                '16' => 'Giải pháp xây dựng thông minh',
+                                '17' => 'Giải pháp cấp, thoát và xử lý nước thông minh',
+                                '18' => 'Giải pháp cho nhà máy thông minh',
+                                '19' => 'Giải pháp cho toà nhà/căn hộ thông minh',
+                                '20' => 'Giải pháp cho khu công nghiệp thông minh',
                             );
                             $options_4 = array(
                                 'Gia công xuất khẩu phần mềm' => 'Gia công xuất khẩu phần mềm',
@@ -79,38 +74,15 @@
                             );
                             echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
                             echo form_error('service[]', '<div class="error">', '</div>');
-                            echo form_checkbox('group_1', '', '', 'class="btn-group-1"');
-                            echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</span><br>';
-                            echo "<div class='row group-1' style='display:none; margin-left: 20px'>";
                             foreach ($options_1 as $key => $value) {
                                 if(!is_null($service) && $service != null){
-                                    echo form_checkbox('service[]', $value, (in_array($value, $service, '')? true : false), 'class="btn-checkbox-group-1"');
-                                    echo $key.'<br>';
+                                    echo form_checkbox('service[]', $key, (in_array($key, $service, '')? true : false), 'class="btn-checkbox-group-1"');
+                                    echo $value.'<br>';
                                 }else{
-                                    echo form_checkbox('service[]', $value, false, 'class="btn-checkbox-group-1"');
-                                    echo $key.'<br>';
+                                    echo form_checkbox('service[]', $key, false, 'class="btn-checkbox-group-1"');
+                                    echo $value.'<br>';
                                 }
                             }
-                            echo "</div>";
-                            echo form_checkbox('service[]', 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0', ($service && in_array('Các sản phẩm, giải pháp ứng dụng công nghệ 4.0', $service, '') ? true : false), 'class="btn-checkbox"');
-                            echo '<span style="color:blue">Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</span><br>';
-                            echo form_checkbox('service[]', 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp', ($service && in_array('Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp', $service, '') ? true : false), 'class="btn-checkbox"');
-                            echo '<span style="color:blue">Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</span><br>';
-                            echo form_checkbox('service[]', 'Các sản phẩm, giải pháp phần mềm mới', ($service && in_array('Các sản phẩm, giải pháp phần mềm mới', $service, '')? true : false), 'class="btn-checkbox"');
-                            echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm mới</span><br>';
-                            echo form_checkbox('group_4', '', false, 'class="btn-group-4"');
-                            echo '<span style="color:blue">Các dịch vụ CNTT</span><br>';
-                            echo "<div class='row group-4' style='display:none; margin-left: 20px'>";
-                            foreach ($options_4 as $key => $value) {
-                                if(!is_null($service) && $service != null){
-                                    echo form_checkbox('service[]', $value, (in_array($value, $service, '')? true : false), 'class="btn-checkbox-group-4"');
-                                    echo $key.'<br>';
-                                }else{
-                                    echo form_checkbox('service[]', $value, false, 'class="btn-checkbox-group-4"');
-                                    echo $key.'<br>';
-                                }
-                            }
-                            echo "</div>";
                             ?>
                         </div>
                     </div>
@@ -119,22 +91,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Số giấy chứng nhận bản quyền', 'copyright_certificate');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('copyright_certificate', '<div class="error">', '</div>');
-                            echo form_input('copyright_certificate', set_value('copyright_certificate', $product['copyright_certificate']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Mô tả các công năng của sản phẩm', 'functional');
+                            echo form_label('Mô tả các công năng của SP/GP/ƯD: <br><i>(Nêu rõ chức năng, tính hiệu quả của SP/GP/ƯD; Khả năng ảnh hưởng tích cực đến kinh tế, xã hội, văn hóa, giáo dục, môi trường, tiết kiệm năng lượng, đô thị thông minh, ứng dụng chuyển đổi số, IoT, dữ liệu lớn, SMAC, AI, AR, VR, robotics… nếu có. Có thể đính kèm các bảng biểu, số liệu, tài liệu,… để chứng minh)</i>', 'functional');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -149,7 +106,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các công nghệ và quy trình chất lượng sử dụng để phát triển sản phẩm', 'process');
+                            echo form_label('Các công nghệ và quy trình chất lượng sử dụng để phát triển SP/GP/ƯD: <br><i>(Nêu rõ khả năng đáp ứng các tiêu chuẩn, các chứng chỉ chất lượng như: ISO 9001:2000/2008, ISO 2700, CMMI, Chứng chỉ khác…)</i>', 'process');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -164,7 +121,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Bảo mật của sản phẩm', 'security');
+                            echo form_label('Tính năng Bảo mật của SP/GP/ƯD', 'security');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -181,7 +138,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các ưu điểm nổi trội của SP/GP/DV', 'positive');
+                            echo form_label('Các ưu điểm nổi trội của SP/GP/ƯD so sánh với SP cùng loại: <br><i>(về tính độc đáo, hiệu quả, công năng, công nghệ, tiện ích sử dụng, khả năng tương thích, mô hình kinh doanh, quy trình quản lý, dịch vụ hậu mãi… so với các đối thủ khác trên thị trường)</i>', 'positive');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -194,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
@@ -210,60 +167,7 @@
                             ?>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm ' . (intval($eventYear) - 2) . ' (triệu đồng)', 'income_2016');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('income_2016', '<div class="error">', '</div>');
-                            ///////////////////////// Change
-                            echo form_input('income_2016', set_value('income_2016', $product['income_2016']), 'class="form-control"');
-                            // echo form_textarea('income_2016', $product['income_2016'], 'class="form-control tinymce-area" id="income_2016" rows="3"');
-                            ///////////////////////// Change
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm ' . (intval($eventYear) - 1) . ' (triệu đồng', 'income_2017');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('income_2017', '<div class="error">', '</div>');
-                            ///////////////////////// Change
-                            echo form_input('income_2017', set_value('income_2017', $product['income_2017']), 'class="form-control"');
-                            // echo form_textarea('income_2017', $product['income_2017'], 'class="form-control tinymce-area" id="income_2017" rows="3"');
-                            ///////////////////////// Change
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Thị phần của SP/GP/DV', 'area');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('area', '<div class="error">', '</div>');
-                            ///////////////////////// Change
-                            echo form_textarea('area', $product['area'], 'class="form-control tinymce-area" id="area" rows="3"');
-                            ///////////////////////// Change
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -283,7 +187,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Giá SP/GP/DV', 'price');
+                            echo form_label('Giá SP/GP/ƯD (ghi rõ đơn giá bán ra thị trường, ĐVT: Triệu Việt Nam đồng): ', 'price');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -291,6 +195,60 @@
                             echo form_error('price', '<div class="error">', '</div>');
                             ///////////////////////// Change
                             echo form_textarea('price', $product['price'], 'class="form-control tinymce-area" id="price" rows="3"');
+                            ///////////////////////// Change
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Doanh thu của SP/GP/ƯD năm ' . (intval($eventYear) - 3) . ' (triệu đồng)', 'income_1');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('income_1', '<div class="error">', '</div>');
+                            ///////////////////////// Change
+                            echo form_input('income_1', set_value('income_1', $product['income_1']), 'class="form-control"');
+                            // echo form_textarea('income_2016', $product['income_2016'], 'class="form-control tinymce-area" id="income_2016" rows="3"');
+                            ///////////////////////// Change
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Doanh thu của SP/GP/ƯD năm ' . (intval($eventYear) - 2) . ' (triệu đồng)', 'income_2016');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('income_2016', '<div class="error">', '</div>');
+                            ///////////////////////// Change
+                            echo form_input('income_2016', set_value('income_2016', $product['income_2016']), 'class="form-control"');
+                            // echo form_textarea('income_2016', $product['income_2016'], 'class="form-control tinymce-area" id="income_2016" rows="3"');
+                            ///////////////////////// Change
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Doanh thu của SP/GP/ƯD năm ' . (intval($eventYear) - 1) . ' (triệu đồng', 'income_2017');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('income_2017', '<div class="error">', '</div>');
+                            ///////////////////////// Change
+                            echo form_input('income_2017', set_value('income_2017', $product['income_2017']), 'class="form-control"');
+                            // echo form_textarea('income_2017', $product['income_2017'], 'class="form-control tinymce-area" id="income_2017" rows="3"');
                             ///////////////////////// Change
                             ?>
                         </div>
@@ -317,6 +275,23 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            echo form_label('Thị phần hiện có và công tác phát triển thị trường', 'area');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('area', '<div class="error">', '</div>');
+                            ///////////////////////// Change
+                            echo form_textarea('area', $product['area'], 'class="form-control tinymce-area" id="area" rows="3"');
+                            ///////////////////////// Change
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
                             echo form_label('Dịch vụ sau bán hàng', 'after_sale');
                             ?>
                         </div>
@@ -334,7 +309,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Đội ngũ phát triển sp/gp (bao nhiêu người, trình độ, trong bao lâu...)', 'team');
+                            echo form_label('Đội ngũ phát triển SP/GP/ƯD (bao nhiêu người, trình độ, trong bao lâu...)', 'team');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -351,7 +326,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các giải thưởng/DH đã nhận được', 'award');
+                            echo form_label('Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được', 'award');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -383,12 +358,32 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Giấy chứng nhận bản quyền/cam kết bản quyền', 'certificate');
+                            echo form_label('Số giấy chứng nhận bản quyền', 'copyright_certificate');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <p style="color:red;">Ghi chú: Nếu chưa có giấy chứng nhận bản quyền, thì tải mẫu Cam kết bản quyền tại đây, khai thông tin, ký, đóng dấu và gửi lại bản cứng cho ban tổ chức.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('Camketbanquyen_SmartCity.docx') ?>" target="_blank">Tải mẫu Cam kết bản quyền</a>
+                            <?php
+                            echo form_error('copyright_certificate', '<div class="error">', '</div>');
+                            echo form_input('copyright_certificate', set_value('copyright_certificate', $product['copyright_certificate']), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Giấy chứng nhận bản quyền/cam kết bản quyền', 'certificate');
+                            ?>
+                        </div>
+
+                        <div class="col-sm-9 col-md-9 col-xs-12">
+                            <p>Ghi chú: Nếu chưa có giấy chứng nhận bản quyền, thì tải mẫu Cam kết bản quyền tại đây, khai đầy đủ thông tin, ký, đóng dấu và upload tại đây.</p>
+                            <?php  echo form_error('certificate', '<div class="error">', '</div>'); ?>
+                            <div class="input-group">
+                                <?php echo form_input('certificate', set_value('certificate', $product['certificate']), 'class="form-control" aria-describedby="basic-addon2" placeholder="Nhập Link tại đây" '); ?>
+                            <span class="input-group-addon" id="basic-addon2" style="background: #f39c12 !important"><a style="color:#fff;font-weight: bold;" class="color-warning" href="<?php echo site_url('Cam-ket-ban-quyen.docx') ?>" target="_blank">Tải mẫu Cam kết bản quyền</a></span>
+                            </div>
                             <br>
                         </div>
                     </div>

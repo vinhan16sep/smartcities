@@ -24,6 +24,22 @@ class MY_Controller extends CI_Controller {
         if ($this->ion_auth->user()->row() !== null){
             $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
         }
+        $this->data['type_smart_city'] = [
+            '0' => 'Thành phố Quy hoạch thông minh',
+            '1' => 'Thành phố Điều hành, quản lý thông minh',
+            '2' => 'Thành phố Dịch vụ Công thông minh',
+            '3' => 'Thành phố Hạ tầng số thông minh',
+            '4' => 'Thành phố Giao thông và Logistics thông minh',
+            '5' => 'Thành phố Giáo dục thông minh',
+            '6' => 'Thành phố Du lịch thông minh',
+            '7' => 'Thành phố Y tế thông minh',
+            '8' => 'Thành phố Năng lượng thông minh',
+            '9' => 'Thành phố quản lý môi trường thông minh, xanh, sạch',
+            '10' => 'Thành phố Cấp, thoát và xử lý nước thông minh',
+            '11' => 'Thành phố an ninh, an toàn',
+            '12' => 'Thành phố hấp dẫn Khởi nghiệp ĐMST',
+            '13' => 'Các lĩnh vực ứng dụng thành phố thông  minh khác đang được TP triển khai, áp dụng thực tế đem lại hiệu quả cho người dân, DN và cộng đồng, xã hội'
+        ];
     }
 
     protected function render($the_view = NULL, $template = 'master') {

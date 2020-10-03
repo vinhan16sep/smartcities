@@ -20,9 +20,32 @@
                                 <li class="list-group-item">
                                     <?php $service = json_decode($product['service']) ?>
                                     <a><i class="fa fa-circle margin-r-5"></i> Đăng ký tham gia lĩnh vực</a> <br>
-                                    <?php if(!is_null($service) && $service != null){ ?>
+                                    <?php if(!is_null($service) && $service != null){ 
+                                        $options_1 = array(
+                                            '1' => 'Giải pháp cho Chính quyền số',
+                                            '2' => 'Giải pháp Quy hoạch thành phố thông minh',
+                                            '3' => 'Giải pháp cho hạ tầng kỹ thuật thành phố thông minh',
+                                            '4' => 'Giải pháp hạ tầng số cho thành phố thông minh',
+                                            '5' => 'Giải pháp/ứng dụng cho công dân/cộng đồng thông minh',
+                                            '6' => 'Giải pháp An toàn thông tin',
+                                            '7' => 'Giải pháp du lịch thông minh',
+                                            '8' => 'Giải pháp thanh toán thông minh',
+                                            '9' => 'Giải pháp giao thông thông minh',
+                                            '10' => 'Giải pháp giáo dục thông minh',
+                                            '11' => 'Giải pháp nông nghiệp thông minh',
+                                            '12' => 'Giải pháp an ninh, an toàn, cấp cứu, cứu nạn',
+                                            '13' => 'Giải pháp y tế thông minh',
+                                            '14' => 'Giải pháp năng lượng thông minh',
+                                            '15' => 'Giải pháp môi trường thông minh',
+                                            '16' => 'Giải pháp xây dựng thông minh',
+                                            '17' => 'Giải pháp cấp, thoát và xử lý nước thông minh',
+                                            '18' => 'Giải pháp cho nhà máy thông minh',
+                                            '19' => 'Giải pháp cho toà nhà/căn hộ thông minh',
+                                            '20' => 'Giải pháp cho khu công nghiệp thông minh',
+                                        );
+                                    ?>
                                         <?php foreach ($service as $key => $value): ?>
-                                            <p class="" style="padding-left:20px;"><?php echo $value; ?></p>
+                                            <p class="" style="padding-left:20px;"><?php echo $options_1[$value]; ?></p>
                                         <?php endforeach ?>
                                     <?php } ?>
                                 </li>
@@ -63,14 +86,17 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-thumbs-o-up margin-r-5"></i> Các ưu điểm nổi trội của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['positive']; ?></p>
                                 </li>
-                                <li class="list-group-item">
+                                <!-- <li class="list-group-item">
                                     <a><i class="fa fa-star margin-r-5"></i> So sánh với các SP/GP/DV khác</a> <br><p class="" style="padding-left:20px;"><?php echo $product['compare']; ?></p>
+                                </li> -->
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 3) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_1']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 2) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯV năm <?= (intval($eventYear) - 1) ?> (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/ƯD năm <?= (intval($eventYear) - 1) ?> (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/GP/ƯD</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>

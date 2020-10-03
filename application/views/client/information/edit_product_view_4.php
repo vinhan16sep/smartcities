@@ -36,6 +36,30 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            echo form_label('Lĩnh vực đăng ký tham gia Giải thưởng: (lựa chọn 1 hoặc nhiều lĩnh vực, mỗi lĩnh vực khai riêng 1 hồ sơ cho 1 lĩnh vực đăng ký xét trao Giải thưởng. Vd: chọn 3 lĩnh vực sẽ khai 3 mẫu thông tin cho 3 lĩnh vực)', 'field_21');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo '<label id="field_21-error" class="error" for="field_21"></label>';
+                            echo form_error('field_21', '<div class="error">', '</div>');
+                            unset($check_choose_type[$product['field_21']]);
+                            foreach ($type_smart_city as $key => $value) {
+                                echo form_radio('field_21', 
+                                    $key, 
+                                    (($key == $product['field_21']) ? 'checked' : ''),
+                                    (array_key_exists($key, $check_choose_type)) ? 'disabled ' : '' .'class="btn-checkbox"'
+                                );
+                                echo $value.'<br>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
                             echo form_label('1. Lĩnh vực đăng ký', 'field_1');
                             ?>
                         </div>
