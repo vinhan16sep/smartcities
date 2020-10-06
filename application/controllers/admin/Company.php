@@ -16,7 +16,7 @@ class Company extends Admin_Controller{
         $this->excel = new PHPExcel();
 	}
 
-	public function index($year = null){
+	public function index($year = null, $stype = null){
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -28,15 +28,26 @@ class Company extends Admin_Controller{
             $keywords = $this->input->get('search');
         }
         $this->data['keywords'] = $keywords;
-        $total_rows  = $this->information_model->count_companys($year);
-        if($keywords != ''){
-            $total_rows  = $this->information_model->count_company_search($keywords, $year);
+
+        // SERVICE TYPE CASE
+        if ($stype != 1) {
+            $total_rows  = $this->information_model->count_companies_by_type($year, $stype);
+            if($keywords != ''){
+                $total_rows  = $this->information_model->count_company_search_by_type($keywords, $year, $stype);
+            }
+        } else {
+            $total_rows  = $this->information_model->count_cities_by_type($year, $stype);
+            if($keywords != ''){
+                $total_rows  = $this->information_model->count_city_search_by_type($keywords, $year, $stype);
+            }
         }
+        // SERVICE TYPE CASE
+
 		$this->load->library('pagination');
 		$config = array();
-		$base_url = base_url('admin/company/index/' . $year);
+		$base_url = base_url('admin/company/index/' . $year . '/' . $stype);
 		$per_page = 50;
-		$uri_segment = 5;
+		$uri_segment = 6;
 
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
@@ -44,11 +55,21 @@ class Company extends Admin_Controller{
         $this->pagination->initialize($config);
 
         $this->data['page_links'] = $this->pagination->create_links();
-        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) - 1 : 0;
-        $result = $this->information_model->fetch_all_company_pagination($per_page, $per_page*$this->data['page'], $year);
-        if($keywords != ''){
-            $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year);
+        $this->data['page'] = ($this->uri->segment(6)) ? $this->uri->segment(6) - 1 : 0;
+
+        // SERVICE TYPE CASE
+        if ($stype != 1) {
+            $result = $this->information_model->fetch_all_company_by_type_pagination($per_page, $per_page*$this->data['page'], $year, $stype);
+            if($keywords != ''){
+                $result = $this->information_model->fetch_all_company_by_type_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year, $stype);
+            }
+        } else {
+            $result = $this->information_model->fetch_all_city_by_type_pagination($per_page, $per_page*$this->data['page'], $year, $stype);
+            if($keywords != ''){
+                $result = $this->information_model->fetch_all_city_by_type_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year, $stype);
+            }
         }
+        // SERVICE TYPE CASE
         foreach ($result as $key => $value) {
             $member_id = json_decode($value['member_id']);
             if($member_id){
@@ -57,7 +78,13 @@ class Company extends Admin_Controller{
                     $result[$key]['member_name'][$val] = $member['first_name'].''.$member['last_name'].' ('.$member['username'].')';
                 }
             }
-            $info = $this->information_model->fetch_company_by_id($value["id"]);
+            // SERVICE TYPE CASE
+            if ($stype != 1) {
+                $info = $this->information_model->fetch_company_by_id($value["id"]);
+            } else {
+                $info = $this->information_model->fetch_city_by_id($value["id"]);
+            }
+            // SERVICE TYPE CASE
             if($info){
                 $result[$key]['avatar'] = $info["avatar"];
             }
@@ -70,9 +97,12 @@ class Company extends Admin_Controller{
              $number = $total_rows - ($this->data['page'] * $per_page);
          };
 
-         $this->data['number'] = $number;
+        $this->data['number'] = $number;
         $this->data['companies'] = $result;
+        // echo '<pre>';
+        // print_r($this->data['companies']);die;
         $this->data['requestYear'] = $year;
+        $this->data['stype'] = $stype;
 		$this->render('admin/company/list_company_view');
 	}
 
@@ -140,15 +170,29 @@ class Company extends Admin_Controller{
         $this->render('admin/company/income_company_view');
     }
 
-	public function detail($id, $requestYear){
-        $this->load->model('users_model');
-        $company = $this->information_model->fetch_company_by_id($id);
-        $member_id = json_decode($company['member_id']);
-        $members = $this->users_model->fetch_all_member_with_where($member_id);
-        $this->data['members'] = $members;
-		$this->data['company'] = $company;
-        $this->data['requestYear'] = $requestYear;
-		$this->render('admin/company/detail_company_view');
+	public function detail($id, $requestYear, $stype){
+        // SERVICE TYPE CASE
+        if ($stype != 1) {
+            $this->load->model('users_model');
+            $company = $this->information_model->fetch_company_by_id($id);
+            $member_id = json_decode($company['member_id']);
+            $members = $this->users_model->fetch_all_member_with_where($member_id);
+            $this->data['members'] = $members;
+            $this->data['company'] = $company;
+            $this->data['selectedYear'] = $requestYear;
+            $this->data['user_service_type'] = $stype;
+            $this->render('admin/company/detail_company_view');
+        } else {
+            $this->load->model('users_model');
+            $company = $this->information_model->fetch_city_by_id($id);
+            $member_id = json_decode($company['member_id']);
+            $members = $this->users_model->fetch_all_member_with_where($member_id);
+            $this->data['members'] = $members;
+            $this->data['company'] = $company;
+            $this->data['user_service_type'] = $stype;
+            $this->render('admin/company/detail_city_view');
+        }
+        // SERVICE TYPE CASE
 	}
 
     public function detail_by_client($client_id){

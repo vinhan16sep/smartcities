@@ -166,6 +166,28 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
+    public function count_companies_by_type($stype, $year = null) {
+        $query = $this->db->select('*')
+            ->join('users', 'users.id = company.client_id')
+            ->from('company')
+            ->where('company.year', $year)
+            ->where('users.service_type', $stype)
+            ->get();
+
+        return $query->num_rows();
+    }
+
+    public function count_cities_by_type($stype, $year = null) {
+        $query = $this->db->select('*')
+            ->join('users', 'users.id = city.client_id')
+            ->from('city')
+            ->where('city.year', $year)
+            ->where('users.service_type', $stype)
+            ->get();
+
+        return $query->num_rows();
+    }
+
     public function count_all_product() {
         $query = $this->db->select('*')
             ->from('product')
@@ -458,7 +480,7 @@ class Information_model extends CI_Model {
         return false;
     }
 
-    public function fetch_all_company_pagination($limit = NULL, $start = NULL, $year = null) {
+    public function fetch_all_company_by_type_pagination($limit = NULL, $start = NULL, $year = null, $stype) {
         $this->db->select('company.*, users.company as company, status.is_final as final');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
@@ -466,10 +488,28 @@ class Information_model extends CI_Model {
         if($year != null){
             $this->db->where('company.year', $year);
             $this->db->where('status.year', $year);
-            $this->db->where('status.is_final', 1);
+            // $this->db->where('status.is_final', 1);
+            $this->db->where('users.service_type', $stype);
         }
         $this->db->limit($limit, $start);
         $this->db->order_by("company.id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
+    public function fetch_all_city_by_type_pagination($limit = NULL, $start = NULL, $year = null, $stype) {
+        $this->db->select('city.*, users.company as city, status.is_final as final');
+        $this->db->from('city');
+        $this->db->join('users', 'users.id = city.client_id');
+        $this->db->join('status', 'status.client_id = city.client_id');
+        if($year != null){
+            $this->db->where('city.year', $year);
+            $this->db->where('status.year', $year);
+            // $this->db->where('status.is_final', 1);
+            $this->db->where('users.service_type', $stype);
+        }
+        $this->db->limit($limit, $start);
+        $this->db->order_by("city.id", "desc");
 
         return $result = $this->db->get()->result_array();
     }
@@ -514,6 +554,16 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->row_array();
     }
 
+    public function fetch_city_by_id($id = null){
+        $this->db->select('city.*, users.*, information.*, city.id as company_id');
+        $this->db->from('city');
+        $this->db->join('users', 'users.id = city.client_id');
+        $this->db->join('information', 'information.client_id = city.client_id');
+        $this->db->where('city.id', $id);
+        // $this->db->where('company.is_submit', 1);
+        return $result = $this->db->get()->row_array();
+    }
+
     public function fetch_company_by_client_id($id = null){
         $this->db->select('company.*, users.*, information.*');
         $this->db->from('company');
@@ -543,7 +593,31 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function fetch_all_company_pagination_search($limit = NULL, $start = NULL, $search = '', $year = null) {
+    public function count_company_search_by_type($search = '', $year = null, $stype) {
+        $query = $this->db->select('company.*, users.*')
+            ->from('company')
+            ->join('users', 'users.id = company.client_id')
+            ->like('users.company', $search)
+            ->where('company.year', $year)
+            ->where('users.service_type', $stype)
+            ->get();
+
+        return $query->num_rows();
+    }
+
+    public function count_city_search_by_type($search = '', $year = null, $stype) {
+        $query = $this->db->select('city.*, users.*')
+            ->from('city')
+            ->join('users', 'users.id = city.client_id')
+            ->like('users.city', $search)
+            ->where('city.year', $year)
+            ->where('users.service_type', $stype)
+            ->get();
+
+        return $query->num_rows();
+    }
+
+    public function fetch_all_company_by_type_pagination_search($limit = NULL, $start = NULL, $search = '', $year = null, $stype) {
         $this->db->select('company.*, users.company as company, status.is_final as final');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
@@ -553,9 +627,28 @@ class Information_model extends CI_Model {
         if($year != null){
             $this->db->like('company.year', $year);
             $this->db->where('status.year', $year);
-            $this->db->where('status.is_final', 1);
+            // $this->db->where('status.is_final', 1);
+            $this->db->where('users.service_type', $stype);
         }
         $this->db->order_by("company.id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
+    public function fetch_all_city_by_type_pagination_search($limit = NULL, $start = NULL, $search = '', $year = null, $stype) {
+        $this->db->select('city.*, users.company as company, status.is_final as final');
+        $this->db->from('city');
+        $this->db->join('users', 'users.id = city.client_id');
+        $this->db->join('status', 'status.client_id = city.client_id');
+        $this->db->limit($limit, $start);
+        $this->db->like('users.company', $search);
+        if($year != null){
+            $this->db->like('city.year', $year);
+            $this->db->where('status.year', $year);
+            // $this->db->where('status.is_final', 1);
+            $this->db->where('users.service_type', $stype);
+        }
+        $this->db->order_by("city.id", "desc");
 
         return $result = $this->db->get()->result_array();
     }

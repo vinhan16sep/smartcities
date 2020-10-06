@@ -1,14 +1,14 @@
 <!--main content start-->
 <div class="content-wrapper" style="min-height: 916px;">
-    <div class="box-body pad table-responsive">
+    <!-- <div class="box-body pad table-responsive">
         <h3>Danh sách doanh nghiệp</h3><a type="button" href="<?php echo site_url('admin/company/export/' . $requestYear); ?>" class="btn btn-success">EXPORT DATA DOANH NGHIỆP</a>
         <a type="button" href="<?php echo site_url('admin/company/export_product/' . $requestYear); ?>" class="btn btn-success">EXPORT DATA SẢN PHẨM</a>
-    </div>
+    </div> -->
 
     <section class="content">
 
         <div class="row">
-            <form action="<?php echo base_url('admin/company/index/' . $requestYear) ?>" class="form-horizontal col-md-12 col-sm-12 col-xs-12" method="get" style="margin-bottom: 30px;">
+            <form action="<?php echo base_url('admin/company/index/' . $requestYear . '/' . $stype) ?>" class="form-horizontal col-md-12 col-sm-12 col-xs-12" method="get" style="margin-bottom: 30px;">
                 <input type="text" name="search" value="<?php echo ($keywords != '')? $keywords : '' ?>" placeholder="Tìm Kiếm Doanh Nghiệp..." class="form-control" style=" width: 40%; float: left;margin-right: 5px;">
                 <input type="submit" name="btn-search" value="Tìm Kiếm" class="btn btn-primary" style="float: left">
             </form>
@@ -18,7 +18,7 @@
                     <?php if ($companies): ?>
                         <div class="post box-body">
                             <table class="table table-striped table-bordered table-condensed">
-                                <th>STT</th>
+                                <!-- <th>STT</th> -->
                                 <th>Tên Doanh Nghiệp</th>
                                 <th>Logo</th>
                                 <th>Người quản lý</th>
@@ -26,8 +26,8 @@
                                 <th style="text-align: center;">Thao Tác</th>
                                 <?php foreach ($companies as $key => $value): ?>
                                     <tr>
-                                        <td><?php echo $number-- ?></td>
-                                        <td style="width: 20%;"><?php echo $value['company'] ?></td>
+                                        <!-- <td><?php echo $number-- ?></td> -->
+                                        <td style="width: 20%;"><?php echo ($stype != 1) ? $value['company'] : $value['city'] ?></td>
                                         <td style="width: 10%;">
                                             <?php if ( isset($value['avatar']) && file_exists('assets/upload/avatar/' . $value['avatar']) ): ?>
                                                 <img style="width: 50% !important;" width="100" height="100" class="profile-user-img img-responsive" src="<?php echo base_url('assets/upload/avatar/') . $value['avatar']; ?>" alt="User profile picture">
@@ -59,15 +59,15 @@
                                             <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                         <?php } ?>
                                         <td style="text-align: center;">
-                                            <a href="<?php echo base_url('admin/company/detail/' . $value['id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin DN</a>
-                                            <a href="<?php echo base_url('admin/product/index/' . $value['client_id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin SP/DV</a>
+                                            <a href="<?php echo base_url('admin/company/detail/' . $value['id'] . '/' . $requestYear . '/' . $stype) ?>" class="btn btn-info">Thông tin DN</a>
+                                            <!-- <a href="<?php echo base_url('admin/product/index/' . $value['client_id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin SP/DV</a> -->
                                         </td>
                                     </tr>
                                 <?php endforeach ?>
                             </table>
                         </div>
                     <?php else: ?>
-                        <div class="post">Chưa có doanh nghiệp đăng ký!</div>
+                        <div class="post">Không có dữ liệu!</div>
                     <?php endif ?>
                 </div>
                 <!-- /.tab-content -->
