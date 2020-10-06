@@ -40,6 +40,13 @@ class MY_Controller extends CI_Controller {
             '12' => 'Thành phố hấp dẫn Khởi nghiệp ĐMST',
             '13' => 'Các lĩnh vực ứng dụng thành phố thông  minh khác đang được TP triển khai, áp dụng thực tế đem lại hiệu quả cho người dân, DN và cộng đồng, xã hội'
         ];
+
+        $this->data['service_types'] = [
+            '1' => 'Nhóm 1: Các thành phố thông minh',
+            '2' => 'Nhóm 2: Các dự án BĐS thông minh',
+            '3' => 'Nhóm 3: Các dự án BĐS Công nghiệp thông minh',
+            '4' => 'Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh',
+        ];
     }
 
     protected function render($the_view = NULL, $template = 'master') {

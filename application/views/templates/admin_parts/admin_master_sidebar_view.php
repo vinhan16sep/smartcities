@@ -66,22 +66,46 @@
                             </li>
                         <?php } ?>
                         <li class="active">
+                            <a href="<?php echo base_url('admin/company/index/2020/1'); ?>">
+                                <!-- <i class="fa fa-minus" aria-hidden="true"></i> -->
+                                1: Các thành phố <br> thông minh
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/company/index/2020/2'); ?>">
+                                <!-- <i class="fa fa-minus" aria-hidden="true"></i> -->
+                                2: Các dự án BĐS <br> thông minh
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/company/index/2020/3'); ?>">
+                                <!-- <i class="fa fa-minus" aria-hidden="true"></i> -->
+                                3: Các dự án BĐS <br> Công nghiệp thông minh
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/company/index/2020/4'); ?>">
+                                <!-- <i class="fa fa-minus" aria-hidden="true"></i> -->
+                                4: Giải pháp công nghệ <br> số cho thành phố thông minh
+                            </a>
+                        </li>
+                        <!-- <li class="active">
                             <?php for($i = $eventYear; $i >= ($eventYear - 2); $i--){ ?>
                                 <a href="<?php echo base_url('admin/company/index/' . $i); ?>">
                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                     Thông tin <?= $i; ?>
                                 </a>
                             <?php } ?>
-                        </li>
-                        <li class="active">
+                        </li> -->
+                        <!-- <li class="active">
                             <a href="<?php echo base_url('admin/company/income/2020'); ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                 Doanh thu 2020
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
-                <li class="active">
+                <!-- <li class="active">
                     <a href=""> Sản phẩm
                         <span class="pull-right-container">
                         </span>
@@ -94,8 +118,8 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="active">
+                </li> -->
+                <!-- <li class="active">
                     <a href=""> Tổng doanh thu
                         <span class="pull-right-container">
                         </span>
@@ -108,7 +132,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </section>
         <!-- /.sidebar -->
