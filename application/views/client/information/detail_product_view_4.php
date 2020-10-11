@@ -10,7 +10,7 @@
                         <div class="post">
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-circle margin-r-5"></i> Lĩnh vực đăng ký</a> <br><p class="" style="padding-left:20px;"><?php echo $type_smart_city[$product['field_21']]; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Lĩnh vực đăng ký</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_1']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-circle margin-r-5"></i> Hành lang pháp lý: các văn bản pháp lý liên quan đến lĩnh vực đăng ký tham gia Giải thưởng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_2']; ?></p>
