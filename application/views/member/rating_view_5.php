@@ -37,7 +37,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             <table class="table table-bordered" style="width: 100%">
                                 <tr>
                                     <td  style="width: 20%"><h3>Sản phẩm: </h3></td>
-                                    <td><h3><?php echo $detail['name']; ?></h3></td>
+                                    <td><h3><?php echo $detail['field_1']; ?></h3></td>
                                 </tr>
                                 <tr>
                                     <td><h4>Doanh nghiệp: </h4></td>
@@ -92,7 +92,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             <tr>
                                 <td rowspan="2">1</td>
                                 <td rowspan="2">Tính độc đáo / sáng tạo</td>
-                                <td rowspan="2">15</td>
+                                <td rowspan="2">10</td>
                                 <td rowspan="2">
                                     <?php
                                     echo form_error('1', '<div class="error">', '</div>');
@@ -238,7 +238,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             <tr>
                                 <td rowspan="3">4</td>
                                 <td rowspan="3">Tính năng</td>
-                                <td rowspan="3">10</td>
+                                <td rowspan="3">15</td>
                                 <td rowspan="3">
                                     <?php
                                     echo form_error('4', '<div class="error">', '</div>');
@@ -366,7 +366,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     ?>
                                 </td>
                                 <td>Doanh thu dịch vụ</td>
-                                <td>50</td>
+                                <td>40</td>
                                 <td>
                                     <?php
                                     echo form_error('6_1', '<div class="error">', '</div>');
@@ -380,7 +380,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             </tr>
                             <tr>
                                 <td>Số lượng người/DN/tổ chức sử dụng</td>
-                                <td>25</td>
+                                <td>30</td>
                                 <td>
                                     <?php
                                     echo form_error('6_2', '<div class="error">', '</div>');
@@ -394,7 +394,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             </tr>
                             <tr>
                                 <td>Tác động kinh tế, xã hội</td>
-                                <td>25</td>
+                                <td>30</td>
                                 <td>
                                     <?php
                                     echo form_error('6_3', '<div class="error">', '</div>');
@@ -500,7 +500,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
 </div>
 <script>
     $('.sub').change(function(){
-        let main1 = (parseInt($('#1_1').val()) * 0.6 + parseInt($('#1_2').val()) * 0.4) * 0.15;
+        let main1 = (parseInt($('#1_1').val()) * 0.6 + parseInt($('#1_2').val()) * 0.4) * 0.1;
         $('#1').val(Number(main1.toFixed(2)));
 
         let main2 = (parseInt($('#2_1').val()) * 0.4 + parseInt($('#2_2').val()) * 0.3 + parseInt($('#2_3').val()) * 0.3) * 0.15;
@@ -509,13 +509,13 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
         let main3 = (parseInt($('#3_1').val()) * 0.6 + parseInt($('#3_2').val()) * 0.4) * 0.15;
         $('#3').val(Number(main3.toFixed(2)));
 
-        let main4 = (parseInt($('#4_1').val()) * 0.5 + parseInt($('#4_2').val()) * 0.25 + parseInt($('#4_3').val()) * 0.25) * 0.1;
+        let main4 = (parseInt($('#4_1').val()) * 0.5 + parseInt($('#4_2').val()) * 0.25 + parseInt($('#4_3').val()) * 0.25) * 0.15;
         $('#4').val(Number(main4.toFixed(2)));
 
         let main5 = (parseInt($('#5_1').val()) * 0.4 + parseInt($('#5_2').val()) * 0.3 + parseInt($('#5_3').val()) * 0.3) * 0.15;
         $('#5').val(Number(main5.toFixed(2)));
 
-        let main6 = (parseInt($('#6_1').val()) * 0.5 + parseInt($('#6_2').val()) * 0.25 + parseInt($('#6_3').val()) * 0.25) * 0.2;
+        let main6 = (parseInt($('#6_1').val()) * 0.4 + parseInt($('#6_2').val()) * 0.3 + parseInt($('#6_3').val()) * 0.3) * 0.2;
         $('#6').val(Number(main6.toFixed(2)));
 
         let main7 = (parseInt($('#7_1').val()) * 0.3 + parseInt($('#7_2').val()) * 0.4 + parseInt($('#7_3').val()) * 0.3) * 0.1;
