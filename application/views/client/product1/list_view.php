@@ -13,7 +13,7 @@
                                     <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
                                 </div>
                             <?php endif ?>
-                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM <i class="fa fa-arrow-right" aria-hidden="true"></i> THÔNG TIN SẢN PHẨM/ DỊCH VỤ ĐỀ CỬ' : 'Danh sách sản phẩm/dịch vụ  đã đăng ký' ?></h4>
+                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM <i class="fa fa-arrow-right" aria-hidden="true"></i> THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP' : 'Danh sách các thành phố thông minh' ?></h4>
                             <?php if (!empty($products)): ?>
                                 <?php foreach($allYear as $index => $year): ?>
                                 <hr>
@@ -24,10 +24,10 @@
                                         echo '<table class="table table-hover table-bordered table-condensed">';
                                         echo '<tr>';
                                         echo '<td><b>STT</b></td>';
-                                        echo '<td><b>Tên sản phẩm/dịch vụ</b></td>';
+                                        echo '<td><b>Lĩnh vực đăng ký</b></td>';
                                         echo '<td><b style="text-align: center !important;">Thông tin</b></td>';
                                         if($reg_status['is_final'] == 0){
-                                            echo '<td><b style="text-align: center !important;">Thao tác</b></td>';
+                                            echo '<td colspan="2" ><b style="text-align: center !important;">Thao tác</b></td>';
                                         }
                                         echo '</tr>';
                                         if (!empty($products)) {
@@ -35,12 +35,12 @@
                                                 if($product['year'] == $year['year']):
                                                     echo '<tr>';
                                                     echo '<td>' . ($key + 1) . '</td>';
-                                                    echo '<td><a href="' . base_url('client/information/detail_product/' . $product['id']) . '">' . $product['name'] . '</a></td>';
+                                                    echo '<td><a href="' . base_url('client/'.$ctrl_name.'/detail_product/' . $product['id']) . '">' . $product['field_1'] . '</a></td>';
                                         ?>
-                                                    <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-primary">Xem chi tiết</a></td>
+                                                    <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/'.$ctrl_name.'/detail_product/' . $product['id']) ?>" class="btn btn-primary">Xem chi tiết</a></td>
                                                     <?php if($reg_status['is_final'] == 0 && $product['year'] == $eventYear): ?>
-                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/edit_product/' . $product['id']) ?>" class="btn btn-primary">Chỉnh sửa</a></td>
-                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/remove_product/' . $product['id']) ?>" class="btn btn-danger" onclick="return confirm('Chắc chắn xóa sản phẩm?')">Xóa sản phẩm</a></td>
+                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/'.$ctrl_name.'/edit_product/' . $product['id']) ?>" class="btn btn-primary">Chỉnh sửa</a></td>
+                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/'.$ctrl_name.'/remove_product/' . $product['id']) ?>" class="btn btn-danger" onclick="return confirm('Chắc chắn xóa sản phẩm?')">Xóa sản phẩm</a></td>
                                                     <?php else: ?>
                                                         <td style="text-align: center;width:110px;"><a style="width:132px;" href="javascript:void(0);" disabled="disabled" class="btn btn-primary">Chỉnh sửa</a></td>
                                                         <td style="text-align: center;width:110px;"><a style="width:132px;" href="javascript:void(0);" disabled="disabled" class="btn btn-danger">Xóa sản phẩm</a></td>
@@ -65,7 +65,7 @@
                             <br>
                             <?php if($reg_status['is_final'] == 0): ?>
                                 <div>
-                                    <a style="display: inline;margin-right:10px !important;"  href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary pull-left"><b>Thêm sản phẩm</b></a>
+                                    <a style="display: inline;margin-right:10px !important;"  href="<?php echo base_url('client/'.$ctrl_name.'/create_product') ?>" class="btn btn-primary pull-left"><b>Thêm sản phẩm</b></a>
                                     <a id="complete" onclick="return complete();" <?php echo ($status['is_product'] == 0) ? 'disabled="disabled"' : '';?> style="display: inline;" href="#" class="btn btn-warning pull-left"><b>Hoàn thành đăng ký</b></a>
                                 </div>
 
@@ -88,3 +88,4 @@
         }
     }
 </script>
+

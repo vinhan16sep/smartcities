@@ -20,7 +20,7 @@
                     <br>
                 </div>
                 <?php
-                echo form_open_multipart('client/'.$folder_name.'/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
+                echo form_open_multipart('client/'.$ctrl_name.'/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
                 <div class="form-group">
                     <div class="row">

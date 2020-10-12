@@ -15,18 +15,19 @@
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
-                    <h1 style="text-align:center;">THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP THÔNG MINH</h1>
+                    <h1 style="text-align:center;">THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN ỨNG CỬ</h1>
                     <h2 style="text-align:center;"><?php //echo $user_service_types ?></h2>
                     <br>
                 </div>
                 <?php
-                echo form_open_multipart('client/'.$folder_name.'/edit_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
+                echo form_open_multipart('client/'.$ctrl_name.'/edit_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
+                <input type="hidden" value="<?php echo $product['id'] ?>" name="id">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('1. Tên dự án BĐS CN', 'field_1');
+                            echo form_label('1. Tên dự án BĐS', 'field_1');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -82,6 +83,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <hr style="border-top: 1px solid #ccc;">
                     <h2>Mô tả dự án</h2>
@@ -249,7 +251,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('13. Tỷ lệ lấp đầy (%)');
+                            echo form_label('13. Hạ tầng/móng: (Đã/Đang/Chưa hoàn thiện)');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -264,7 +266,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('14. Hạ tầng kỹ thuật: (Đã/Đang/Chưa hoàn thiện)');
+                            echo form_label('14. Mức độ triển khai (%) hoặc giai đoạn thực hiện dự án');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -276,33 +278,33 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <hr style="border-top: 1px solid #ccc;">
+                    <h2>Thông tin triển khai các ứng dụng CNTT trong dự án (Mỗi mục giới thiệu tối đa 300 từ)</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('15. Đang mở rộng và phát triển thêm');
+                            echo form_label('15. Kiến trúc tổng thể CNTT của khu/toà nhà');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_15', '<div class="error">', '</div>');
-                            echo form_input(array(
+                            echo form_textarea(array(
                                 'name' => 'field_15',
                                 'id' => 'field_15',
                                 'value' => htmlspecialchars_decode(set_value('field_15', $product['field_15'])),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <hr style="border-top: 1px solid #ccc;">
-                    <h2>Thông tin triển khai các ứng dụng CNTT trong dự án (Mỗi mục giới thiệu tối đa 300 từ)</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('16. Kiến trúc tổng thể CNTT của khu');
+                            echo form_label('16. Hạ tầng dữ liệu');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -323,7 +325,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('17. Hạ tầng dữ liệu');
+                            echo form_label('17. Các tiện ích thông minh của dự án/khu đô thị/toà nhà:');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -345,7 +347,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('18. Các tiện ích thông minh của dự án');
+                            echo form_label('18. Thiết bị điện và chiếu sáng');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -366,7 +368,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('19. Thiết bị điện và chiếu sáng');
+                            echo form_label('19. Môi trường/cây xanh/không khí');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -387,7 +389,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('20. Môi trường/cây xanh/không khí');
+                            echo form_label('20. Cấp nước');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -408,7 +410,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('21. Cấp nước');
+                            echo form_label('21. Xử lý nước và chất thải');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -429,7 +431,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('22. Xử lý nước và chất thải');
+                            echo form_label('22. Cung cấp năng lượng, Điện');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -450,7 +452,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('23. Cung cấp năng lượng, Điện');
+                            echo form_label('23. Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -471,7 +473,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('24. Thiết bị kết nối: IoT, camera giám sát, hệ thống phòng cháy chữa cháy…');
+                            echo form_label('24. Phòng cháy chữa cháy');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -492,7 +494,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('25. Phòng cháy chữa cháy');
+                            echo form_label('25. Theo dõi, giám sát, cứu nạn');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -513,7 +515,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('26. Theo dõi, giám sát, cứu nạn');
+                            echo form_label('26. Bảo mật, an toàn thông tin');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -534,7 +536,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('27. Bảo mật, an toàn thông tin');
+                            echo form_label('27. Mạng xã hội cho dân cư');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -555,7 +557,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('28. Xây dựng nhà xưởng thông minh');
+                            echo form_label('28. Các ứng dụng quản lý dân cư');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -576,7 +578,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('29. Các dịch vụ hỗ trợ doanh nghiệp, nhà đầu tư ');
+                            echo form_label('29. Các tiện ích thông minh khác');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -594,10 +596,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <hr style="border-top: 1px solid #ccc;">
+                    <h2>Thông tin các tiêu chuẩn, chính sách ưu đãi, thế mạnh, và các danh hiệu, giải thưởng đạt được</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('30. Các tiện ích thông minh khác');
+                            echo form_label('30. Các tiêu chuẩn kỹ thuật, an toàn, môi trường đang áp dụng');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -615,12 +619,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <hr style="border-top: 1px solid #ccc;">
-                    <h2>Thông tin các tiêu chuẩn, chính sách ưu đãi, thế mạnh, và các danh hiệu, giải thưởng đạt được</h2>
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('31. Các tiêu chuẩn kỹ thuật, an toàn, phòng cháy chữa cháy, môi trường đang áp dụng');
+                            echo form_label('31. Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được:');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -637,48 +639,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('32. Các chính sách, ưu đãi, lợi thế nổi bật so với các khu khác ');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('field_32', '<div class="error">', '</div>');
-                            echo form_textarea(array(
-                                'name' => 'field_32',
-                                'id' => 'field_32',
-                                'value' => htmlspecialchars_decode(set_value('field_32', $product['field_32'])),
-                                'rows' => '3',
-                                'class' => "form-control tinymce-area"
-                            ));
-                            ?>
+                        <div class="col-sm-12 d-inline" style="line-height: 35px;">
+                            <div style="float: right;display: flex;">
+                                Ngày 
+                                <div style="width: 130px;padding:0 5px;">
+                                    <?php
+                                        echo form_input('field_32', set_value('field_32', $product['field_32']), 'class="form-control"');
+                                        echo form_error('field_32', '<div class="error">', '</div>');
+                                    ?>
+                                </div>
+                                 Tháng 
+                                <div style="width: 130px;padding:0 5px;">
+                                    <?php
+                                        echo form_input('field_33', set_value('field_33', $product['field_33']), 'class="form-control"');
+                                        echo form_error('field_33', '<div class="error">', '</div>');
+                                    ?> 
+                                </div> 
+                                Năm  2020    
+                            </div>
+                                            
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('33. Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được:');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('field_33', '<div class="error">', '</div>');
-                            echo form_textarea(array(
-                                'name' => 'field_33',
-                                'id' => 'field_33',
-                                'value' => htmlspecialchars_decode(set_value('field_33', $product['field_33'])),
-                                'rows' => '3',
-                                'class' => "form-control tinymce-area"
-                            ));
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
+                
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">
                     </div>

@@ -20,9 +20,8 @@
                     <br>
                 </div>
                 <?php
-                echo form_open_multipart('client/'.$folder_name.'/edit_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
+                echo form_open_multipart('client/'.$ctrl_name.'/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
-                <input type="hidden" value="<?php echo $product['id'] ?>" name="id">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -33,7 +32,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_1', '<div class="error">', '</div>');
-                            echo form_input('field_1', set_value('field_1', $product['field_1']), 'class="form-control"');
+                            echo form_input('field_1', set_value('field_1'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -42,18 +41,15 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('2. Hạng mục đăng ký tham gia <span style="color:red;">(Chọn 1 trong 3 hạng mục, điền "X" vào hạng mục tương ứng)<span>', 'field_2');
+                            echo form_label('2. Hạng mục đăng ký tham gia', 'field_2');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            if ($this->input->post('field_2')) {
-                                $product['field_2'] = $this->input->post('field_2');
-                            }
                             echo '<label id="field_2-error" class="error" for="field_2"></label>';
                             echo form_error('field_2', '<div class="error">', '</div>');
                             foreach ($categories as $key => $value) {
-                                echo form_radio('field_2', $key, (($key == $product['field_2']) ? true : false), 'class="btn-checkbox"');
+                                echo form_radio('field_2', $key, (($key == $this->input->post('field_2')) ? true : false), 'class="btn-checkbox"');
                                 echo $value.'<br>';
                             }
                             ?>
@@ -64,26 +60,22 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('3. Hồ sơ pháp lý gửi kèm <span style="color:red;">(Có thể chọn nhiều nếu có, điền "X" vào ô tương ứng)<span>', 'field_3');
+                            echo form_label('3. Hồ sơ pháp lý gửi kèm', 'field_3');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            $product['field_3'] = json_decode($product['field_3'], true);
-                            if ($this->input->post('field_3')) {
-                                $product['field_3'] = (array)$this->input->post('field_3');
-                            }
+                                $not_null = (array)$this->input->post('field_3');
                             echo '<label id="field_3[]-error" class="error" for="field_3[]"></label>';
                             echo form_error('field_3[]', '<div class="error">', '</div>');
                             foreach ($attached_legal_documents as $key => $value) {
-                                echo form_checkbox('field_3[]', $key, (in_array($key, $product['field_3']) ? true : false), 'class="btn-checkbox"');
+                                echo form_checkbox('field_3[]', $key, (in_array($key, $not_null) ? true : false), 'class="btn-checkbox"');
                                 echo $value.'<br>';
                             }
                             ?>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <hr style="border-top: 1px solid #ccc;">
                     <h2>Mô tả dự án</h2>
@@ -96,7 +88,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_4', '<div class="error">', '</div>');
-                            echo form_input('field_4', set_value('field_4', $product['field_4']), 'class="form-control"');
+                            echo form_input('field_4', set_value('field_4'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -111,7 +103,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_5', '<div class="error">', '</div>');
-                            echo form_input('field_5', set_value('field_5', $product['field_5']), 'class="form-control"');
+                            echo form_input('field_5', set_value('field_5'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -126,7 +118,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_6', '<div class="error">', '</div>');
-                            echo form_input('field_6', set_value('field_6', $product['field_6']), 'class="form-control"');
+                            echo form_input('field_6', set_value('field_6'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -144,7 +136,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_7',
                                 'id' => 'field_7',
-                                'value' => htmlspecialchars_decode(set_value('field_7', $product['field_7'])),
+                                'value' => set_value('field_7'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -165,7 +157,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_8',
                                 'id' => 'field_8',
-                                'value' => htmlspecialchars_decode(set_value('field_8', $product['field_8'])),
+                                'value' => set_value('field_8'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -186,7 +178,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_9',
                                 'id' => 'field_9',
-                                'value' => htmlspecialchars_decode(set_value('field_9', $product['field_9'])),
+                                'value' => set_value('field_9'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -207,7 +199,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_10',
                                 'id' => 'field_10',
-                                'value' => htmlspecialchars_decode(set_value('field_10', $product['field_10'])),
+                                'value' => set_value('field_10'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -227,7 +219,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_11', '<div class="error">', '</div>');
-                            echo form_input('field_11', set_value('field_11', $product['field_11']), 'class="form-control"');
+                            echo form_input('field_11', set_value('field_11'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -242,7 +234,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_12', '<div class="error">', '</div>');
-                            echo form_input('field_12', set_value('field_12', $product['field_12']), 'class="form-control"');
+                            echo form_input('field_12', set_value('field_12'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -257,7 +249,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_13', '<div class="error">', '</div>');
-                            echo form_input('field_13', set_value('field_13', $product['field_13']), 'class="form-control"');
+                            echo form_input('field_13', set_value('field_13'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -272,7 +264,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('field_14', '<div class="error">', '</div>');
-                            echo form_input('field_14', set_value('field_14', $product['field_14']), 'class="form-control"');
+                            echo form_input('field_14', set_value('field_14'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -292,7 +284,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_15',
                                 'id' => 'field_15',
-                                'value' => htmlspecialchars_decode(set_value('field_15', $product['field_15'])),
+                                'value' => set_value('field_15'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -313,7 +305,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_16',
                                 'id' => 'field_16',
-                                'value' => htmlspecialchars_decode(set_value('field_16', $product['field_16'])),
+                                'value' => set_value('field_16'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -334,7 +326,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_17',
                                 'id' => 'field_17',
-                                'value' => htmlspecialchars_decode(set_value('field_17', $product['field_17'])),
+                                'value' => set_value('field_17'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -356,7 +348,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_18',
                                 'id' => 'field_18',
-                                'value' => htmlspecialchars_decode(set_value('field_18', $product['field_18'])),
+                                'value' => set_value('field_18'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -377,7 +369,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_19',
                                 'id' => 'field_19',
-                                'value' => htmlspecialchars_decode(set_value('field_19', $product['field_19'])),
+                                'value' => set_value('field_19'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -398,7 +390,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_20',
                                 'id' => 'field_20',
-                                'value' => htmlspecialchars_decode(set_value('field_20', $product['field_20'])),
+                                'value' => set_value('field_20'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -419,7 +411,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_21',
                                 'id' => 'field_21',
-                                'value' => htmlspecialchars_decode(set_value('field_21', $product['field_21'])),
+                                'value' => set_value('field_21'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -440,7 +432,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_22',
                                 'id' => 'field_22',
-                                'value' => htmlspecialchars_decode(set_value('field_22', $product['field_22'])),
+                                'value' => set_value('field_22'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -461,7 +453,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_23',
                                 'id' => 'field_23',
-                                'value' => htmlspecialchars_decode(set_value('field_23', $product['field_23'])),
+                                'value' => set_value('field_23'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -482,7 +474,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_24',
                                 'id' => 'field_24',
-                                'value' => htmlspecialchars_decode(set_value('field_24', $product['field_24'])),
+                                'value' => set_value('field_24'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -503,7 +495,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_25',
                                 'id' => 'field_25',
-                                'value' => htmlspecialchars_decode(set_value('field_25', $product['field_25'])),
+                                'value' => set_value('field_25'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -524,7 +516,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_26',
                                 'id' => 'field_26',
-                                'value' => htmlspecialchars_decode(set_value('field_26', $product['field_26'])),
+                                'value' => set_value('field_26'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -545,7 +537,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_27',
                                 'id' => 'field_27',
-                                'value' => htmlspecialchars_decode(set_value('field_27', $product['field_27'])),
+                                'value' => set_value('field_27'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -566,7 +558,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_28',
                                 'id' => 'field_28',
-                                'value' => htmlspecialchars_decode(set_value('field_28', $product['field_28'])),
+                                'value' => set_value('field_28'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -587,7 +579,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_29',
                                 'id' => 'field_29',
-                                'value' => htmlspecialchars_decode(set_value('field_29', $product['field_29'])),
+                                'value' => set_value('field_29'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -610,7 +602,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_30',
                                 'id' => 'field_30',
-                                'value' => htmlspecialchars_decode(set_value('field_30', $product['field_30'])),
+                                'value' => set_value('field_30'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -631,7 +623,7 @@
                             echo form_textarea(array(
                                 'name' => 'field_31',
                                 'id' => 'field_31',
-                                'value' => htmlspecialchars_decode(set_value('field_31', $product['field_31'])),
+                                'value' => set_value('field_31'),
                                 'rows' => '3',
                                 'class' => "form-control tinymce-area"
                             ));
@@ -646,14 +638,14 @@
                                 Ngày 
                                 <div style="width: 130px;padding:0 5px;">
                                     <?php
-                                        echo form_input('field_32', set_value('field_32', $product['field_32']), 'class="form-control"');
+                                        echo form_input('field_32', set_value('field_32'), 'class="form-control"');
                                         echo form_error('field_32', '<div class="error">', '</div>');
                                     ?>
                                 </div>
                                  Tháng 
                                 <div style="width: 130px;padding:0 5px;">
                                     <?php
-                                        echo form_input('field_33', set_value('field_33', $product['field_33']), 'class="form-control"');
+                                        echo form_input('field_33', set_value('field_33'), 'class="form-control"');
                                         echo form_error('field_33', '<div class="error">', '</div>');
                                     ?> 
                                 </div> 

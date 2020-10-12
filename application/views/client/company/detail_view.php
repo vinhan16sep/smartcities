@@ -179,11 +179,11 @@
 
                                     <div class="col-xs-12 col-md-4 pull-right">
                                         <?php if ($user_service_type == '2'): ?>
-                                            <a href="<?php echo base_url('client/product1/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
-                                        <?php elseif ($user_service_type == '3'): ?>
                                             <a href="<?php echo base_url('client/product2/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                        <?php elseif ($user_service_type == '3'): ?>
+                                            <a href="<?php echo base_url('client/product3/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         <?php else: ?>
-                                            <a href="<?php echo base_url('client/information/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                            <a href="<?php echo base_url('client/product4/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         <?php endif ?>
                                     </div>
                                     <?php } ?>
