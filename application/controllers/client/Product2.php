@@ -12,6 +12,9 @@ class Product2 extends Client_Controller {
             redirect('client/user/login', 'refresh');
         }
 
+
+        $this->load->model('product2_model');
+
         $this->load->helper('url');
         $this->load->model('information_model');
         $this->load->model('status_model');
@@ -28,26 +31,31 @@ class Product2 extends Client_Controller {
             '4' => 'Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh',
         ];
         $this->data['categories'] = [
-            '1' => 'Khu Công nghệ thông minh',
-            '2' => 'Khu Công nghệ cao thông minh',
-            '3' => 'Khu Công nghiệp thông minh',
-            '4' => 'Khu chế xuất thông minh'
+            '1' => 'Dự án bất động sản thông minh',
+            '2' => 'Toà nhà thông minh',
+            '3' => 'Khu đô thị thông minh',
         ];
 
         $this->data['attached_legal_documents'] = [
-            '1' => 'Quyết định thành lập KCN',
-            '2' => 'Giấy chứng nhận đầu tư',
-            '3' => 'Quyết định phê duyệt quy hoạch 1:500',
-            '4' => 'Các giấy phép khác',
+            '1' => 'Phê duyệt quy hoạch 1/500',
+            '2' => 'Sổ đất',
+            '3' => 'Quyết định giao đất',
+            '4' => 'Chấp thuận chủ trương đầu tư',
+            '5' => 'Chấp thuận Phòng cháy chữa cháy, đấu nối điện nước, đường giao thông nội bộ',
+            '6' => 'Giấy phép xây dựng cơ sở hạ tầng cơ bản, giấy phép phần thân, phần móng đối với căn hộ căn cư',
+            '7' => 'Văn bản thông báo đủ điều kiện huy động vốn',
+            '8' => 'Thông báo bảo lãnh ngân hàng',
+            '9' => 'Các loại giấy phép: phòng cháy chữa cháy, hồ sơ chuyển nhượng dự án, bảo vệ môi trường,…',
+            '10' => 'Các văn bản pháp lý khác theo quy định của địa phương',
         ];
-        $this->data['folder_name'] = 'product'.($this->data['user_service_type'] - 1);
+        $this->data['ctrl_name'] = 'product' . ($this->data['user_service_type']);
     }
 
     public function products(){
         $this->load->library('pagination');
         $config = array();
-        $base_url = base_url() . 'client/information/products';
-        $total_rows = $this->information_model->count_product2($this->data['user']->id, $this->data['eventYear']);
+        $base_url = base_url() . 'client/product2/products';
+        $total_rows = $this->product2_model->count_product($this->data['user']->id, $this->data['eventYear']);
         $per_page = 10;
         $uri_segment = 4;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
@@ -57,15 +65,15 @@ class Product2 extends Client_Controller {
 
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $this->data['allYear'] = $this->information_model->getAllProductYears();
-        $this->data['products'] = $this->information_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page'], 'product2');
+        $this->data['allYear'] = $this->product2_model->getAllProductYears();
+        $this->data['products'] = $this->product2_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page'], 'product2');
 
-        $this->render('client/information/list_product_view_'.$this->data['user_service_type']);
+        $this->render('client/product2/list_view');
     }
 
     public function detail_product($id = NULL){
-        $this->data['product'] = $this->information_model->fetch_product_by_user_and_id($this->data['folder_name'], $this->data['user']->id, $id);
-        $this->render('client/information/detail_product_view_' . $this->data['user']->service_type);
+        $this->data['product'] = $this->product2_model->fetch_product_by_user_and_id($this->data['ctrl_name'], $this->data['user']->id, $id);
+        $this->render('client/product2/detail_view');
     }
 
     public function remove_product($id = null){
@@ -75,15 +83,15 @@ class Product2 extends Client_Controller {
         // NEED TO CHECK AGAIN, BECAUSE NOW HAVE 4 TABLES FOR PRODUCT =============================================
         if ( $check_product_in_team > 0 ) {
             $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
-            redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+            redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
         }else{
-            $deleted = $this->information_model->delete($this->data['folder_name'], $id);
+            $deleted = $this->product2_model->delete($this->data['ctrl_name'], $id);
             if ($deleted) {
                 $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
-                redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+                redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
             }else{
                 $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
-                redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+                redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
             }
         }
     }
@@ -92,7 +100,7 @@ class Product2 extends Client_Controller {
         if (isset($this->data['service_types'][$this->data['user']->service_type])){
             $this->data['user_service_types'] = $this->data['service_types'][$this->data['user']->service_type];
         } else {
-            redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+            redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
         }
 
         $this->load->helper('form');
@@ -101,7 +109,7 @@ class Product2 extends Client_Controller {
             // VALIDATION
             $this->validate_product_complete();
             if ($this->form_validation->run() == FALSE) {
-                $this->render('client/information/create_product_view_' . $this->data['user_service_type']);
+                $this->render('client/product2/create_view');
             } else {
                 if ($this->input->post()) {
                     // if(!empty($_FILES['file']['name'])){
@@ -145,8 +153,8 @@ class Product2 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -156,10 +164,7 @@ class Product2 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
-                    if(!empty($_FILES['file']['name'])){
-                        $data['file'] = $file;
-                    }
-                    $insert = $this->information_model->insert_product($this->data['folder_name'], $data);
+                    $insert = $this->product2_model->insert_product($this->data['ctrl_name'], $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
                     }
@@ -167,7 +172,7 @@ class Product2 extends Client_Controller {
                     $this->status_model->update('status', $this->data['user']->id, array('is_product' => 1));
                     $this->session->set_flashdata('message', 'Item added successfully');
 
-                    redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+                    redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
                 }
             }
         }else{
@@ -176,7 +181,7 @@ class Product2 extends Client_Controller {
             // var_dump($this->form_validation->run());die;
 
             if ($this->form_validation->run() == FALSE) {
-                $this->render('client/information/create_product_view_'.$this->data['user_service_type']);
+                $this->render('client/product2/create_view');
             } else {
                 if ($this->input->post()) {
 
@@ -220,8 +225,8 @@ class Product2 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
@@ -231,16 +236,13 @@ class Product2 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
-                    if(!empty($_FILES['file']['name'])){
-                        $data['file'] = $file;
-                    }
-                    $insert = $this->information_model->insert_product($this->data['folder_name'], $data);
+                    $insert = $this->product2_model->insert_product($this->data['ctrl_name'], $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
                     }
                     $this->session->set_flashdata('message', 'Item added successfully');
 
-                    redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+                    redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
                 }
             }
         }
@@ -256,11 +258,11 @@ class Product2 extends Client_Controller {
 
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
-                $this->data['product'] = $this->information_model->fetch_product_by_user_id($this->data['folder_name'], $this->data['user']->id, $id);
+                $this->data['product'] = $this->product2_model->fetch_product_by_user_id($this->data['ctrl_name'], $this->data['user']->id, $id);
                 if (!$this->data['product']) {
-                    redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
+                    redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
                 }
-                $this->render('client/information/edit_product_view_' . $this->data['user']->service_type);
+                $this->render('client/product2/edit_view');
             } else {
                 if ($this->input->post()) {
                     // if(!empty($_FILES['file']['name'])){
@@ -302,25 +304,22 @@ class Product2 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by'],
                     );
-                    if(!empty($_FILES['file']['name'])){
-                        $data['file'] = $file;
-                    }
                     try {
-                        $this->information_model->update_product($this->data['folder_name'], $this->data['user']->id, $id, $data);
+                        $this->product2_model->update_product($this->data['ctrl_name'], $this->data['user']->id, $id, $data);
                         $this->load->model('status_model');
                         $this->status_model->update('status', $this->data['user']->id, array('is_product' => 1));
                         $this->session->set_flashdata('message', 'Item updated successfully');
                     } catch (Exception $e) {
                         $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                     }
-                    redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+                    redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
                 }
             }
         }else{
@@ -328,11 +327,11 @@ class Product2 extends Client_Controller {
             $this->validate_product_temporary();
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
-                $this->data['product'] = $this->information_model->fetch_product_by_user_id($this->data['folder_name'], $this->data['user']->id, $id);
+                $this->data['product'] = $this->product2_model->fetch_product_by_user_id($this->data['ctrl_name'], $this->data['user']->id, $id);
                 if (!$this->data['product']) {
-                    redirect('client/'.$this->data['folder_name'].'/product', 'refresh');
+                    redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
                 }
-                $this->render('client/information/edit_product_view_' . $this->data['user']->service_type);
+                $this->render('client/product2/edit_view');
             } else {
                 if ($this->input->post()) {
                     // if(!empty($_FILES['file']['name'])){
@@ -377,23 +376,20 @@ class Product2 extends Client_Controller {
                         'field_29' => $this->input->post('field_29'),
                         'field_30' => $this->input->post('field_30'),
                         'field_31' => $this->input->post('field_31'),
-                        'field_32' => $this->input->post('field_32'),
-                        'field_33' => $this->input->post('field_33'),
+                        'field_32' => null,
+                        'field_33' => null,
 
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
-                    if(!empty($_FILES['file']['name'])){
-                        $data['file'] = $file;
-                    }
                     try {
-                        $this->information_model->update_product($this->data['folder_name'], $this->data['user']->id, $id, $data);
+                        $this->product2_model->update_product($this->data['ctrl_name'], $this->data['user']->id, $id, $data);
                         $this->session->set_flashdata('message', 'Item updated successfully');
                     } catch (Exception $e) {
                         $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                     }
-                    redirect('client/'.$this->data['folder_name'].'/products', 'refresh');
+                    redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
                 }
             }
         }
@@ -420,7 +416,7 @@ class Product2 extends Client_Controller {
         $array_image = array('docx', 'doc', 'xlsx', 'xlsm', 'xlsb', 'xltx', 'xltm', 'xls', 'pdf');
         if( !in_array($fileextension, $array_image)){
             $this->session->set_flashdata('message_error', 'Định dạng file không đúng');
-            redirect('client/'.$this->data['folder_name'].'/products');
+            redirect('client/' . $this->data['ctrl_name'] . '/products');
         }
     }
 
@@ -473,7 +469,7 @@ class Product2 extends Client_Controller {
 
 
     private function validate_product_complete(){
-        $this->form_validation->set_rules('field_1', 'Tên dự án BĐS CN', 'trim|required', array(
+        $this->form_validation->set_rules('field_1', 'Tên dự án BĐS', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
         $this->form_validation->set_rules('field_2', 'Hạng mục đăng ký tham gia', 'trim|required', array(
@@ -509,61 +505,58 @@ class Product2 extends Client_Controller {
         $this->form_validation->set_rules('field_12', 'Tỷ lệ giải phóng mặt bằng (%)', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_13', 'Tỷ lệ lấp đầy (%)', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_14', 'Hạ tầng kỹ thuật: (Đã/Đang/Chưa hoàn thiện)', 'trim|required', array(
+        $this->form_validation->set_rules('field_13', 'Hạ tầng/móng: (Đã/Đang/Chưa hoàn thiện)', 'trim|required', array(
             'required' => '%s không được trống.'
+        ));
+        $this->form_validation->set_rules('field_14', 'Mức độ triển khai (%) hoặc giai đoạn thực hiện dự án', 'trim|required', array(
+            'required' => '%s không được trống.',
         ));
         
         
         // check require
-        $this->form_validation->set_rules('field_15', 'Đang mở rộng và phát triển thêm', 'trim|required', array(
+        $this->form_validation->set_rules('field_15', 'Kiến trúc tổng thể CNTT của khu/toà nhà', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_16', 'Kiến trúc tổng thể CNTT của khu', 'trim|required', array(
+        $this->form_validation->set_rules('field_16', 'Hạ tầng dữ liệu', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_17', 'Hạ tầng dữ liệu', 'trim|required', array(
+        $this->form_validation->set_rules('field_17', 'Các tiện ích thông minh của dự án/khu đô thị/toà nhà:', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_18', 'Các tiện ích thông minh của dự án', 'trim|required', array(
+        $this->form_validation->set_rules('field_18', 'Thiết bị điện và chiếu sáng', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_19', 'Thiết bị điện và chiếu sáng', 'trim|required', array(
+        $this->form_validation->set_rules('field_19', 'Môi trường/cây xanh/không khí', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_20', 'Môi trường/cây xanh/không khí', 'trim|required', array(
+        $this->form_validation->set_rules('field_20', 'Cấp nước', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_21', 'Cấp nước', 'trim|required', array(
+        $this->form_validation->set_rules('field_21', 'Xử lý nước và chất thải', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_22', 'Xử lý nước và chất thải', 'trim|required', array(
+        $this->form_validation->set_rules('field_22', 'Cung cấp năng lượng, Điện', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_23', 'Cung cấp năng lượng, Điện', 'trim|required', array(
+        $this->form_validation->set_rules('field_23', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_24', 'Thiết bị kết nối: IoT, smart home, camera giám sát, hệ thống phòng cháy chữa cháy…', 'trim|required', array(
+        $this->form_validation->set_rules('field_24', 'Phòng cháy chữa cháy', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_25', 'Phòng cháy chữa cháy', 'trim|required', array(
+        $this->form_validation->set_rules('field_25', 'Theo dõi, giám sát, cứu nạn', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_26', 'Theo dõi, giám sát, cứu nạn', 'trim|required', array(
+        $this->form_validation->set_rules('field_26', 'Bảo mật, an toàn thông tin', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_27', 'Bảo mật, an toàn thông tin', 'trim|required', array(
+        $this->form_validation->set_rules('field_27', 'Mạng xã hội cho dân cư', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_28', 'Xây dựng nhà xưởng thông minh', 'trim|required', array(
+        $this->form_validation->set_rules('field_28', 'Các ứng dụng quản lý dân cư', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_29', 'Các dịch vụ hỗ trợ doanh nghiệp, nhà đầu tưCác tiện ích thông minh khác', 'trim|required', array(
-            'required' => '%s không được trống.',
-        ));
-        $this->form_validation->set_rules('field_30', 'Các tiện ích thông minh khác', 'trim|required', array(
+        $this->form_validation->set_rules('field_29', 'Các tiện ích thông minh khác', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
         
@@ -628,10 +621,10 @@ class Product2 extends Client_Controller {
         //     'required' => '%s không được trống.',
         //     'max_word' => '%s Tối đa 300 từ'
         // ));
-        $this->form_validation->set_rules('field_31', 'Các tiêu chuẩn kỹ thuật, an toàn, phòng cháy chữa cháy, môi trường đang áp dụng', 'trim|required', array(
+        $this->form_validation->set_rules('field_30', 'Các tiêu chuẩn kỹ thuật, an toàn, môi trường đang áp dụng', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
-        $this->form_validation->set_rules('field_33', 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được', 'trim|required', array(
+        $this->form_validation->set_rules('field_31', 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được:', 'trim|required', array(
             'required' => '%s không được trống.',
         ));
         // $this->form_validation->set_rules('field_32', 'Ngày', 'trim|numeric|numeric|min_length[1]|max_length[2]', array(

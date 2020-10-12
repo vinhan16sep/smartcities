@@ -47,6 +47,19 @@ class MY_Controller extends CI_Controller {
             '3' => 'Nhóm 3: Các dự án BĐS Công nghiệp thông minh',
             '4' => 'Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh',
         ];
+
+        if ($this->ion_auth->user()->row()) {
+            $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
+            if ($this->data['user_service_type'] == '4') {
+                $this->data['product_url'] =  'client/product4/';
+            } elseif ($this->data['user_service_type'] == '2') {
+                $this->data['product_url'] =  'client/product2/';
+            } elseif ($this->data['user_service_type'] == '3') {
+                $this->data['product_url'] =  'client/product3/';
+            } else {
+                $this->data['product_url'] =  'client/product1/';
+            }
+        }
     }
 
     protected function render($the_view = NULL, $template = 'master') {
@@ -464,13 +477,13 @@ class Client_Controller extends MY_Controller {
         );
         $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
         if ($this->data['user_service_type'] == '4') {
-            $this->data['product_url'] =  'client/information/';
+            $this->data['product_url'] =  'client/product4/';
         } elseif ($this->data['user_service_type'] == '2') {
-            $this->data['product_url'] =  'client/product1/';
-        } elseif ($this->data['user_service_type'] == '3') {
             $this->data['product_url'] =  'client/product2/';
-        } else {
+        } elseif ($this->data['user_service_type'] == '3') {
             $this->data['product_url'] =  'client/product3/';
+        } else {
+            $this->data['product_url'] =  'client/product1/';
         }
     }
 

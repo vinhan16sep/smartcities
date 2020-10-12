@@ -40,9 +40,48 @@
                 <?php endif; ?>
 
 
+                <!-- Nhóm 1: Các thành phố thông minh -->
+                <?php if($user_service_type == '1'): ?>
+                <li class="<?php echo ($active == 'product1')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product1/products'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin lĩnh vực đăng <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ký tham gia</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+                <!-- Nhóm 2: Các dự án BĐS thông minh -->
+                <?php elseif ($user_service_type == '2'): ?>
+                <li class="<?php echo ($active == 'product2')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product2/products'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin dự án bất động <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sản ứng cử</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+                <!-- Nhóm 3: Các dự án BĐS Công nghiệp thông minh -->
+                <?php elseif ($user_service_type == '3'): ?>
+                <li class="<?php echo ($active == 'product3')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product3/products'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin dự án bất động <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sản công nghiệp</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+                <!-- Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh -->
+                <?php else: ?>
+                <li class="<?php echo ($active == 'product4')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/product4/products'); ?>">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span>Thông tin Sản phẩm/Dịch vụ <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;đề cử</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+                <?php endif; ?>
 
 
-                <?php if($user_service_type == '4'): ?>
+
+
+                <!-- <?php if($user_service_type == '4'): ?>
                 <li class="<?php echo ($active == 'products')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/products'); ?>">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
@@ -74,7 +113,7 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
-                <?php endif; ?>
+                <?php endif; ?> -->
                 <li>
                     <a onclick="return openModal();" href="#"><b></b>
                         <i class="fa fa-exclamation" aria-hidden="true"></i>
