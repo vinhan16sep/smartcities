@@ -22,7 +22,7 @@
                             <strong style="font-size: 17px;">Lưu ý:</strong>
                             <div style="margin-top: 10px;">
                                 <p>Các thông tin chi tiết chỉ nêu liên quan đến lĩnh vực đăng ký xét trao Giải thưởng. Vd: đăng ký cho lĩnh vực “Thành phố du lịch thông minh” thì hồ sơ sẽ chỉ tập chung vào các thông tin cho lĩnh vực du lịch thông minh.  
-                                <p>Nếu thành phố/đô thị đăng ký lĩnh vực <em><strong>“Thành phố hấp dẫn Khởi nghiệp ĐMST”</strong></em> chỉ cần cung cấp thông tin tại Mục 8 và <strong>Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được</strong> (đặc biệt là liên quan đến lĩnh vực thành phố thông minh)</p>
+                                <p>Nếu thành phố/đô thị đăng ký lĩnh vực <em><strong>“Thành phố hấp dẫn Khởi nghiệp ĐMST”</strong></em> chỉ cần cung cấp thông tin tại Mục 9 và <strong>Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được</strong> (đặc biệt là liên quan đến lĩnh vực thành phố thông minh)</p>
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('10. Số lượng DN thành lập mới năm 2018, 2019');
+                            echo form_label('9.1. Số lượng DN thành lập mới năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -247,7 +247,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('11. Các chính sách của tỉnh/thành phố cho startups');
+                            echo form_label('9.2. Các chính sách của tỉnh/thành phố cho startups');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -268,7 +268,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('12. Các chương trình hỗ trợ, thúc đẩy startups năm 2018, 2019');
+                            echo form_label('9.3. Các chương trình hỗ trợ, thúc đẩy startups năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -289,7 +289,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('13. Tổng ngân sách cho hỗ trợ, thúc đẩy startups năm 2018, 2019');
+                            echo form_label('9.4. Tổng ngân sách cho hỗ trợ, thúc đẩy startups năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -310,7 +310,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('14. Các đơn vị phụ trách, vườn ươm, trung tâm hỗ trợ/thúc đẩy khởi nghiệp');
+                            echo form_label('9.5. Các đơn vị phụ trách, vườn ươm, trung tâm hỗ trợ/thúc đẩy khởi nghiệp');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -331,7 +331,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('15. Kết quả đạt được trong 2018, 2019');
+                            echo form_label('9.6. Kết quả đạt được trong 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -352,7 +352,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('16. Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm:');
+                            echo form_label('10. Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm:');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -373,7 +373,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('17. Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019');
+                            echo form_label('10.1. Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -395,7 +395,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('18. Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019');
+                            echo form_label('10.2. Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -416,7 +416,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('19. Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)');
+                            echo form_label('11. Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -437,7 +437,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('20. Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh):');
+                            echo form_label('12. Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh):');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">

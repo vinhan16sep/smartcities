@@ -178,7 +178,7 @@
                                     <?php if(!$count_product || $count_product < 1): ?>
                                         <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin</p>
                                         <span>
-                                            <a href="<?php echo base_url($product_url . 'maintenance') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                                            <a href="<?php echo base_url($product_url . 'create_product') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
                                         </span>
                                     <?php else: ?>
                                         <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
