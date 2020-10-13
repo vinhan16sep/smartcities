@@ -125,14 +125,14 @@ class Dashboard extends Member_Controller {
                         }
                     }
                     if($product_ids){
-                        $products = $this->information_model->get_personal_products($product_ids);
+                        $products = $this->information_model->get_personal_products($value['stype'], $product_ids);
                         // echo '<pre>';
                         // print_r($products);die;
                         if ($products) {
                             foreach($product_ids as $k => $val){
                                 foreach ($products as $it => $item) {
                                     if($val == $item['id']){
-                                        $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);
+                                        $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id($value['stype'], 'new_rating', $item['id'], $user_id, $this->data['eventYear']);
                                         if ( $check_product_is_rating ) {
                                             $products[$it]['is_rating'] = 1;
                                         }else{
@@ -173,7 +173,7 @@ class Dashboard extends Member_Controller {
                         // $products = $this->information_model->get_personal_products($product_ids);
                         if ($products) {
                             foreach ($products as $it => $item) {
-                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);
+                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id($value['stype'], 'new_rating', $item['id'], $user_id, $this->data['eventYear']);
                                 if ( $check_product_is_rating ) {
                                     $products[$it]['is_rating'] = 1;
                                 }else{

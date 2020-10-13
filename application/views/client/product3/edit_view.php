@@ -74,7 +74,7 @@
                             }
                             echo '<label id="field_3[]-error" class="error" for="field_3[]"></label>';
                             echo form_error('field_3[]', '<div class="error">', '</div>');
-                            foreach ($attached_legal_documents as $key => $value) {
+                            foreach ($attached_legal_documents_stype3 as $key => $value) {
                                 echo form_checkbox('field_3[]', $key, (in_array($key, $product['field_3']) ? true : false), 'class="btn-checkbox"');
                                 echo $value.'<br>';
                             }

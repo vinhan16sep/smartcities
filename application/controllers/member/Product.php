@@ -12,6 +12,10 @@ class Product extends Member_Controller{
         $this->load->library('ion_auth');
         $this->load->model('status_model');
         $this->load->model('new_rating_model');
+		$this->load->model('product1_model');
+		$this->load->model('product2_model');
+		$this->load->model('product3_model');
+		$this->load->model('product4_model');
 
         $this->excel = new PHPExcel();
 	}
@@ -229,15 +233,16 @@ class Product extends Member_Controller{
         $this->render('member/list_team_by_manager_view');
     }
 
-    public function detail($id = null){
-        if(!$id){
+    public function detail($id = null, $stype, $client_id){
+        if(!$id || !$stype){
             redirect('member/dashboard', 'refresh');
         }
-        $product = $this->information_model->fetch_product_by_id('product', $id);
+        // $product = $this->information_model->fetch_product_by_id('product' . $stype, $id);
+        $product = $this->product1_model->fetch_product_by_user_and_id('product' . $stype, $client_id, $id);
         if(!$product){
             redirect('member/dashboard', 'refresh');
         }
         $this->data['product'] = $product;
-        $this->render('member/product/detail_product_view');
+        $this->render('member/product/detail_view' . $stype);
     }
 }

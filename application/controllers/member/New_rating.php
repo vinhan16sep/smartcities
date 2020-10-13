@@ -53,16 +53,16 @@ class New_rating extends Member_Controller{
 
     public function index($product_id=''){
         $id = $this->input->get('id');
-        $main_service = $this->input->get('main_service');
-        if(empty($main_service)){
+        $stype = $this->input->get('main_service');
+        if(empty($stype)){
             $this->session->set_flashdata('main_service_message', 'Sản phẩm bạn vừa chọn chưa được đặt lĩnh vực chính');
             redirect('member/');
         }
-        $detail = $this->information_model->fetch_by_id('product', $id);
+        $detail = $this->information_model->fetch_by_id('product' . $stype, $id);
         $company = $this->information_model->fetch_by_id('users', $detail['client_id']);
         $this->data['detail'] = $detail;
         $this->data['company'] = $company;
-        $this->data['main_service'] = $main_service;
+        $this->data['main_service'] = $stype;
 
         $this->load->model('users_model');
         $user = $this->ion_auth->user()->row();
@@ -99,10 +99,19 @@ class New_rating extends Member_Controller{
             }
 
 
-            $this->data['rating'] = $this->new_rating_model->check_rating_exist_for_list('new_rating', $detail['id'], $this->ion_auth->user()->row()->id);
+            $this->data['rating'] = $this->new_rating_model->check_rating_exist_for_list('new_rating', $detail['id'], $this->ion_auth->user()->row()->id, $stype);
+        }
+        if($stype == 1){
+            if($detail['field_21'] == 12){
+                $view_no = 5;
+            }else{
+                $view_no = 1;
+            }
+        } else {
+            $view_no = $stype;
         }
 
-        $this->render('member/rating_view_' . $main_service);
+        $this->render('member/rating_view_' . $view_no);
     }
 
     public function rating(){
@@ -111,18 +120,20 @@ class New_rating extends Member_Controller{
         $product_id = $request['product_id'];
         $total = $request['total'];
         $comment = $request['comment'];
+        $stype = $request['stype'];
         unset($request['comment']);
         unset($request['member_id']);
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
         unset($request['total']);
+        unset($request['stype']);
 
         if ($this->ion_auth->user()->row()->member_role == 'manager') {
             $data = array(
                 'rating' => json_encode($request),
                 'comment' => $comment,
             );
-            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data, $stype);
             if($update){
                 return $this->output->set_status_header(200)
                     ->set_output(json_encode(array('name' => $product_id)));
@@ -137,7 +148,8 @@ class New_rating extends Member_Controller{
                 'rating' => json_encode($request),
                 'total' => $total,
                 'year' => date('Y'),
-                'is_submit' => 1
+                'is_submit' => 1,
+                'stype' => $stype
             );
             $insert = $this->new_rating_model->insert('new_rating', $data);
             if($insert){
@@ -155,17 +167,19 @@ class New_rating extends Member_Controller{
         $product_id = $request['product_id'];
         $total = $request['total'];
         $comment = $request['comment'];
+        $stype = $request['stype'];
         unset($request['comment']);
         unset($request['member_id']);
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
         unset($request['total']);
+        unset($request['stype']);
 
         if ($this->ion_auth->user()->row()->member_role == 'manager') {
             $data = array(
                 'rating' => json_encode($request)
             );
-            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data, $stype);
             if($update){
                 return $this->output->set_status_header(200)
                     ->set_output(json_encode(array('name' => $product_id)));
@@ -182,7 +196,7 @@ class New_rating extends Member_Controller{
                     'comment' => $comment,
                     'is_submit' => 0
                 );
-                $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+                $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data, $stype);
                 if($update){
                     return $this->output->set_status_header(200)
                         ->set_output(json_encode(array('name' => $update)));
@@ -197,7 +211,8 @@ class New_rating extends Member_Controller{
                     'rating' => json_encode($request),
                     'total' => $total,
                     'year' => date('Y'),
-                    'is_submit' => 0
+                    'is_submit' => 0,
+                    'stype' => $stype
                 );
                 $insert = $this->new_rating_model->insert('new_rating', $data);
                 if($insert){
@@ -218,18 +233,20 @@ class New_rating extends Member_Controller{
         $product_id = $request['product_id'];
         $total = $request['total'];
         $comment = $request['comment'];
+        $stype = $request['stype'];
         unset($request['comment']);
         unset($request['member_id']);
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
         unset($request['total']);
+        unset($request['stype']);
 
         if ($this->ion_auth->user()->row()->member_role == 'manager') {
             $data = array(
                 'rating' => json_encode($request),
                 'comment' => $comment,
             );
-            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data, $stype);
             if($update){
                 return $this->output->set_status_header(200)
                     ->set_output(json_encode(array('name' => $product_id)));
@@ -266,7 +283,9 @@ class New_rating extends Member_Controller{
             $data = array(
                 'is_submit' => 0
             );
-            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+            // TODO ===========================
+            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data, $stype);
+            // TODO ===========================
             if($update){
                 return $this->output->set_status_header(200)
                     ->set_output(json_encode(array('name' => $product_id)));

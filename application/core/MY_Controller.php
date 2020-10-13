@@ -48,6 +48,33 @@ class MY_Controller extends CI_Controller {
             '4' => 'Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh',
         ];
 
+        $this->data['categories'] = [
+            '1' => 'Khu Công nghệ thông minh',
+            '2' => 'Khu Công nghệ cao thông minh',
+            '3' => 'Khu Công nghiệp thông minh',
+            '4' => 'Khu chế xuất thông minh'
+        ];
+
+        $this->data['attached_legal_documents_stype2'] = [
+            '1' => 'Phê duyệt quy hoạch 1/500',
+            '2' => 'Sổ đất',
+            '3' => 'Quyết định giao đất',
+            '4' => 'Chấp thuận chủ trương đầu tư',
+            '5' => 'Chấp thuận Phòng cháy chữa cháy, đấu nối điện nước, đường giao thông nội bộ',
+            '6' => 'Giấy phép xây dựng cơ sở hạ tầng cơ bản, giấy phép phần thân, phần móng đối với căn hộ căn cư',
+            '7' => 'Văn bản thông báo đủ điều kiện huy động vốn',
+            '8' => 'Thông báo bảo lãnh ngân hàng',
+            '9' => 'Các loại giấy phép: phòng cháy chữa cháy, hồ sơ chuyển nhượng dự án, bảo vệ môi trường,…',
+            '10' => 'Các văn bản pháp lý khác theo quy định của địa phương',
+        ];
+
+        $this->data['attached_legal_documents_stype3'] = [
+            '1' => 'Quyết định thành lập KCN',
+            '2' => 'Giấy chứng nhận đầu tư',
+            '3' => 'Quyết định phê duyệt quy hoạch 1:500',
+            '4' => 'Các giấy phép khác',
+        ];
+
         if ($this->ion_auth->user()->row()) {
             $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
             if ($this->data['user_service_type'] == '4') {

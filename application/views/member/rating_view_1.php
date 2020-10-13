@@ -36,25 +36,16 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                         <div class="post">
                             <table class="table table-bordered" style="width: 100%">
                                 <tr>
-                                    <td  style="width: 20%"><h3>Sản phẩm: </h3></td>
-                                    <td><h3><?php echo $detail['field_1']; ?></h3></td>
+                                    <td  style="width: 20%"><h4>Lĩnh vực đăng ký: </h4></td>
+                                    <td><h4><?php echo $type_smart_city[$detail['field_21']]; ?></h4></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Doanh nghiệp: </h4></td>
+                                    <td><h4>Đơn vị: </h4></td>
                                     <td><h4><?php echo $company['company']; ?></h4></td>
                                 </tr>
                                 <tr>
-                                    <?php
-                                        $main_services = array(
-                                            1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
-                                            2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                                            3 => 'Các sản phẩm, giải pháp phần mềm mới',
-                                            4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                                            5 => 'Các dịch vụ CNTT'
-                                        );
-                                    ?>
-                                    <td><h4>Nhóm sản phẩm </h4></td>
-                                    <td><h4><?php echo $main_service . ': ' . $main_services[$main_service]; ?></h4></td>
+                                    <td><h4>HẠNG MỤC </h4></td>
+                                    <td><h4>ĐÔ THỊ, THÀNH PHỐ THÔNG MINH</h4></td>
                                 </tr>
                             </table>
                         </div>
@@ -443,6 +434,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                         </table>
                     </div>
                     <!-- /.tab-content -->
+                    <input type="hidden" name="stype" value="<?php echo $main_service ?>" />
                 </div>
                 <div class="right">
                     <?php

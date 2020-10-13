@@ -24,30 +24,6 @@ class Product2 extends Client_Controller {
 
         $this->data['user'] = $this->ion_auth->user()->row();
         $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id, $this->data['eventYear']);
-        $this->data['service_types'] = [
-            '1' => 'Nhóm 1: Các thành phố thông minh',
-            '2' => 'Nhóm 2: Các dự án BĐS thông minh',
-            '3' => 'Nhóm 3: Các dự án BĐS Công nghiệp thông minh',
-            '4' => 'Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh',
-        ];
-        $this->data['categories'] = [
-            '1' => 'Dự án bất động sản thông minh',
-            '2' => 'Toà nhà thông minh',
-            '3' => 'Khu đô thị thông minh',
-        ];
-
-        $this->data['attached_legal_documents'] = [
-            '1' => 'Phê duyệt quy hoạch 1/500',
-            '2' => 'Sổ đất',
-            '3' => 'Quyết định giao đất',
-            '4' => 'Chấp thuận chủ trương đầu tư',
-            '5' => 'Chấp thuận Phòng cháy chữa cháy, đấu nối điện nước, đường giao thông nội bộ',
-            '6' => 'Giấy phép xây dựng cơ sở hạ tầng cơ bản, giấy phép phần thân, phần móng đối với căn hộ căn cư',
-            '7' => 'Văn bản thông báo đủ điều kiện huy động vốn',
-            '8' => 'Thông báo bảo lãnh ngân hàng',
-            '9' => 'Các loại giấy phép: phòng cháy chữa cháy, hồ sơ chuyển nhượng dự án, bảo vệ môi trường,…',
-            '10' => 'Các văn bản pháp lý khác theo quy định của địa phương',
-        ];
         $this->data['ctrl_name'] = 'product' . ($this->data['user_service_type']);
     }
 
