@@ -27,23 +27,47 @@ class Team extends Admin_Controller{
 	    $this->data['leaders'] = $this->users_model->fetch_all_leaders();
         $this->data['members'] = $this->users_model->fetch_all_members();
         $this->data['companys'] = $this->information_model->fetch_all_company_for_team(null, null, $this->data['eventYear']);
-	    $products = $this->information_model->get_product($this->data['eventYear']);
-        
-        if ($products) {
-            foreach ($products as $key => $value) {
+	    $_products1 = $this->information_model->get_product_for_team('product1', $this->data['eventYear']);
+	    $_products2 = $this->information_model->get_product_for_team('product2', $this->data['eventYear']);
+	    $_products3 = $this->information_model->get_product_for_team('product3', $this->data['eventYear']);
+	    $_products4 = $this->information_model->get_product_for_team('product4', $this->data['eventYear']);
+        if ($_products1) {
+            foreach ($_products1 as $key => $value) {
                 $user = $this->users_model->fetch_by_id($value['client_id']);
-                $products[$key]['company'] = $user['company'];
+                $_products1[$key]['company'] = $user['company'];
             }
         }
-        $this->data['products'] = $products;
+        if ($_products2) {
+            foreach ($_products2 as $key => $value) {
+                $user = $this->users_model->fetch_by_id($value['client_id']);
+                $_products2[$key]['company'] = $user['company'];
+            }
+        }
+        if ($_products3) {
+            foreach ($_products3 as $key => $value) {
+                $user = $this->users_model->fetch_by_id($value['client_id']);
+                $_products3[$key]['company'] = $user['company'];
+            }
+        }
+        if ($_products4) {
+            foreach ($_products4 as $key => $value) {
+                $user = $this->users_model->fetch_by_id($value['client_id']);
+                $_products4[$key]['company'] = $user['company'];
+            }
+        }
+        $this->data['products1'] = $_products1;
+        $this->data['products2'] = $_products2;
+        $this->data['products3'] = $_products3;
+        $this->data['products4'] = $_products4;
         $this->data['teams'] = $teams;
         $this->render('admin/team/list_team_view');
 	}
 
 	public function create(){
 	    $name = $this->input->get('name');
+	    $stype = $this->input->get('stype');
 
-        $insert = $this->team_model->insert('team', array('name' => $name, 'year' => $this->data['eventYear']));
+        $insert = $this->team_model->insert('team', array('name' => $name, 'stype' => $stype, 'year' => $this->data['eventYear']));
         if($insert){
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('name' => $name)));
@@ -133,16 +157,35 @@ class Team extends Admin_Controller{
 
     public function get_products(){
         $client_id = $this->input->get('client_id');
-        $products = $this->information_model->get_all_product($client_id, null, null, $this->data['eventYear']);
+        $user = $this->users_model->fetch_by_id($client_id);
+        $table = 'product' . $user['service_type'];
+        
+        $products = $this->information_model->get_all_product_for_team($table, $client_id, $this->data['eventYear']);
         foreach ($products as $key => $value) {
-            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id'], $this->data['eventYear']);
+            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id'], $this->data['eventYear'], $user['service_type']);
             $is_company_submitted = $this->status_model->check_company_submitted($client_id, $this->data['eventYear']);
             if ( $check_product_in_team > 0 || !$is_company_submitted ) {
                 unset($products[$key]);
             }
+            if($user['service_type'] == 1){
+                $products[$key]['title'] = $this->data['type_smart_city'][$value['field_21']];
+            }elseif($user['service_type'] == 2){
+                $products[$key]['title'] = $value['field_1'];
+            }elseif($user['service_type'] == 3){
+                $products[$key]['title'] = $value['field_1'];
+            }elseif($user['service_type'] == 4){
+                $products[$key]['title'] = $value['name'];
+            }
         }
         return $this->output->set_status_header(200)
             ->set_output(json_encode(array('products' => $products)));
+    }
+
+    public function get_company_city_by_stype(){
+        $stype = $this->input->get('stype');
+        $company_city = $this->information_model->get_company_city_by_stype($stype, $this->data['eventYear']);
+        return $this->output->set_status_header(200)
+            ->set_output(json_encode(array('company_city' => $company_city)));
     }
 
     public function add_product(){

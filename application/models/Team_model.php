@@ -63,11 +63,12 @@ class Team_model extends CI_Model {
         return $query->get()->result_array();
     }
 
-    public function check_exist_product_id($table, $product_id='', $year){
+    public function check_exist_product_id($table, $product_id='', $year, $stype){
         $this->db->select('*');
         $this->db->from($table);
         $this->db->like('product_id', ',' . $product_id . ',')
             ->where('year', $year)
+            ->where('stype', $stype)
             ->where('is_deleted', 0);
         return $result = $this->db->get()->num_rows();
     }

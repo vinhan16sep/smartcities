@@ -26,7 +26,10 @@
                                 </span>
                             </div>
                             <div class="post">
-                                <h4>Tổng số sản phẩm / giải pháp / dịch vụ đã đăng ký năm <?= $eventYear ?>: <span style="color: red"><?php echo $total_products; ?></span></h4>
+                                <h4>Tổng số Nhóm 1: Các thành phố thông minh năm <?= $eventYear ?>: <span style="color: red"><?php echo $total_products1; ?></span></h4>
+                                <h4>Tổng số Nhóm 2: Các dự án BĐS thông minh năm <?= $eventYear ?>: <span style="color: red"><?php echo $total_products2; ?></span></h4>
+                                <h4>Tổng số Nhóm 3: Các dự án BĐS Công nghiệp thông minh năm <?= $eventYear ?>: <span style="color: red"><?php echo $total_products3; ?></span></h4>
+                                <h4>Tổng số Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh năm <?= $eventYear ?>: <span style="color: red"><?php echo $total_products4; ?></span></h4>
                             </div>
                         <?php } ?>
                     </div>

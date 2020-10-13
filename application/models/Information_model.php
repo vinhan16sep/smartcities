@@ -41,6 +41,18 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_all_product_for_team($table, $id, $year = null) {
+        $this->db->select($table . '.*, users.company');
+        $this->db->from($table);
+        $this->db->join('users', $table . '.client_id = users.id');
+        $this->db->where($table . '.client_id', $id);
+        $this->db->where($table . '.year', $year);
+        $this->db->where($table . '.is_deleted', 0);
+        $this->db->order_by($table . '.id', "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function get_all_product_by_year($year = null) {
         $this->db->select('*');
         $this->db->from('product');
@@ -93,6 +105,18 @@ class Information_model extends CI_Model {
         if($year != null){
             $this->db->where('year', $year);
         }
+        $this->db->order_by("id", "desc");
+
+        return $this->db->get()->result_array();
+    }
+
+    public function get_product_for_team($table, $year = null) {
+        $this->db->select('*');
+        $this->db->from($table);
+        if($year != null){
+            $this->db->where('year', $year);
+        }
+        $this->db->where('is_deleted', 0);
         $this->db->order_by("id", "desc");
 
         return $this->db->get()->result_array();
@@ -196,9 +220,9 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function count_all_current_year_product($year) {
+    public function count_all_current_year_product($type, $year) {
         $query = $this->db->select('*')
-            ->from('product')
+            ->from($type)
             ->where('year', $year)
             ->get();
 
@@ -540,6 +564,28 @@ class Information_model extends CI_Model {
         }
         $this->db->limit($limit, $start);
         $this->db->order_by("company.id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
+    public function get_company_city_by_stype($stype, $year = null) {
+        if($stype == 1){
+            $table = 'city';
+        }else{
+            $table = 'company';
+        }
+
+        $this->db->select( $table . '.client_id, users.company as company, status.is_final as final');
+        $this->db->from($table);
+        $this->db->join('users', 'users.id = ' . $table . '.client_id');
+        $this->db->join('status', 'status.client_id = ' . $table . '.client_id');
+        if($year != null){
+            $this->db->where($table . '.year', $year);
+            $this->db->where('status.year', $year);
+            $this->db->where('status.is_final', 1);
+            $this->db->where('users.service_type', $stype);
+        }
+        $this->db->order_by($table . ".id", "desc");
 
         return $result = $this->db->get()->result_array();
     }
