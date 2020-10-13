@@ -17,11 +17,13 @@ class Dashboard extends Admin_Controller {
     	$total_users = $this->users_model->count_all_users_groups();
     	
     	/* total products */
-    	$total_products = $this->information_model->count_all_current_year_product($this->data['eventYear']);
+    	$this->data['total_products1'] = $this->information_model->count_all_current_year_product('product1', $this->data['eventYear']);
+    	$this->data['total_products2'] = $this->information_model->count_all_current_year_product('product2', $this->data['eventYear']);
+    	$this->data['total_products3'] = $this->information_model->count_all_current_year_product('product3', $this->data['eventYear']);
+    	$this->data['total_products4'] = $this->information_model->count_all_current_year_product('product4', $this->data['eventYear']);
 
     	$this->data['total_companys'] = $total_companys;
     	$this->data['total_users'] = $total_users;
-    	$this->data['total_products'] = $total_products;
         $this->render('admin/dashboard_view');
     }
 }

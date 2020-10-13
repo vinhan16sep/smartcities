@@ -75,7 +75,7 @@ class Product4 extends Client_Controller {
 
     public function remove_product($id = null){
         // Check if product has registered in table [team]
-        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear']);
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear'], $this->data['user']->service_type);
         if ( $check_product_in_team > 0 ) {
             $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('client/product4/products', 'refresh');

@@ -76,7 +76,8 @@ class Product extends Admin_Controller{
 
     public function remove_product($client_id, $id = null){
         // Check if product has registered in table [team]
-        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear']);
+        $user = $this->users_model->fetch_by_id($client_id);
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear'], $user['service_type']);
         if ( $check_product_in_team > 0 ) {
             $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('admin/product/index/' . $client_id, 'refresh');
