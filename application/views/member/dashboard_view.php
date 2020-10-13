@@ -16,7 +16,10 @@
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <?php foreach ($team as $key => $value): ?>
-                            <?php $team_id = $value['id'] ?>
+                            <?php 
+                                $team_id = $value['id'];
+                                $team_stype = $value['stype'];
+                            ?>
                             <div class="panel panel-info">
                                 <div class="panel-heading"><h4>Nhóm: <span style="color: red"><?php echo $value['name']; ?></span></h4></div>
                                 <div class="panel-body">
@@ -32,27 +35,28 @@
                                                                 <td style="font-weight:bold;color: #31708f; width: 5%">STT</td>
                                                                 <td style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
                                                                 <td style="font-weight:bold;color: #31708f;">Doanh nghiệp</td>
-                                                                <td style="font-weight:bold;color: #31708f; width: 23%">Nhóm lĩnh vực chính</td>
                                                                 <td style="font-weight:bold;color: #31708f; width: 7%">Trạng thái</td>
                                                                 <td style="font-weight:bold;color: #31708f; width: 7%">Điểm</td>
                                                                 <td style="font-weight:bold;color: #31708f; width: 7%">Điểm TB</td>
                                                                 <td style="text-align: center;font-weight:bold;color: #31708f; width: 8%">Thao Tác</td>
                                                             </tr>
                                                             <?php foreach ($value['product_list'] as $key => $value): ?>
-                                                                <?php
-                                                                    $main_services = array(
-                                                                        1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
-                                                                        2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                                                                        3 => 'Các sản phẩm, giải pháp phần mềm mới',
-                                                                        4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                                                                        5 => 'Các dịch vụ CNTT'
-                                                                    );
-                                                                ?>
                                                                 <tr>
                                                                     <td><?php echo $key + 1 ?></td>
-                                                                    <td><?php echo $value['name']; ?></td>
+                                                                    <?php
+                                                                    // echo '<pre>';
+                                                                    // print_r($value);die;
+                                                                        if($team_stype == 1){
+                                                                            echo "<td>" . $type_smart_city[$value['field_21']] . "</td>";
+                                                                        }elseif($team_stype == 2){
+                                                                            echo "<td>" . $value['field_1'] . "</td>";
+                                                                        }elseif($team_stype == 3){
+                                                                            echo "<td>" . $value['field_1'] . "</td>";
+                                                                        }elseif($team_stype == 4){
+                                                                            echo "<td>" . $value['name'] . "</td>";
+                                                                        }
+                                                                    ?>
                                                                     <td><?php echo $value['company_name']; ?></td>
-                                                                    <td><?php echo (!empty($value['main_service'])) ? $main_services[$value['main_service']] : '<span style="color: red;">(chưa có)</span>'; ?></td>
                                                                     <td><?php echo $value['is_rating'] == 1 ? '<i class="fa fa-check" aria-hidden="true" style="color:#5cb85c" data-toggle="tooltip" data-placement="right" title="Đã chấm điểm"></i>' : '<i class="fa fa-times" aria-hidden="true"style="color:#ac2925" data-toggle="tooltip" data-placement="right" title="Chưa chấm điểm"></i>' ?></td>
                                                                     <td style="font-weight: bold;"><?php echo $value['new_rating']; ?></td>
                                                                     <?php if($value['members_rating_total'] && $value['members_rating_total'] != ''){ ?>
@@ -61,13 +65,15 @@
                                                                         <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Dành cho trưởng nhóm</td>
                                                                     <?php } ?>
                                                                     <td style="text-align: center;">
-                                                                        <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin sản phẩm">
+                                                                        <a href="<?php echo base_url('member/product/detail/' . $value['id'] . '/' . $team_stype . '/' . $value['client_id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin sản phẩm">
                                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                                         </a>
-                                                                        <a href="<?php echo base_url('member/company/detail/' . $value['company_id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin doanh nghiệp">
+                                                                        <!-- TODO ===========================-->
+                                                                        <!-- <a href="<?php echo base_url('member/company/detail/' . $value['company_id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin doanh nghiệp">
                                                                             <i class="fa fa-building" aria-hidden="true"></i>
-                                                                        </a>
-                                                                        <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $value['main_service']); ?>" data-toggle="tooltip" data-placement="top" title="Chấm điểm">
+                                                                        </a> -->
+                                                                        <!-- TODO ===========================-->
+                                                                        <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $team_stype); ?>" data-toggle="tooltip" data-placement="top" title="Chấm điểm">
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
                                                                         </a>
                                                                         <?php if ($this->ion_auth->user()->row()->member_role == 'leader'): ?>

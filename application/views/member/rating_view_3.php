@@ -22,6 +22,7 @@ $arrRate = [];
         $arrRate[$key] = $val;
     }
 // $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
+// $total = isset($arrRate['8']) ? $total + $arrRate['8'] : $total;
 
 $is_readonly = ($rating['is_submit'] == 1) ? "readonly" : "";
 $is_submit = ($rating['is_submit'] == 1) ? 1 : 0;
@@ -36,25 +37,16 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                         <div class="post">
                             <table class="table table-bordered" style="width: 100%">
                                 <tr>
-                                    <td  style="width: 20%"><h3>Sản phẩm: </h3></td>
-                                    <td><h3><?php echo $detail['field_1']; ?></h3></td>
+                                    <td  style="width: 20%"><h4>Tên dự án BĐS: </h4></td>
+                                    <td><h4><?php echo $detail['field_1']; ?></h4></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Doanh nghiệp: </h4></td>
+                                    <td><h4>Đơn vị: </h4></td>
                                     <td><h4><?php echo $company['company']; ?></h4></td>
                                 </tr>
                                 <tr>
-                                    <?php
-                                    $main_services = array(
-                                        1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
-                                        2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                                        3 => 'Các sản phẩm, giải pháp phần mềm mới',
-                                        4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                                        5 => 'Các dịch vụ CNTT'
-                                    );
-                                    ?>
-                                    <td><h4>Nhóm sản phẩm </h4></td>
-                                    <td><h4><?php echo $main_service . ': ' . $main_services[$main_service]; ?></h4></td>
+                                    <td><h4>HẠNG MỤC </h4></td>
+                                    <td><h4>DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP</h4></td>
                                 </tr>
                             </table>
                         </div>
@@ -247,7 +239,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 </td>
                             </tr>
                             <tr>
-                                <td>Chất lượng các tiện ích cho dân cư</td>
+                                <td>Chất lượng các tiện ích cho DN</td>
                                 <td>15</td>
                                 <td>
                                     <?php
@@ -279,7 +271,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
 
                             <tr>
                                 <td rowspan="2">4</td>
-                                <td rowspan="2">Bảo mật, an toàn thông tin, an ninh an toàn cho toà nhà và dân cư</td>
+                                <td rowspan="2">Bảo mật, an toàn thông tin, an ninh an toàn</td>
                                 <td rowspan="2">10</td>
                                 <td rowspan="2">
                                     <?php
@@ -305,7 +297,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 </td>
                             </tr>
                             <tr>
-                                <td>An ninh cho toà nhà và dân cư</td>
+                                <td>An ninh an toàn cho doanh nghiệp, tổ chức, người làm việc</td>
                                 <td>60</td>
                                 <td>
                                     <?php
@@ -425,9 +417,11 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                         </table>
                     </div>
                     <!-- /.tab-content -->
+                    <input type="hidden" name="stype" value="<?php echo $main_service ?>" />
                 </div>
                 <div class="right">
                     <?php
+
                     if(!$rating || ($rating && $is_submit == 0)){
                         echo '<button type="button" class="btn btn-info temporarily-saved" style="width:40%;">Lưu tạm</button>';
                         echo form_submit('submit', 'Gửi điểm', 'class="btn btn-primary pull-right" style="width:40%;"');
@@ -491,13 +485,12 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
         var form = $(this);
         var url = form.attr('action');
 
-        for(let i = 1; i <= 7; i++){
+        for(let i = 1; i <= 8; i++){
             if($('#' + i).val() == ''){
                 alert('Chưa chấm hết tất cả các mục');
                 return false;
             }
         }
-
         if(confirm("Chắc chắn gửi điểm?")){
             $.ajax({
                 type: "GET",
@@ -514,6 +507,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                 }
             });
         }
+
         // $('rating1Form').unbind('submit').submit();
         e.preventDefault();
     });
@@ -528,7 +522,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                 let data = JSON.parse(result);
                 if(data.name != undefined){
                     alert('Lưu tạm điểm thành công');
-                    // window.location.reload();
+                    window.location.reload();
                 }else{
                     alert(data.message)
                 }
@@ -537,5 +531,4 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
         // $('rating1Form').unbind('submit').submit();
         e.preventDefault();
     })
-
 </script>

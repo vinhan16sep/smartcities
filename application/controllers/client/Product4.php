@@ -25,25 +25,6 @@ class Product4 extends Client_Controller {
 
         $this->data['user'] = $this->ion_auth->user()->row();
         $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id, $this->data['eventYear']);
-        $this->data['service_types'] = [
-            '1' => 'Nhóm 1: Các thành phố thông minh',
-            '2' => 'Nhóm 2: Các dự án BĐS thông minh',
-            '3' => 'Nhóm 3: Các dự án BĐS Công nghiệp thông minh',
-            '4' => 'Nhóm 4: Giải pháp công nghệ số cho thành phố thông minh',
-        ];
-        $this->data['categories'] = [
-            '1' => 'Khu Công nghệ thông minh',
-            '2' => 'Khu Công nghệ cao thông minh',
-            '3' => 'Khu Công nghiệp thông minh',
-            '4' => 'Khu chế xuất thông minh'
-        ];
-
-        $this->data['attached_legal_documents'] = [
-            '1' => 'Quyết định thành lập KCN',
-            '2' => 'Giấy chứng nhận đầu tư',
-            '3' => 'Quyết định phê duyệt quy hoạch 1:500',
-            '4' => 'Các giấy phép khác',
-        ];
         $this->data['ctrl_name'] = 'product' . ($this->data['user_service_type']);
     }
 

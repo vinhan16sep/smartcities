@@ -91,9 +91,9 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_personal_products($ids){
+    public function get_personal_products($stype, $ids){
         $query = $this->db->select('*')
-            ->from('product')
+            ->from('product' . $stype)
             ->where_in('id', $ids)
             ->order_by("id", "desc");
         return $query->get()->result_array();
