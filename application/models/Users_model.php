@@ -91,6 +91,16 @@ class Users_model extends CI_Model{
 
         if($query->num_rows() > 0){
             return $query->row_array();
+    }
+      
+    public function fetch_by_array($param = array()){
+        $query = $this->db->select('*')
+            ->from('users')
+            ->where($param)
+            ->get();
+
+        if($query->num_rows() > 0){
+            return $query->row();
         }
 
         return false;
