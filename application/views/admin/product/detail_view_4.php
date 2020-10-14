@@ -55,14 +55,6 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-calendar margin-r-5"></i> Ngày thương mại hoá ra thị trường</a> <p class="pull-right"><?php echo $product['open_date']; ?></p>
                                 </li>
-                                <li class="list-group-item">
-                                    <?php if ( $product['file'] != "" && filesize('assets/upload/file/' . $product['file']) ): ?>
-                                        <a href="<?php echo base_url('assets/upload/file/' . $product['file']) ?>" download><i class="fa fa-file-excel-o margin-r-5" aria-hidden="true"></i> File mô tả chi tiết sản phẩm<p class="pull-right">Click để tải file</p></a>
-                                    <?php else: ?>
-                                        <p>Chưa có File mô tả chi tiết sản phẩm</p>
-                                    <?php endif ?>
-                                    
-                                </li>
                             </ul>
                         </div>
                     </div>
