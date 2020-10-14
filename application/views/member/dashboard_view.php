@@ -15,7 +15,10 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
-                        <?php foreach ($team as $key => $value): ?>
+                        <?php foreach ($team as $key => $value): 
+                                // echo '<pre>';
+                                // print_r($team);die;
+                            ?>
                             <?php 
                                 $team_id = $value['id'];
                                 $team_stype = $value['stype'];
@@ -69,9 +72,15 @@
                                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                                         </a>
                                                                         <!-- TODO ===========================-->
-                                                                        <!-- <a href="<?php echo base_url('member/company/detail/' . $value['company_id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin doanh nghiệp">
-                                                                            <i class="fa fa-building" aria-hidden="true"></i>
-                                                                        </a> -->
+                                                                        <?php if($team_stype == 1): ?>
+                                                                            <a href="<?php echo base_url('member/city/detail/' . $value['companyId'] . '/' . $value['identity']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin doanh nghiệp">
+                                                                                <i class="fa fa-building" aria-hidden="true"></i>
+                                                                            </a>
+                                                                        <?php else: ?>
+                                                                            <a href="<?php echo base_url('member/company/detail/' . $value['companyId'] . '/' . $value['identity']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin doanh nghiệp">
+                                                                                <i class="fa fa-building" aria-hidden="true"></i>
+                                                                            </a>
+                                                                        <?php endif ?>
                                                                         <!-- TODO ===========================-->
                                                                         <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $team_stype); ?>" data-toggle="tooltip" data-placement="top" title="Chấm điểm">
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>

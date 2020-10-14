@@ -92,10 +92,12 @@ class Company extends Member_Controller{
          $this->render('member/company/list_company_view');
     }
 
-	public function detail($id){
+	public function detail($id, $identity){
         $this->load->model('users_model');
-        $company = $this->information_model->fetch_company_by_id($id);
-        $this->data['company'] = $company;
+        $user = $this->users_model->fetch_by_identity($identity);
+        $this->data['user_service_type'] = $user['service_type'];
+        $this->data['selectedYear'] = $this->data['eventYear'];
+        $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $identity, $this->data['eventYear']);
 		$this->render('member/company/detail_company_view');
 	}
 
