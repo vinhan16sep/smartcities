@@ -2,6 +2,7 @@
 /**
 * 
 */
+
 class Users_model extends CI_Model{
 	
 	function __construct(){
@@ -91,6 +92,7 @@ class Users_model extends CI_Model{
 
         if($query->num_rows() > 0){
             return $query->row_array();
+        }
     }
       
     public function fetch_by_array($param = array()){
