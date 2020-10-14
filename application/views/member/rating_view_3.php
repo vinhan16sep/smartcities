@@ -21,7 +21,7 @@ $arrRate = [];
     foreach($rate as $key => $val){
         $arrRate[$key] = $val;
     }
-// $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
+$total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] : 0;
 // $total = isset($arrRate['8']) ? $total + $arrRate['8'] : $total;
 
 $is_readonly = ($rating['is_submit'] == 1) ? "readonly" : "";

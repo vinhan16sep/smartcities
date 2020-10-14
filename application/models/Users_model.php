@@ -83,6 +83,19 @@ class Users_model extends CI_Model{
         return false;
     }
 
+    public function fetch_by_identity($identity = ''){
+        $query = $this->db->select('*')
+            ->from('users')
+            ->where('username', $identity)
+            ->get();
+
+        if($query->num_rows() > 0){
+            return $query->row_array();
+        }
+
+        return false;
+    }
+
     public function fetch_member_by_id($id = ''){
         $query = $this->db->select('*')
             ->from('users')

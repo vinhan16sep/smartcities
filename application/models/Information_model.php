@@ -91,11 +91,15 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_personal_products($stype, $ids){
-        $query = $this->db->select('*')
-            ->from('product' . $stype)
-            ->where_in('id', $ids)
-            ->order_by("id", "desc");
+    public function get_personal_products($stype, $ids, $year){
+        $table = 'product' . $stype;
+        $company_city = ($stype == 1) ? 'city' : 'company';
+        $query = $this->db->select($table . '.*, ' . $company_city . '.id AS companyId')
+            ->from($table)
+            ->join($company_city, $table . '.client_id = ' . $company_city . '.client_id')
+            ->where($company_city . '.year', $year)
+            ->where_in($table . '.id', $ids)
+            ->order_by($table . ".id", "desc");
         return $query->get()->result_array();
     }
 
@@ -285,6 +289,23 @@ class Information_model extends CI_Model {
         }
 
         return false;
+    }
+
+    public function fetch_product_by_id_for_leader($type, $id, $stype, $year){
+        $table = 'product' . $stype;
+        $company_city = ($stype == 1) ? 'city' : 'company';
+        $query = $this->db->select($table . '.*, ' . $company_city . '.id AS companyId')
+            ->from($table)
+            ->join($company_city, $table . '.client_id = ' . $company_city . '.client_id')
+            ->where($company_city . '.year', $year)
+            ->where($table . '.id', $id)
+            ->get();
+
+            if($query->num_rows() == 1){
+                return $query->row_array();
+            }
+    
+            return false;
     }
 
     public function fetch_user_by_id($id){

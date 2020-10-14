@@ -67,7 +67,7 @@ class New_rating extends Member_Controller{
         $this->load->model('users_model');
         $user = $this->ion_auth->user()->row();
         if ($user->member_role == 'manager') {
-            $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $detail['id'], $this->input->get('member_id'));
+            $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $detail['id'], $this->input->get('member_id'), $stype);
         }else{
             $this->load->model('users_model');
             $user_id = $user->id;
@@ -187,7 +187,7 @@ class New_rating extends Member_Controller{
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
         }else{
-            $check_rating_temp = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $member_id);
+            $check_rating_temp = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $member_id, $stype);
 
             if ( $check_rating_temp ) {
                 $data = array(
@@ -278,6 +278,7 @@ class New_rating extends Member_Controller{
         $request = $this->input->get();
         $product_id = $request['product'];
         $member_id = $request['member'];
+        $stype = $request['stype'];
 
         if ($this->ion_auth->user()->row()->member_role == 'manager' || $this->ion_auth->user()->row()->member_role == 'leader') {
             $data = array(

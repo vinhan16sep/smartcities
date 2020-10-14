@@ -67,7 +67,7 @@ class List_user extends Member_Controller {
                     $members = $this->information_model->get_personal_members($member_ids);
                     if ($members) {
                     	foreach ($members as $key => $value) {
-                    		$is_rating = $this->new_rating_model->get_rating_exist_by_product_id('new_rating', $product_id, $value['id']);
+                    		$is_rating = $this->new_rating_model->get_rating_exist_by_product_id('new_rating', $product_id, $value['id'], $team['stype']);
                     		if ( $is_rating) {
                     			$members[$key]['is_rating'] = 1;
                     			$members[$key]['total'] = $is_rating['total'];
@@ -84,12 +84,13 @@ class List_user extends Member_Controller {
 
             }
     	}
-    	$product = $this->information_model->fetch_by_id('product', $product_id);
+    	$product = $this->information_model->fetch_product_by_id_for_leader('product', $product_id, $team['stype'], $this->data['eventYear']);
         $company_name = $this->users_model->fetch_by_id($product['client_id']);
 
         $this->data['team'] = $team;
         $this->data['team_rating_total'] = ($rated_members > 0) ? $team_rating_total / $rated_members : 0;
         $this->data['company_name'] = $company_name;
+        $this->data['stype'] = $team['stype'];
         $this->data['product'] = $product;
     	$this->data['list_team'] = $list_team;
     	$this->data['product_id'] = $product_id;

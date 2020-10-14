@@ -6,25 +6,35 @@
     <section class="content">
         <table class="table table-bordered" style="width: 100%">
             <tr>
-                <td  style="width: 20%"><h3>Sản phẩm: </h3></td>
-                <td><h3><?php echo $product['name']; ?></h3></td>
+                <?php if($stype == 1): ?>
+                    <td  style="width: 20%"><h4>Lĩnh vực đăng ký: </h4></td>
+                    <td><h4><?php echo $type_smart_city[$product['field_21']]; ?></h4></td>
+                <?php elseif($stype == 2): ?>
+                    <td  style="width: 20%"><h4>Tên dự án BĐS: </h4></td>
+                    <td><h4><?php echo $product['field_1']; ?></h4></td>
+                <?php elseif($stype == 3): ?>
+                    <td  style="width: 20%"><h4>Tên dự án BĐS: </h4></td>
+                    <td><h4><?php echo $product['field_1']; ?></h4></td>
+                <?php else: ?>
+                    <td  style="width: 20%"><h4>Sản phẩm: </h4></td>
+                    <td><h4><?php echo $product['name']; ?></h4></td>
+                <?php endif; ?>
             </tr>
             <tr>
-                <td><h4>Doanh nghiệp: </h4></td>
+                <td><h4>Đơn vị: </h4></td>
                 <td><h4><?php echo $company_name['company']; ?></h4></td>
             </tr>
             <tr>
-                <?php
-                $main_services = array(
-                    1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
-                    2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                    3 => 'Các sản phẩm, giải pháp phần mềm mới',
-                    4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                    5 => 'Các dịch vụ CNTT'
-                );
-                ?>
-                <td><h4>Nhóm sản phẩm </h4></td>
-                <td><h4><?php echo ($main_service) ? $main_services[$main_service] : "Chưa chọn"; ?></h4></td>
+                <td><h4>HẠNG MỤC </h4></td>
+                <?php if($stype == 1): ?>
+                    <td><h4>ĐÔ THỊ, THÀNH PHỐ THÔNG MINH</h4></td>
+                <?php elseif($stype == 2): ?>
+                    <td><h4>DỰ ÁN BẤT ĐỘNG SẢN</h4></td>
+                <?php elseif($stype == 3): ?>
+                    <td><h4>DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP</h4></td>
+                <?php else: ?>
+                    <td><h4>SẢN PHẨM, GIẢI PHÁP PHẦN MỀM</h4></td>
+                <?php endif; ?>
             </tr>
             <tr>
                 <td  style="width: 20%"><h4>Nhóm: </h4></td>
@@ -94,13 +104,14 @@
 
 <script>
     $('.openRating').click(function(){
-
+        let stype = '<?php echo $stype ?>';
         $.ajax({
             type: "GET",
             url: "<?php echo base_url('member/new_rating/open_rating'); ?>",
             data: {
                 product: $(this).data('product'),
-                member: $(this).data('member')
+                member: $(this).data('member'),
+                stype: stype
             },
             success: function(result){
                 let data = JSON.parse(result);

@@ -29,9 +29,10 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
-    public function update_by_member_id_and_product_id($member_id='', $product_id = '', $data){
+    public function update_by_member_id_and_product_id($member_id='', $product_id = '', $data, $stype){
         $this->db->where('member_id', $member_id);
         $this->db->where('product_id', $product_id);
+        $this->db->where('stype', $stype);
         $this->db->update('new_rating', $data);
 
         if($this->db->affected_rows() == 1){
@@ -74,11 +75,12 @@ class New_rating_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function fetch_by_product_id_and_logged_in_user($type, $id, $user_id){
+    public function fetch_by_product_id_and_logged_in_user($type, $id, $user_id, $stype){
         $query = $this->db->select('*')
             ->from('new_rating')
             ->where('product_id', $id)
             ->where('member_id', $user_id)
+            ->where('stype', $stype)
             ->get();
 
         if($query->num_rows() == 1){
@@ -87,10 +89,11 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
-    public function fetch_by_product_id_and_member_id($product_id, $user_id){
+    public function fetch_by_product_id_and_member_id($product_id, $user_id, $stype){
         $query = $this->db->select('*')
             ->from('new_rating')
             ->where('product_id', $product_id)
+            ->where('stype', $stype)
             ->where('member_id', $user_id)
             ->get();
 
@@ -100,10 +103,11 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
-    public function check_rating_exist($table, $product_id, $member_id){
+    public function check_rating_exist($table, $product_id, $member_id, $stype){
         $query = $this->db->select('*')
             ->from($table)
             ->where('product_id', $product_id)
+            ->where('stype', $stype)
             ->where('member_id', $member_id)
             ->where('is_submit', 1)
             ->get();
@@ -139,11 +143,12 @@ class New_rating_model extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
-    public function get_rating_exist_by_product_id($table, $product_id, $user_id){
+    public function get_rating_exist_by_product_id($table, $product_id, $user_id, $stype){
         $query = $this->db->select('*')
             ->from($table)
             ->where('product_id', $product_id)
             ->where('member_id', $user_id)
+            ->where('stype', $stype)
             ->where('is_submit', 1)
             ->get();
         return $query->row_array();
