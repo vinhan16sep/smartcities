@@ -23,6 +23,8 @@
                                 <th>Logo</th>
                                 <th>Người quản lý</th>
                                 <th>Trạng thái</th>
+                                <th>Sản phẩm</th>
+                                <th>Thông tin cơ bản</th>
                                 <th style="text-align: center;">Thao Tác</th>
                                 <?php foreach ($companies as $key => $value): ?>
                                     <tr>
@@ -58,6 +60,12 @@
                                         <?php }else{ ?>
                                             <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                         <?php } ?>
+                                        <td style="text-align: center;">
+                                            <a href="<?php echo base_url('admin/product/index/' . $requestYear.'/' . $value['identity'] . '/'.$this->uri->segment(5)) ?>" class="btn btn-info">Thông tin SP</a>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <a href="<?php echo base_url('admin/information/detail/' . $requestYear. '/' . $value['identity'] . '/'.$this->uri->segment(5)) ?>" class="btn btn-info">Thông tin cơ bản</a>
+                                        </td>
                                         <td style="text-align: center;">
                                             <a href="<?php echo base_url('admin/company/detail/' . $value['id'] . '/' . $requestYear . '/' . $stype) ?>" class="btn btn-info">Thông tin DN</a>
                                             <!-- <a href="<?php echo base_url('admin/product/index/' . $value['client_id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin SP/DV</a> -->
