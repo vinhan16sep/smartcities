@@ -32,6 +32,44 @@ class Product1_model extends CI_Model {
         return $query->num_rows();
     }
 
+
+
+    public function count_product_by_identity($identity, $year) {
+        $query = $this->db->select('*')
+            ->from('product1')
+            ->where('identity', $identity)
+            ->where('year', $year)
+            ->where('is_deleted', 0)
+            ->get();
+
+        return $query->num_rows();
+    }
+    
+    public function get_all_product_for_client_by_identity($identity, $year,$limit = NULL, $start = NULL, $table = 'product') {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where('identity', $identity);
+        $this->db->where('year', $year);
+        $this->db->where('is_deleted', 0);
+        $this->db->limit($limit, $start);
+        $this->db->order_by("id", "desc");
+        return $result = $this->db->get()->result_array();
+    }
+    public function fetch_product_by_identity($identity, $year, $id, $type){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('identity', $identity)
+            ->where('year', $year)
+            ->where('id', $id)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+        return false;
+    }
+
     function getAllProductYears(){
         $query = $this->db->select('year')
             ->from('product1')
