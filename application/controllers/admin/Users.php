@@ -21,13 +21,14 @@ class Users extends Admin_Controller
         $this->load->model('status_model');
         $this->load->model('users_model');
         $this->data['page_title'] = 'Quản lý user';
+        $stype = $this->input->get('stype');
 
         $keywords = '';
         if($this->input->get('search')){
             $keywords = trim($this->input->get('search'));
         }
         $this->data['keywords'] = $keywords;
-        $total_rows  = $this->users_model->count_search($group_id, $keywords);
+        $total_rows  = $this->users_model->count_search($group_id, $keywords, $stype);
         $this->load->library('pagination', TRUE);
         $config = array();
         $base_url = base_url('admin/users/index/' . $group_id);
@@ -39,7 +40,7 @@ class Users extends Admin_Controller
         $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) - 1 : 0;
         $this->pagination->initialize($config);
         $this->data['page_links'] = $this->pagination->create_links();
-        $users = $this->users_model->get_all_with_pagination_search($group_id, $per_page, $per_page*$this->data['page'], $keywords);
+        $users = $this->users_model->get_all_with_pagination_search($group_id, $per_page, $per_page*$this->data['page'], $keywords, $stype);
         if ($group_id == 3) {
             foreach ($users as $key => $value) {
                 $company = $this->information_model->fetch_client_id($value['id']);

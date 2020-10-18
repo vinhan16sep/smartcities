@@ -35,6 +35,7 @@
                                 <td><b><a href="#">E-Mail</a></b></td>
                                 <td style="width: 10%;"><b><a href="#">Thời gian tạo</a></b></td>
                                 <?php if ($this->uri->segment(4) == 3): ?>
+                                <td><b><a href="#">Nhóm</a></b></td>
                                 <td><b><a href="#">T/t cơ bản</a></b></td>
                                 <td><b><a href="#">T/t doanh nghiệp</a></b></td>
                                 <td><b><a href="#">T/t sản phẩm</a></b></td>
@@ -57,6 +58,7 @@
                                     <td><?php echo $user['phone']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s',$user['created_on']); ?></td>
+                                    <td><strong style="color:red;"><?php echo $user['service_type']; ?></strong></td>
                                     <?php if ($this->uri->segment(4) == 3): ?>
                                     <td style="text-align:center"><?php echo ($user['status']['is_information'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                     <td style="text-align:center"><?php echo ($user['status']['is_company'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>

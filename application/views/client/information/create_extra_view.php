@@ -15,7 +15,7 @@
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
-                    <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA DOANH NGHIỆP</h2>
+                    <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA ĐƠN VỊ</h2>
                 </div>
                 <div class="form-group">
                     <h3 style="text-align:center;">Tên công ty: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tên người đại diện pháp luật <span style="color: red">(*)</span>', 'legal_representative');
+                            echo form_label('Họ và tên Lãnh đạo <span style="color: red">(*)</span>', 'legal_representative');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">

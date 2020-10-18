@@ -34,6 +34,7 @@ class Dashboard extends Client_Controller {
     }
 
     public function index(){
+        
         $this->data['user'] = $this->ion_auth->user()->row();
         $this->data['information_submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
         if ($this->data['user']->service_type != 1) {

@@ -54,9 +54,16 @@ class Company extends Client_Controller {
     }
 
     public function create() {
+        
         $this->load->helper('form');
         $this->load->library('form_validation');
-
+        
+        
+        $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
+        if(!empty($this->data['company'])){
+            redirect('client/company/edit?year='.$this->input->get('year'), 'refresh');
+        }
+        
         if($this->input->post('submit') == 'Hoàn thành') {
             // VALIDATION
             $this->validate_company_complete();

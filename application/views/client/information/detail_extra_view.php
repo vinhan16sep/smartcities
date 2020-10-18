@@ -37,7 +37,7 @@
                                 </div>
                             <?php endif ?>
                             <div class="form-group">
-                                <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA DOANH NGHIỆP</h2>
+                                <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA ĐƠN VỊ</h2>
                                 <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc"><?php echo $user->username; ?></span></h3>
                                 <div style="margin: auto; width: 100%; text-align: center;">
                                     <?php if ( $submitted['avatar'] && file_exists('assets/upload/avatar/' . $submitted['avatar']) ): ?>
@@ -55,7 +55,7 @@
                                 </li>
 
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-user margin-r-5"></i> Tên người đại diện pháp luật</a> <p class="pull-right"><?php echo $submitted['legal_representative']; ?></p>
+                                    <a><i class="fa fa-user margin-r-5"></i> Họ và tên lãnh đạo</a> <p class="pull-right"><?php echo $submitted['legal_representative']; ?></p>
                                 </li>
 
                                 <li class="list-group-item">

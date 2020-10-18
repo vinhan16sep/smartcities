@@ -30,7 +30,7 @@
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
-                            <h2 style="text-align:center;">Thông tin doanh nghiệp</h2>
+                            <h2 style="text-align:center;">Thông tin Đơn vị</h2>
                             <h3 style="color:red; text-align:center;">NĂM <?php echo $company['year']; ?></h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">

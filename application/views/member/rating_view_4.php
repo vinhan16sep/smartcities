@@ -82,7 +82,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             <tbody>
                             <tr>
                                 <td rowspan="2">1</td>
-                                <td rowspan="2">Tính độc đáo / sáng tạo</td>
+                                <td rowspan="2">Tính độc đáo</td>
                                 <td rowspan="2">10</td>
                                 <td rowspan="2">
                                     <?php
@@ -240,7 +240,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     }
                                     ?>
                                 </td>
-                                <td>Đáp ứng nhu cầu người dùng</td>
+                                <td>Khả năng đáp ứng nhu cầu người dùng</td>
                                 <td>50</td>
                                 <td>
                                     <?php
@@ -286,7 +286,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
 
                             <tr>
                                 <td rowspan="3">5</td>
-                                <td rowspan="3">Chất lượng dịch vụ</td>
+                                <td rowspan="3">Công nghệ, chất lượng sản phẩm</td>
                                 <td rowspan="3">15</td>
                                 <td rowspan="3">
                                     <?php
@@ -298,7 +298,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     }
                                     ?>
                                 </td>
-                                <td>Công nghệ tiên tiến/tỉ lệ lỗi/sự hài lòng của khách hàng</td>
+                                <td>Công nghệ tiên tiến</td>
                                 <td>40</td>
                                 <td>
                                     <?php
@@ -312,7 +312,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 </td>
                             </tr>
                             <tr>
-                                <td>Các tiêu chuẩn áp dụng</td>
+                                <td>Các tiêu chuẩn/quy trình áp dụng</td>
                                 <td>30</td>
                                 <td>
                                     <?php
@@ -326,7 +326,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 </td>
                             </tr>
                             <tr>
-                                <td>Chăm sóc khách hàng và hậu mãi</td>
+                                <td>Sự ổn định và độ tin cậy/sự hài lòng của khách hàng</td>
                                 <td>30</td>
                                 <td>
                                     <?php
@@ -356,7 +356,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     }
                                     ?>
                                 </td>
-                                <td>Doanh thu dịch vụ</td>
+                                <td>Doanh thu sản phẩm</td>
                                 <td>40</td>
                                 <td>
                                     <?php

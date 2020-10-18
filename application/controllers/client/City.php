@@ -62,6 +62,11 @@ class City extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
+        $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('city', $this->data['user']->username, $this->input->get('year'));
+        if(!empty($this->data['company'])){
+            redirect('client/city/edit?year='.$this->input->get('year'), 'refresh');
+        }
+        
         if($this->input->post('submit') == 'Hoàn thành') {
             // VALIDATION
             $this->validate_company_complete();

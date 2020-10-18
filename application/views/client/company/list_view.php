@@ -54,7 +54,7 @@
                                                     <td style="text-align: center;width:110px;">
                                                         <a style="width:132px;" href="<?php echo base_url('client/company/edit?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Sửa thông tin</a>
                                                     </td>
-                                                    <?php } ?>
+                                                    <?php break; } ?>
                                                 <?php
                                                 }else{
                                                     echo '<td>Không thể sửa</td>';

@@ -51,20 +51,46 @@
                         </ul>
                     </li>
                 <?php } ?>
+                <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
+                <li class="active">
+                    <a href=""> THông tin tài khoản
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index/3?stype=1'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Nhóm 1
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index/3?stype=2'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Nhóm 2
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index/3?stype=3'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Nhóm 3
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index/3?stype=4'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Nhóm 4
+                                </a>
+                            </li>
+                    </ul>
+                </li>
+                <?php } ?>
                 <li class="active">
                     <a href=""> Doanh nghiệp
                         <span class="pull-right-container">
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
-                            <li class="active">
-                                <a href="<?php echo base_url('admin/users/index/3'); ?>">
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                    Tài khoản
-                                </a>
-                            </li>
-                        <?php } ?>
                         <li class="active">
                             <a href="<?php echo base_url('admin/company/index/2020/1'); ?>">
                                 <!-- <i class="fa fa-minus" aria-hidden="true"></i> -->
