@@ -286,7 +286,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
 
                             <tr>
                                 <td rowspan="3">5</td>
-                                <td rowspan="3">Công nghệ, chất lượng sản phẩm</td>
+                                <td rowspan="3">Công nghệ,  chất lượng sản phẩm</td>
                                 <td rowspan="3">15</td>
                                 <td rowspan="3">
                                     <?php

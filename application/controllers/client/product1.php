@@ -58,6 +58,12 @@ class Product1 extends Client_Controller {
 
     public function detail_product($id = NULL){
         $this->data['product'] = $this->product1_model->fetch_product_by_user_and_id($this->data['ctrl_name'], $this->data['user']->id, $id);
+        if(!empty($this->data['product'])){
+            foreach($this->data['product'] as $key => $value){
+                $this->data['product'][$key] = htmlspecialchars_decode(htmlspecialchars_decode($value));
+            }
+        }
+        
         $this->render('client/product1/detail_view');
     }
 

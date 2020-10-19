@@ -12,7 +12,7 @@
                     <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA ĐƠN VỊ</h2>
                 </div>
                 <div class="form-group">
-                    <h3 style="text-align:center;">Tên công ty: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
+                    <h3 style="text-align:center;">Tên đơn vị: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
                     <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc;"><?php echo $user->username; ?></span></h3>
                     <div style="margin: auto; width: 100%; text-align: center;">
                         <?php if ( $information_submitted['avatar'] && file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Logo công ty <br /><span style="color: #f0ad4e">(*.jpg, *.jpeg, *.png, *.gif, file < 1200Kb)</span>', 'avatar');
+                            echo form_label('Logo đơn vị <br /><span style="color: #f0ad4e">(*.jpg, *.jpeg, *.png, *.gif, file < 1200Kb)</span>', 'avatar');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -209,11 +209,11 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Link upload hồ sơ của DN', 'link');
+                            echo form_label('Link upload hồ sơ của đơn vị', 'link');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-xs-12">
-                            <p>Doanh nghiệp vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia (Phiếu đăng ký, Giấy phép kinh doanh, logo, profile DN&SP (nếu có)) vào ô dưới đây</p>
+                            <p>Quý đơn vị vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia (Phiếu đăng ký, Giấy phép kinh doanh (đối với DN), logo, profile DN&SP (nếu có)) vào ô dưới đây</p>
                             <?php  echo form_error('link', '<div class="error">', '</div>'); ?>
                             <div class="input-group link">
                                 <?php echo form_input('link', set_value('link', $extra['link']), 'class="form-control" aria-describedby="basic-addon2" placeholder="Nhập Link phiếu đăng ký tại đây" '); ?>

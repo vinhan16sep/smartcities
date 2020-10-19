@@ -30,7 +30,7 @@
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
-                            <h4 style="text-align: center;"><?php echo empty($companies) ? 'THÔNG TIN DOANH NGHIỆP' : 'Danh sách thông tin chi tiết của đơn vị qua các năm' ?></h4>
+                            <h4 style="text-align: center;"><?php echo empty($companies) ? 'Thông tin đơn vị' : 'Danh sách thông tin chi tiết của đơn vị qua các năm' ?></h4>
                             <?php if ( !empty($companies) ): ?>
                                 <div class="row">
                                     <div class="col-lg-12" style="margin-top: 10px;">

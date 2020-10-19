@@ -18,7 +18,7 @@
                                     <a><i class="fa fa-circle margin-r-5"></i> Tên dự án BĐS</a> <br><p class="" style="padding-left:20px;"><?php echo $product['field_1']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-circle margin-r-5"></i> Hạng mục đăng ký tham gia</a> <br><p class="" style="padding-left:20px;"><?php echo !empty($categories[$product['field_2']]) ? $categories[$product['field_2']] : 'Chưa xác định'; ?></p>
+                                    <a><i class="fa fa-circle margin-r-5"></i> Hạng mục đăng ký tham gia</a> <br><p class="" style="padding-left:20px;"><?php echo !empty($categories_bds[$product['field_2']]) ? $categories_bds[$product['field_2']] : 'Chưa xác định'; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-circle margin-r-5"></i> Hồ sơ pháp lý gửi kèm</a> <br>

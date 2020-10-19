@@ -55,6 +55,12 @@ class MY_Controller extends CI_Controller {
             '4' => 'Khu chế xuất thông minh'
         ];
 
+        $this->data['categories_bds'] = [
+            '1' => 'Dự án bất động sản thông minh',
+            '2' => 'Toà nhà thông minh',
+            '3' => 'Khu đô thị thông minh',
+        ];
+
         $this->data['attached_legal_documents_stype2'] = [
             '1' => 'Phê duyệt quy hoạch 1/500',
             '2' => 'Sổ đất',

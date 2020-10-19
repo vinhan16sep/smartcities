@@ -198,7 +198,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
 
                             <tr>
                                 <td rowspan="3">3</td>
-                                <td rowspan="3">Các hoạt động ươm tạo tạo, hỗ trợ/thúc đẩy khởi nghiệp</td>
+                                <td rowspan="3">Các hoạt động ươm tạo, hỗ trợ/thúc đẩy khởi nghiệp</td>
                                 <td rowspan="3">20</td>
                                 <td rowspan="3">
                                     <?php
@@ -238,7 +238,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 </td>
                             </tr>
                             <tr>
-                                <td>Các tổ chức accelerator</td>
+                                <td>Các hoạt động hợp tác quốc tế</td>
                                 <td>20</td>
                                 <td>
                                     <?php
