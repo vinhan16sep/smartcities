@@ -146,14 +146,16 @@ class Users_model extends CI_Model{
         return false;
     }
 
-    public function count_search($group_id = null, $keywords = '', $stype){
+    public function count_search($group_id = null, $keywords = '', $stype= ''){
 
         $this->db->select('*')
         ->join('users_groups', 'users.id = users_groups.user_id')
         ->from('users')
         ->where('email !=', 'admin@admin.com')
-        ->where('users.service_type', $stype)
         ->where('users_groups.group_id', $group_id);
+        if(!empty($stype)){
+            $this->db->where('users.service_type', $stype);
+        }
 
         if($keywords != ''){
             $this->db->where('(username LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%" OR email LIKE "%' . $keywords . '%")');
@@ -162,14 +164,16 @@ class Users_model extends CI_Model{
         return $result = $this->db->get()->num_rows();
     }
 
-    public function get_all_with_pagination_search($group_id = null, $limit = NULL, $start = NULL, $keywords = null, $stype) {
+    public function get_all_with_pagination_search($group_id = null, $limit = NULL, $start = NULL, $keywords = null, $stype = '') {
         $this->db->select('*');
         $this->db->join('users_groups', 'users.id = user_id');
         $this->db->from('users');
         if ( !empty($keywords) ){
             $this->db->like('username', $keywords)->or_like('company', $keywords)->or_like('email', $keywords);
         }
-        $this->db->where('users.service_type', $stype);
+        if(!empty($stype)){
+            $this->db->where('users.service_type', $stype);
+        }
         $this->db->where('email !=', 'admin@admin.com');
         $this->db->limit($limit, $start);
         $this->db->where('users_groups.group_id', $group_id);

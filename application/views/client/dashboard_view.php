@@ -2,7 +2,23 @@
 <div class="content-wrapper" style="min-height: 916px;">
     <div class="box-body pad table-responsive" style="box-shadow: 2px 2px 1px grey;">
         <strong style="color: #2d76b8; font-size: 18px">Quý doanh nghiệp vui lòng khai đầy đủ thông tin theo các bước sau:</strong>
-        <a target="_blank" href="http://smartcitiesvietnam.com/"><img style="width: 100% !important;" src="<?php echo site_url('assets/public/img/huongdansk.jpg'); ?>" /></a>
+        <?php  
+            $type = !empty($user_service_type) ? $user_service_type : 1;
+            switch ($type) {
+              case 1:
+                $huongdan = site_url('assets/public/img/huongdansk_1.jpg');
+                break;
+              case 2:
+                $huongdan = site_url('assets/public/img/huongdansk_2.jpg');
+                break;
+              case 3:
+                $huongdan = site_url('assets/public/img/huongdansk_3.jpg');
+                break;
+              default:
+                $huongdan = site_url('assets/public/img/huongdansk.jpg');
+            }
+        ?>
+        <a target="_blank" href="http://smartcitiesvietnam.com/"><img style="width: 100% !important;" src="<?php echo $huongdan; ?>" /></a>
         <!--<i style="color: #2d76b8; font-size: 15px">Thời hạn nộp hồ sơ: 05/03/2019</i><br>-->
         <!--<i style="color: #2d76b8; font-size: 15px"><ins>Cán bộ hỗ trợ:</ins> Ms. Cao Ánh Hằng, mobile: 0974 29 87 86, email: hangca@vinasa.org.vn</i>-->
         <!--        <h3>Trang thông tin: <span style="color:red;">--><?php //echo $user->company; ?><!--</span></h3>-->

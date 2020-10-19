@@ -58,6 +58,9 @@ class Product extends Admin_Controller{
         if(!$this->data['product']){
             redirect('admin/dashboard', 'refresh');
         }
+        foreach($this->data['product'] as $key => $value){
+            $this->data['product'][$key] = htmlspecialchars_decode(htmlspecialchars_decode($value));
+        }
 
         $this->render('admin/product/detail_view_'.$stype);
 

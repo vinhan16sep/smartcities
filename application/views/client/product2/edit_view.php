@@ -52,7 +52,7 @@
                             }
                             echo '<label id="field_2-error" class="error" for="field_2"></label>';
                             echo form_error('field_2', '<div class="error">', '</div>');
-                            foreach ($categories as $key => $value) {
+                            foreach ($categories_bds as $key => $value) {
                                 echo form_radio('field_2', $key, (($key == $product['field_2']) ? true : false), 'class="btn-checkbox"');
                                 echo $value.'<br>';
                             }

@@ -13,7 +13,7 @@
                                     <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
                                 </div>
                             <?php endif ?>
-                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM <i class="fa fa-arrow-right" aria-hidden="true"></i> THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP' : 'Danh sách dự án bất động sản công nghiệp' ?></h4>
+                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN DỰ ÁN BẤT ĐỘNG SẢN CÔNG NGHIỆP' : 'Danh sách dự án bất động sản công nghiệp' ?></h4>
                             <?php if (!empty($products)): ?>
                                 <?php foreach($allYear as $index => $year): ?>
                                 <hr>

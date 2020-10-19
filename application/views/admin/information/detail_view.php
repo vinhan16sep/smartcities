@@ -86,9 +86,9 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-mobile margin-r-5"></i> Di động người liên hệ với BTC</a> <p class="pull-right"><?php echo $submitted['c_phone']; ?></p>
                                 </li>
-<!--                                <li class="list-group-item">-->
-<!--                                    <a><i class="fa fa-link margin-r-5"></i> Link download PĐK của DN</a> <p class="pull-right">--><?php //echo $submitted['link']; ?><!--</p>-->
-<!--                                </li>-->
+                                <li class="list-group-item">
+                                    <a href="<?php echo $submitted['link']; ?>" target="_blank" style="color:darkgreen"><i class="fa fa-link margin-r-5"></i> Link download PĐK của DN</a>
+                                </li>
                             </ul>
                             
                         </div>
