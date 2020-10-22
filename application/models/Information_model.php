@@ -1050,36 +1050,35 @@ class Information_model extends CI_Model {
         return $query->get()->result_array();
     }
 
-    public function fetch_product_by_client_ids_with_search_pagination($year, $client_ids = array(), $limit = NULL, $start = NULL, $search = '', $main_service = '') {
-        $this->db->select('id, client_id, name, main_service, year');
-        $this->db->from('product');
+    public function fetch_product_by_client_ids_with_search_pagination($year, $client_ids = array(), $stype = '', $limit = NULL, $start = NULL) {
+        $table = 'product' . $stype;
+        if ($stype == 1) {
+            $this->db->select('id, client_id, field_21 AS name, main_service, year');
+        } elseif ($stype == 2) {
+            $this->db->select('id, client_id, field_1 AS name, main_service, year');
+        } elseif ($stype == 3) {
+            $this->db->select('id, client_id, field_1 AS name, main_service, year');
+        } elseif ($stype == 4) {
+            $this->db->select('id, client_id, name AS name, main_service, year');
+        }
+
+        $this->db->from($table);
         $this->db->where('year', $year);
         $this->db->where('is_deleted', 0);
         $this->db->where_in('client_id', $client_ids);
         $this->db->limit($limit, $start);
-        if ( $main_service != '' && $main_service != null) {
-            $this->db->where('main_service', $main_service);
-        }
-        if ( $search != '') {
-            $this->db->like('name', $search);
-        }
         $this->db->order_by("id", "desc");
 
         return $result = $this->db->get()->result_array();
     }
 
-    public function count_product_by_client_ids_with_search($year, $client_ids = array(), $search = '', $main_service = '') {
+    public function count_product_by_client_ids_with_search($year, $client_ids = array(), $stype = '') {
+        $table = 'product' . $stype;
         $this->db->select('*');
-        $this->db->from('product');
+        $this->db->from($table);
         $this->db->where('year', $year);
         $this->db->where('is_deleted', 0);
         $this->db->where_in('client_id', $client_ids);
-        if ( $main_service != '') {
-            $this->db->where('main_service', $main_service);
-        }
-        if ( $search != '') {
-            $this->db->like('name', $search);
-        }
 
         return $this->db->get()->num_rows();
     }

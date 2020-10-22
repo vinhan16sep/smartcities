@@ -70,11 +70,7 @@
                                         <table class="table table-bordered">
                                             <?php
                                                 $array_product_id = explode(',', $team['product_id']);
-                                                if($team['stype'] == 2){
-
-                                                    // echo '<pre>';
-                                                    // print_r($team['product_id']);die;
-                                                }
+                                                
                                                 $stt = 1;
                                                 $newProducts = array();
                                                 if($team['stype'] == 1){

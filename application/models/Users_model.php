@@ -7,7 +7,18 @@ class Users_model extends CI_Model{
 	
 	function __construct(){
 		parent::__construct();
-	}
+    }
+    
+    public function get_all_client_by_year($year) {
+        $this->db->select('users.*')
+            ->from('users')
+            ->join('users_groups', 'users.id = users_groups.user_id')
+            ->join('status', 'users.id = status.client_id')
+            ->where('status.year', $year)
+            ->where('users_groups.group_id', 3);
+
+        return $this->db->get()->result_array();
+    }
 
     public function get_user_by_email($mails){
         $query = $this->db->select('*')

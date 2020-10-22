@@ -15,6 +15,16 @@ class Team_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function fetch_all_team_by_stype($year = null, $stype){
+        $this->db->select('*')
+            ->from('team')
+            ->where('year', $year)
+            ->where('stype', $stype)
+            ->where('is_deleted', 0);
+
+        return $this->db->get()->result_array();
+    }
+
     public function insert($table, $data){
         $this->db->set($data)
             ->insert($table);
