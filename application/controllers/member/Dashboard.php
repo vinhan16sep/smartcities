@@ -45,8 +45,6 @@ class Dashboard extends Member_Controller {
                 }
             }
             
-                        // echo '<pre>';
-                        // print_r($team);die;
             $this->data['team'] = $team;
             $this->data['user_id'] = $user->id;
 
@@ -56,7 +54,7 @@ class Dashboard extends Member_Controller {
             foreach((array) $team as $team_key => $team_value){
                 if(isset($team_value['product_list'])){
                     foreach((array) $team_value['product_list'] as $product_key => $product_value){
-                        $rated = $this->new_rating_model->fetch_by_product_id_submited('new_arting', $product_value['id']);
+                        $rated = $this->new_rating_model->fetch_by_product_id_submited('new_arting', $product_value['id'], $team_value['stype']);
                         $total = 0;
                         $rated_member = 0;
                         if($rated){

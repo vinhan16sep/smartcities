@@ -22,6 +22,8 @@ class Product extends Member_Controller{
 
 	public function index(){
         $this->load->model('users_model');
+        $stype = $this->input->get('stype');
+
         $user = $this->ion_auth->user()->row();
         if ($user->member_role == 'manager') {
             $keywords = '';
@@ -37,14 +39,10 @@ class Product extends Member_Controller{
             if($this->input->get('team_search')){
                 $team_search = $this->input->get('team_search');
             }
-            if($this->input->get('main_service_search')){
-                $main_service_search = $this->input->get('main_service_search');
-            }
 
             $this->data['keywords'] = $keywords;
             $this->data['rating_search'] = $rating_search;
             $this->data['team_search'] = $team_search;
-            $this->data['main_service_search'] = $main_service_search;
 
             $status = $this->status_model->fetch_by_is_final(1, $this->data['eventYear']);
             $client_ids = [];
@@ -60,7 +58,7 @@ class Product extends Member_Controller{
 
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) - 1 : 0;
             if ($team_search != null) {
-                $product_by_client = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, null, null, $keywords, $main_service_search);
+                $product_by_client = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, $stype, null, null);
                 if ($product_by_client) {
                     foreach ($product_by_client as $key => $value) {
                         $team = $this->team_model->get_by_product_id($value['id']);
@@ -86,7 +84,7 @@ class Product extends Member_Controller{
                     $total_rows  = 0;
                 }
             }else{
-                $total_rows  = $this->information_model->count_product_by_client_ids_with_search($this->data['eventYear'], $client_ids, $keywords, $main_service_search);
+                $total_rows  = $this->information_model->count_product_by_client_ids_with_search($this->data['eventYear'], $client_ids, $stype);
             
                 
             }
@@ -104,9 +102,9 @@ class Product extends Member_Controller{
             $this->data['page_links'] = $this->pagination->create_links();
             $result =  array();
             if ($team_search == null && $team_search == '') {
-                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, $per_page, $per_page*$this->data['page'], $keywords, $main_service_search);
+                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, $stype, $per_page, $per_page*$this->data['page']);
             }else{
-                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, null, null, $keywords, $main_service_search);
+                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, $stype, null, null);
             }
             
             foreach ($result as $key => $value) {
@@ -118,7 +116,7 @@ class Product extends Member_Controller{
                     $result[$key]['team'] = 'Chưa có';
                     $result[$key]['team_id'] = 0;
                 }
-                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id'], $rating_search);
+                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id'], $rating_search, $stype);
                 $new_rating_medium = array();
                 $total_rating = 0;
                 if ($new_rating_array) {
@@ -168,17 +166,28 @@ class Product extends Member_Controller{
                 $number = $total_rows - ($this->data['page'] * $per_page);
             };
 
-            $new_rating = $this->new_rating_model->fetch_all();
+            $new_rating = $this->new_rating_model->fetch_all_by_year_and_stype($this->data['eventYear'], $stype);
             $list_products_rating = [];
-            foreach ($new_rating as $key => $value) {
-                $list_products_rating[] = $value['product_id'];
+            if (!empty($new_rating)) {
+                foreach ($new_rating as $key => $value) {
+                    $list_products_rating[] = $value['product_id'];
+                }
             }
 
-            $team = $this->team_model->fetch_all_team($this->data['eventYear']);
+            $team = $this->team_model->fetch_all_team_by_stype($this->data['eventYear'], $stype);
+
+            // Get company name in table users 
+            $clients = $this->users_model->get_all_client_by_year($this->data['eventYear']);
+            $client_mapping = [];
+            foreach ($clients as $key => $val) {
+                $client_mapping[$val['id']] = $val['company'];
+            }
 
             $this->data['number'] = $number;
+            $this->data['stype'] = $stype;
             $this->data['list_products_rating'] = $list_products_rating;
             $this->data['team'] = $team;
+            $this->data['client_mapping'] = $client_mapping;
             $this->data['result'] = $result;
 
             $this->render('member/list_product_by_manager_view');
@@ -189,6 +198,7 @@ class Product extends Member_Controller{
         if ($this->ion_auth->user()->row()->member_role != 'manager') {
             redirect('member/','refresh');
         }
+        $stype = $this->input->get('stype');
         $team = $this->team_model->fetch_by_id('team', $team_id);
         $list_team = array();
         if ($team && $team['member_id']) {
@@ -204,8 +214,8 @@ class Product extends Member_Controller{
                     $members = $this->information_model->get_personal_members($member_ids);
                     if ($members) {
                         foreach ($members as $key => $value) {
-                            $check_rating = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $value['id']);
-                            $rating_detail = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $value['id']);
+                            $check_rating = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $value['id'], $stype);
+                            $rating_detail = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $value['id'], $stype);
                             if ( $check_rating && $check_rating['is_submit'] == 1) {
                                 $members[$key]['is_rating'] = 1;
                             }elseif( $check_rating && $check_rating['is_submit'] == 0){
@@ -221,10 +231,11 @@ class Product extends Member_Controller{
 
             }
         }
-        $product = $this->information_model->fetch_by_id('product', $product_id);
+        $product = $this->information_model->fetch_by_id('product' . $stype, $product_id);
         $company = $this->information_model->fetch_by_id('users', $product['client_id']);
 
         $this->data['team'] = $team;
+        $this->data['stype'] = $stype;
         $this->data['company'] = $company;
         $this->data['product'] = $product;
         $this->data['list_team'] = $list_team;

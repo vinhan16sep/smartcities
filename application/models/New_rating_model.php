@@ -65,10 +65,11 @@ class New_rating_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function fetch_by_product_id_submited($type, $id){
+    public function fetch_by_product_id_submited($type, $id, $stype){
         $query = $this->db->select('*')
             ->from('new_rating')
             ->where('product_id', $id)
+            ->where('stype', $stype)
             ->where('is_submit', 1)
             ->get();
 
@@ -154,18 +155,33 @@ class New_rating_model extends CI_Model {
         return $query->row_array();
     }
 
-   public function fetch_all(){
-       $query = $this->db->select('*')
-           ->from('new_rating')
-           ->where('is_submit', 1)
-           ->get();
+    public function fetch_all_by_year_and_stypefetch_all(){
+        $query = $this->db->select('*')
+            ->from('new_rating')
+            ->where('is_submit', 1)
+            ->get();
 
-       if($query->num_rows() > 0){
-           return $query->result_array();
-       }
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }
 
-       return false;
-   }
+        return false;
+    }
+
+    public function fetch_all_by_year_and_stype($year, $stype){
+        $query = $this->db->select('*')
+            ->from('new_rating')
+            ->where('is_submit', 1)
+            ->where('year', $year)
+            ->where('stype', $stype)
+            ->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }
+
+        return false;
+    }
 
    public function delete_rating($team_products, $user_id){
        $this->db->where_in('product_id', $team_products);
