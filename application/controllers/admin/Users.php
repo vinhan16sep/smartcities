@@ -34,14 +34,14 @@ class Users extends Admin_Controller
         // $usr_str = "$usr_str"; // Dung de debug truc tiep tren sql
 
 
-        // delete from status where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from company where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from information where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from product1 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from product2 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from product3 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from product4 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
-        // delete from user where email IN ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com');
+        // delete from status where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from company where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from information where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from product1 where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from product2 where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from product3 where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from product4 where client_id IN (select id from users where email in ('vinhan16sep5@gmail.com'));
+        // delete from users where email IN ('vinhan16sep5@gmail.com');
 
 
         // delete from users where id in (595,596)
