@@ -24,6 +24,30 @@ class MY_Controller extends CI_Controller {
         if ($this->ion_auth->user()->row() !== null){
             $this->data['user_service_type'] = $this->ion_auth->user()->row()->service_type;
         }
+
+        $this->data['product_services'] = array(
+            '1' => 'Giải pháp cho Chính quyền số',
+            '2' => 'Giải pháp Quy hoạch thành phố thông minh',
+            '3' => 'Giải pháp cho hạ tầng kỹ thuật thành phố thông minh',
+            '4' => 'Giải pháp hạ tầng số cho thành phố thông minh',
+            '5' => 'Giải pháp/ứng dụng cho công dân/cộng đồng thông minh',
+            '6' => 'Giải pháp An toàn thông tin',
+            '7' => 'Giải pháp du lịch thông minh',
+            '8' => 'Giải pháp thanh toán thông minh',
+            '9' => 'Giải pháp giao thông thông minh',
+            '10' => 'Giải pháp giáo dục thông minh',
+            '11' => 'Giải pháp nông nghiệp thông minh',
+            '12' => 'Giải pháp an ninh, an toàn, cấp cứu, cứu nạn',
+            '13' => 'Giải pháp y tế thông minh',
+            '14' => 'Giải pháp năng lượng thông minh',
+            '15' => 'Giải pháp môi trường thông minh',
+            '16' => 'Giải pháp xây dựng thông minh',
+            '17' => 'Giải pháp cấp, thoát và xử lý nước thông minh',
+            '18' => 'Giải pháp cho nhà máy thông minh',
+            '19' => 'Giải pháp cho toà nhà/căn hộ thông minh',
+            '20' => 'Giải pháp cho khu công nghiệp thông minh',
+        );
+
         $this->data['type_smart_city'] = [
             '0' => 'Thành phố Quy hoạch thông minh',
             '1' => 'Thành phố Điều hành, quản lý thông minh',

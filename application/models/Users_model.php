@@ -9,6 +9,13 @@ class Users_model extends CI_Model{
 		parent::__construct();
 	}
 
+    public function get_user_by_email($mails){
+        $query = $this->db->select('*')
+            ->from('users')
+            ->where_in('email', $mails);
+        return $query->get()->result_array();
+    }
+
 	public function fetch_all_users_groups(){
         $query = $this->db->select('*')
             ->from('users_groups')

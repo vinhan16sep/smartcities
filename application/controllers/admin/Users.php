@@ -17,6 +17,45 @@ class Users extends Admin_Controller
     }
 
     public function index($group_id = null){
+
+
+        //////////////////// DELETE MULTIPLE ACCOUNT ////////////////////
+        // $this->load->model('users_model');
+        // $str = "support5@vinasa.org.vn, satnghethuat1411@gmail.com, vinhan16sep2@gmail.com, satmythuat1411@gmail.com, nguyenquyen18011996@gmail.com, vinhan16sep1@gmail.com, support3@vinasa.org.vn, vinhan16sep4@gmail.com, minhmc@vinasa.org.vn, tuyetlta@vinasa.org.vn, lethianhtuyet170588@gmail.com, binhdt@vinasa.org.vn, dothanhbinh6997@gmail.com";
+        // $arr = explode(',', str_replace(' ', '', $str));
+        // $c_str = implode("','", $arr);
+        // $c_str = "'$c_str'"; // Dung de debug truc tiep tren sql
+        // $res = $this->users_model->get_user_by_email($arr);
+        // $ids = [];
+        // foreach ($res as $key => $value) {
+        //     $ids[] = $value['id'];
+        // }
+        // $usr_str = implode(",", $ids);
+        // $usr_str = "$usr_str"; // Dung de debug truc tiep tren sql
+
+
+        // delete from status where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from company where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from information where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from product1 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from product2 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from product3 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from product4 where client_id IN (select id from users where email in ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com'));
+        // delete from user where email IN ('support5@vinasa.org.vn','satnghethuat1411@gmail.com','vinhan16sep2@gmail.com','satmythuat1411@gmail.com','nguyenquyen18011996@gmail.com','vinhan16sep1@gmail.com','support3@vinasa.org.vn','vinhan16sep4@gmail.com','minhmc@vinasa.org.vn','tuyetlta@vinasa.org.vn','lethianhtuyet170588@gmail.com','binhdt@vinasa.org.vn','dothanhbinh6997@gmail.com');
+
+
+        // delete from users where id in (595,596)
+        // delete from company where client_id in (595,596)
+        // delete from information where client_id in (595,596)
+        // delete from product1 where client_id in (595,596)
+        // delete from product2 where client_id in (595,596)
+        // delete from product3 where client_id in (595,596)
+        // delete from product4 where client_id in (595,596)
+        // delete from status where client_id in (595,596)
+        //////////////////// DELETE MULTIPLE ACCOUNT ////////////////////
+
+
+
         $this->load->model('information_model');
         $this->load->model('status_model');
         $this->load->model('users_model');

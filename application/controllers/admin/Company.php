@@ -270,7 +270,7 @@ class Company extends Admin_Controller{
         $this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
     }
 
-    public function export($requestYear){
+    public function export($requestYear, $stype){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
@@ -280,12 +280,53 @@ class Company extends Admin_Controller{
         $this->load->database();
 
         // get all users in array formate
-        $data = $this->information_model->get_all_for_export('company', null, $requestYear);
-        foreach($data as $key => $val){
-            if(!$this->status_model->check_company_submitted($val['client_id'], $requestYear)){
-                unset($data[$key]);
-            }
+        if ($stype == 1) {
+            $data = $this->information_model->get_city_for_export_by_stype($requestYear, $stype);
+            $data_export = $this->data_export_stype_1($data);
+        } else {
+            $data = $this->information_model->get_company_for_export_by_stype($requestYear, $stype);
+            $data_export = $this->data_export_stype_2_3_4($data, $stype, $requestYear);
         }
+        // foreach($data as $key => $val){
+        //     if(!$this->status_model->check_company_submitted($val['client_id'], $requestYear)){
+        //         unset($data[$key]);
+        //     }
+        // }
+
+        // read data to active sheet
+        $this->excel->getActiveSheet()->fromArray($data_export);
+
+        if ($stype == 1) {
+            $filename='Danh_sach_nhom_1_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+
+        } elseif ($stype == 2) {
+            $filename='Danh_sach_nhom_2_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+
+        } elseif ($stype == 3) {
+            $filename='Danh_sach_nhom_3_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+            
+        } else {
+            $filename='Danh_sach_nhom_4_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+
+        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+
+        header('Cache-Control: max-age=0'); //no cache
+
+        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+        //if you want to save it as .XLSX Excel 2007 format
+
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+
+        //force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+
+    private function data_export_stype_2_3_4($data, $stype, $requestYear) {
+        $requestYear = (int) $requestYear;
         $data_export = array(
             '0' => array(
                 'company' => 'Doanh nghiệp',
@@ -301,33 +342,166 @@ class Company extends Admin_Controller{
                 'c_email' => 'Email',
                 'c_phone' => 'Di động',
                 'link' => 'Link download PĐK của DN',
-                'equity_2015' => 'Vốn điều lệ năm ' . ($requestYear - 3) . ' (triệu VND)',
-                'equity_2016' => 'Vốn điều lệ năm ' . ($requestYear - 2) . ' (triệu VND)',
-                'equity_2017' => 'Vốn điều lệ năm ' . ($requestYear - 1) . ' (triệu VND)',
-                'owner_equity_2015' => 'Tổng tài sản (triệu VND) ' . ($requestYear - 3),
-                'owner_equity_2016' => 'Tổng tài sản (triệu VND) ' . ($requestYear - 2),
-                'owner_equity_2017' => 'Tổng tài sản (triệu VND) ' . ($requestYear - 1),
-                'total_income_2015' => 'Tổng doanh thu DN ' . ($requestYear - 3),
-                'total_income_2016' => 'Tổng doanh thu DN ' . ($requestYear - 2),
-                'total_income_2017' => 'Tổng doanh thu DN ' . ($requestYear - 1),
-                'software_income_2015' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) ' . ($requestYear - 3),
-                'software_income_2016' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) ' . ($requestYear - 2),
-                'software_income_2017' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) ' . ($requestYear - 1),
-                'it_income_2015' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) ' . ($requestYear - 3),
-                'it_income_2016' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) ' . ($requestYear - 2),
-                'it_income_2017' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) ' . ($requestYear - 1),
-                'export_income_2015' => 'Tổng DT xuất khẩu (USD) ' . ($requestYear - 3),
-                'export_income_2016' => 'Tổng DT xuất khẩu (USD) ' . ($requestYear - 2),
-                'export_income_2017' => 'Tổng DT xuất khẩu (USD) ' . ($requestYear - 1),
-                'total_labor_2015' => 'Tổng số lao động của DN ' . ($requestYear - 3),
-                'total_labor_2016' => 'Tổng số lao động của DN ' . ($requestYear - 2),
-                'total_labor_2017' => 'Tổng số lao động của DN ' . ($requestYear - 1),
-                'total_ltv_2015' => 'Tổng số LTV ' . ($requestYear - 3),
-                'total_ltv_2016' => 'Tổng số LTV ' . ($requestYear - 2),
-                'total_ltv_2017' => 'Tổng số LTV ' . ($requestYear - 1),
-                'main_service' => 'SP dịch vụ chính của DN',
-                'main_market' => 'Thị trường chính',
                 'description' => 'Giới thiệu chung',
+                'linhvuckd' => 'Lĩnh vực kinh doanh',
+                'themanh' => 'Thế mạnh'
+            )
+        );
+
+        if ($stype == 4) {
+            $data_export[0]['equity_1'] = 'Vốn điều lệ ' . ($requestYear - 3);
+        }
+
+        $data_export[0]['equity_2'] = 'Vốn điều lệ ' . ($requestYear - 2);
+        $data_export[0]['equity_3'] = 'Vốn điều lệ ' . ($requestYear - 1);
+
+        if ($stype == 4) {
+            $data_export[0]['owner_equity_1'] = 'Tổng tài sản ' . ($requestYear - 3);
+            $data_export[0]['owner_equity_2'] = 'Tổng tài sản ' . ($requestYear - 2);
+            $data_export[0]['owner_equity_3'] = 'Tổng tài sản ' . ($requestYear - 1);
+            $data_export[0]['total_income_1'] = 'Tổng doanh thu ' . ($requestYear - 3);
+        }
+
+        $data_export[0]['total_income_2'] = 'Tổng doanh thu ' . ($requestYear - 2);
+        $data_export[0]['total_income_3'] = 'Tổng doanh thu ' . ($requestYear - 1);
+
+        if ($stype == 4) {
+            $data_export[0]['software_income_1'] = 'Tổng doanh thu lĩnh vực sản xuất phần mềm ' . ($requestYear - 3);
+            $data_export[0]['software_income_2'] = 'Tổng doanh thu lĩnh vực sản xuất phần mềm ' . ($requestYear - 2);
+            $data_export[0]['software_income_3'] = 'Tổng doanh thu lĩnh vực sản xuất phần mềm ' . ($requestYear - 1);
+            
+            $data_export[0]['it_income_1'] = 'Tổng doanh thu dịch vụ CNTT ' . ($requestYear - 3);
+            $data_export[0]['it_income_2'] = 'Tổng doanh thu dịch vụ CNTT ' . ($requestYear - 2);
+            $data_export[0]['it_income_3'] = 'Tổng doanh thu dịch vụ CNTT ' . ($requestYear - 1);
+            
+            $data_export[0]['export_income_1'] = 'Tổng doanh thu xuất khẩu ' . ($requestYear - 3);
+            $data_export[0]['export_income_2'] = 'Tổng doanh thu xuất khẩu ' . ($requestYear - 2);
+            $data_export[0]['export_income_3'] = 'Tổng doanh thu xuất khẩu ' . ($requestYear - 1);
+            
+            $data_export[0]['candidate_income_1'] = 'Tổng doanh thu lĩnh vực/dự án ' . ($requestYear - 3);
+        }
+            
+        $data_export[0]['candidate_income_2'] = 'Tổng doanh thu lĩnh vực/dự án ' . ($requestYear - 2);
+        $data_export[0]['candidate_income_3'] = 'Tổng doanh thu lĩnh vực/dự án ' . ($requestYear - 1);
+
+        if ($stype == 4) {
+            $data_export[0]['total_labor_1'] = 'Tổng số lao động ' . ($requestYear - 3);
+        }
+        $data_export[0]['total_labor_2'] = 'Tổng số lao động ' . ($requestYear - 2);
+        $data_export[0]['total_labor_3'] = 'Tổng số lao động ' . ($requestYear - 1);
+
+        if ($stype == 4) {
+            $data_export[0]['total_ltv_1'] = 'Tổng số lập trình viên ' . ($requestYear - 3);
+            $data_export[0]['total_ltv_2'] = 'Tổng số lập trình viên ' . ($requestYear - 2);
+            $data_export[0]['total_ltv_3'] = 'Tổng số lập trình viên ' . ($requestYear - 1);
+        }
+
+        foreach($data as $key => $company){
+            $extra_info = $this->information_model->fetch_company_by_id($company['id']);
+            $data_export[$key + 1] = array(
+                'company' => $extra_info['company'],
+                'phone' => $extra_info['phone'],
+                'address' => $extra_info['address'],
+                'website' => $extra_info['website'],
+                'legal_representative' => $extra_info['legal_representative'],
+                'lp_position' => $extra_info['lp_position'],
+                'lp_email' => $extra_info['lp_email'],
+                'lp_phone' => $extra_info['lp_phone'],
+                'connector' => $extra_info['connector'],
+                'c_position' => $extra_info['c_position'],
+                'c_email' => $extra_info['c_email'],
+                'c_phone' => $extra_info['c_phone'],
+                'link' => $extra_info['link'],
+                'description' => strip_tags(html_entity_decode($company['description'])),
+                'linhvuckd' => strip_tags(html_entity_decode($company['linhvuckd'])),
+                'themanh' => strip_tags(html_entity_decode($company['themanh']))
+            );
+            if ($stype == 4) {
+                $data_export[$key + 1]['equity_1'] = strip_tags(html_entity_decode($company['equity_1']));
+            }
+    
+            $data_export[$key + 1]['equity_2'] = strip_tags(html_entity_decode($company['equity_2']));
+            $data_export[$key + 1]['equity_3'] = strip_tags(html_entity_decode($company['equity_3']));
+    
+            if ($stype == 4) {
+                $data_export[$key + 1]['owner_equity_1'] = strip_tags(html_entity_decode($company['owner_equity_1']));
+                $data_export[$key + 1]['owner_equity_2'] = strip_tags(html_entity_decode($company['owner_equity_2']));
+                $data_export[$key + 1]['owner_equity_3'] = strip_tags(html_entity_decode($company['owner_equity_3']));
+                $data_export[$key + 1]['total_income_1'] = strip_tags(html_entity_decode($company['total_income_1']));
+            }
+    
+            $data_export[$key + 1]['total_income_2'] = strip_tags(html_entity_decode($company['total_income_2']));
+            $data_export[$key + 1]['total_income_3'] = strip_tags(html_entity_decode($company['total_income_3']));
+    
+            if ($stype == 4) {
+                $data_export[$key + 1]['software_income_1'] = strip_tags(html_entity_decode($company['software_income_1']));
+                $data_export[$key + 1]['software_income_2'] = strip_tags(html_entity_decode($company['software_income_2']));
+                $data_export[$key + 1]['software_income_3'] = strip_tags(html_entity_decode($company['software_income_3']));
+                
+                $data_export[$key + 1]['it_income_1'] = strip_tags(html_entity_decode($company['it_income_1']));
+                $data_export[$key + 1]['it_income_2'] = strip_tags(html_entity_decode($company['it_income_2']));
+                $data_export[$key + 1]['it_income_3'] = strip_tags(html_entity_decode($company['it_income_3']));
+                
+                $data_export[$key + 1]['export_income_1'] = strip_tags(html_entity_decode($company['export_income_1']));
+                $data_export[$key + 1]['export_income_2'] = strip_tags(html_entity_decode($company['export_income_2']));
+                $data_export[$key + 1]['export_income_3'] = strip_tags(html_entity_decode($company['export_income_3']));
+                
+                $data_export[$key + 1]['candidate_income_1'] = strip_tags(html_entity_decode($company['candidate_income_1']));
+            }
+                
+            $data_export[$key + 1]['candidate_income_2'] = strip_tags(html_entity_decode($company['candidate_income_2']));
+            $data_export[$key + 1]['candidate_income_3'] = strip_tags(html_entity_decode($company['candidate_income_3']));
+    
+            if ($stype == 4) {
+                $data_export[$key + 1]['total_labor_1'] = strip_tags(html_entity_decode($company['total_labor_1']));
+            }
+            $data_export[$key + 1]['total_labor_2'] = strip_tags(html_entity_decode($company['total_labor_2']));
+            $data_export[$key + 1]['total_labor_3'] = strip_tags(html_entity_decode($company['total_labor_3']));
+    
+            if ($stype == 4) {
+                $data_export[$key + 1]['total_ltv_1'] = strip_tags(html_entity_decode($company['total_ltv_1']));
+                $data_export[$key + 1]['total_ltv_2'] = strip_tags(html_entity_decode($company['total_ltv_2']));
+                $data_export[$key + 1]['total_ltv_3'] = strip_tags(html_entity_decode($company['total_ltv_3']));
+            }
+        }
+        return $data_export;
+    }
+
+    private function data_export_stype_1($data) {
+        $data_export = array(
+            '0' => array(
+                'company' => 'Doanh nghiệp',
+                'phone' => 'Điện thoại',
+                'address' => 'Địa chỉ',
+                'website' => 'Website',
+                'legal_representative' => 'Tên người đại diện pháp luật',
+                'lp_position' => 'Chức danh',
+                'lp_email' => 'Email',
+                'lp_phone' => 'Di động',
+                'connector' => 'Tên người liên hệ với BTC',
+                'c_position' => 'Chức danh',
+                'c_email' => 'Email',
+                'c_phone' => 'Di động',
+                'link' => 'Link download PĐK của DN',
+                'field_1' => 'Tên Đô thị (thành phố/thị xã/thị trấn/xã phường)',
+                'field_2' => 'Giới thiệu ngắn về Đô thị (Tối đa 500 từ)',
+                'field_3' => 'Vị trí địa lý, diện tích',
+                'field_4' => 'Dân số, mật độ dân số',
+                'field_5' => 'Tổng số quận, huyện, thị trấn, thị xã…',
+                'field_6' => 'GDP/đầu người',
+                'field_7' => 'GRDP',
+                'field_8' => 'Các ngành kinh tế mũi nhọn',
+                'field_9' => 'Số lượng các dự án bất động sản thông minh, khu công nghiệp, công nghệ, công nghệ cao, khu chế xuất trong tỉnh/thành phố hiện tại',
+                'field_10' => 'Điểm mạnh/Lợi thế',
+                'field_11' => 'Định hướng phát triển của đô thị đến năm 2025, định hướng 2030…',
+                'field_12' => 'Các văn bản pháp lý liên quan đến chính sách, chương trình, dự án, đề án thành phố thông minh của tỉnh, thành phố',
+                'field_13' => 'Tổng quan về đề án, dự án, chương trình, hoạt động về thành phố, đô thị thông minh của Tỉnh/thành phố và các kết quả đạt được (nêu tóm tắt thông tin, số liệu và gửi kèm đề án)',
+                'field_14' => 'Tổng kinh phí của thành phố/đô thị cho các chương trình, dự án… thành phố thông minh năm 2018, 2019',
+                'field_15' => 'Tổng thu ngân sách (triệu VNĐ) 2018',
+                'field_16' => 'Tổng thu ngân sách (triệu VNĐ) 2019',
+                'field_17' => 'Tốc độ tăng trưởng kinh tế (triệu VNĐ) 2018',
+                'field_18' => 'Tốc độ tăng trưởng kinh tế (triệu VNĐ) 2019',
+                'field_19' => 'Các thông tin khác'
             )
         );
 
@@ -347,57 +521,32 @@ class Company extends Admin_Controller{
                 'c_email' => $extra_info['c_email'],
                 'c_phone' => $extra_info['c_phone'],
                 'link' => $extra_info['link'],
-                'equity_2015' => $company['equity_1'],
-                'equity_2016' => $company['equity_2'],
-                'equity_2017' => $company['equity_3'],
-                'owner_equity_2015' => $company['owner_equity_1'],
-                'owner_equity_2016' => $company['owner_equity_2'],
-                'owner_equity_2017' => $company['owner_equity_3'],
-                'total_income_2015' => $company['total_income_1'],
-                'total_income_2016' => $company['total_income_2'],
-                'total_income_2017' => $company['total_income_3'],
-                'software_income_2015' => $company['software_income_1'],
-                'software_income_2016' => $company['software_income_2'],
-                'software_income_2017' => $company['software_income_3'],
-                'it_income_2015' => $company['it_income_1'],
-                'it_income_2016' => $company['it_income_2'],
-                'it_income_2017' => $company['it_income_3'],
-                'export_income_2015' => $company['export_income_1'],
-                'export_income_2016' => $company['export_income_2'],
-                'export_income_2017' => $company['export_income_3'],
-                'total_labor_2015' => $company['total_labor_1'],
-                'total_labor_2016' => $company['total_labor_2'],
-                'total_labor_2017' => $company['total_labor_3'],
-                'total_ltv_2015' => $company['total_ltv_1'],
-                'total_ltv_2016' => $company['total_ltv_2'],
-                'total_ltv_2017' => $company['total_ltv_3'],
-                'main_service' => implode(", ", (array)json_decode($company['main_service'])),
-                'main_market' => implode(", ", (array)json_decode($company['main_market'])),
-                'description' => html_entity_decode(strip_tags($company['description'])),
+                'field_1' => strip_tags(html_entity_decode($company['field_1'])),
+                'field_2' => strip_tags(html_entity_decode($company['field_2'])),
+                'field_3' => strip_tags(html_entity_decode($company['field_3'])),
+                'field_4' => strip_tags(html_entity_decode($company['field_4'])),
+                'field_5' => strip_tags(html_entity_decode($company['field_5'])),
+                'field_6' => strip_tags(html_entity_decode($company['field_6'])),
+                'field_7' => strip_tags(html_entity_decode($company['field_7'])),
+                'field_8' => strip_tags(html_entity_decode($company['field_8'])),
+                'field_9' => strip_tags(html_entity_decode($company['field_9'])),
+                'field_10' => strip_tags(html_entity_decode($company['field_10'])),
+                'field_11' => strip_tags(html_entity_decode($company['field_11'])),
+                'field_12' => strip_tags(html_entity_decode($company['field_12'])),
+                'field_13' => strip_tags(html_entity_decode($company['field_13'])),
+                'field_14' => strip_tags(html_entity_decode($company['field_14'])),
+                'field_15' => strip_tags(html_entity_decode($company['field_15'])),
+                'field_16' => strip_tags(html_entity_decode($company['field_16'])),
+                'field_17' => strip_tags(html_entity_decode($company['field_17'])),
+                'field_18' => strip_tags(html_entity_decode($company['field_18'])),
+                'field_19' => strip_tags(html_entity_decode($company['field_19'])),
+                'field_1' => strip_tags(html_entity_decode($company['field_1']))
             );
         }
-
-        // read data to active sheet
-        $this->excel->getActiveSheet()->fromArray($data_export);
-
-        $filename='Danh_sach_doanh_nghiep_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
-
-        header('Content-Type: application/vnd.ms-excel'); //mime type
-
-        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
-
-        header('Cache-Control: max-age=0'); //no cache
-
-        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-        //if you want to save it as .XLSX Excel 2007 format
-
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-
-        //force user to download the Excel file without writing it to server's HD
-        $objWriter->save('php://output');
+        return $data_export;
     }
 
-    public function export_product($requestYear){
+    public function export_product($requestYear, $stype){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
@@ -407,60 +556,37 @@ class Company extends Admin_Controller{
         $this->load->database();
 
         // get all users in array formate
-        $data = $this->information_model->get_all_product_for_export('product', null, $requestYear);
-        foreach($data as $key => $val){
-            if(!$this->status_model->check_company_submitted($val['client_id'], $requestYear)){
-                unset($data[$key]);
-            }
-        }
-        $data_export = array(
-            '0' => array(
-                'company' => 'Doanh nghiệp',
-                'name' => 'Tên SP/dịch vụ/giải pháp/ứng dụng',
-                'service' => 'Đăng ký tham gia lĩnh vực',
-                'functional' => 'Mô tả các công năng của sản phẩm',
-                'process' => 'Các công nghệ và quy trình chất lượng sử dụng để phát triển sản phẩm',
-                'security' => 'Bảo mật của sản phẩm',
-                'positive' => 'Các ưu điểm nổi trội của SP/GP/DV',
-                'compare' => 'So sánh với các SP/GP/DV khác',
-                'income_2016' => 'Doanh thu của SP/GP/DV năm ' . ($requestYear - 2),
-                'income_2017' => 'Doanh thu của SP/GP/DV năm ' . ($requestYear - 1),
-                'area' => 'Thị phần của SP/giải pháp/DV',
-                'open_date' => 'Ngày thương mại hoá/ra mắt dịch vụ',
-                'price' => 'Giá SP/GP/DV',
-                'customer' => '1 số khách hàng tiêu biểu',
-                'after_sale' => 'Dịch vụ sau bán hàng',
-                'team' => 'Đội ngũ phát triển sp/gp (bao nhiêu người, trình độ, trong bao lâu...)',
-                'award' => 'Các giải thưởng/DH đã nhận được'
-            )
-        );
+        if ($stype == 1) {
+            $data = $this->information_model->get_product_for_export_by_stype('product1', $requestYear, $stype);
+            $data_export = $this->product_export_stype_1($data, $requestYear);
 
-        foreach($data as $key => $extra_info){
-            $data_export[$key + 1] = array(
-                'company' => $extra_info['company'],
-                'name' => $extra_info['name'],
-                'service' => (is_array(json_decode($extra_info['service']))) ? implode(", ", (array)json_decode($extra_info['service'])) : '',
-                'functional' => html_entity_decode(strip_tags($extra_info['functional'])),
-                'process' => html_entity_decode(strip_tags($extra_info['process'])),
-                'security' => html_entity_decode(strip_tags($extra_info['security'])),
-                'positive' => html_entity_decode(strip_tags($extra_info['positive'])),
-                'compare' => html_entity_decode(strip_tags($extra_info['compare'])),
-                'income_2016' => $extra_info['income_2016'],
-                'income_2017' => $extra_info['income_2017'],
-                'area' => html_entity_decode(strip_tags($extra_info['area'])),
-                'open_date' => $extra_info['open_date'],
-                'price' => html_entity_decode(strip_tags($extra_info['price'])),
-                'customer' => html_entity_decode(strip_tags($extra_info['customer'])),
-                'after_sale' => html_entity_decode(strip_tags($extra_info['after_sale'])),
-                'team' => html_entity_decode(strip_tags($extra_info['team'])),
-                'award' => html_entity_decode(strip_tags($extra_info['award'])),
-            );
+            $filename='Danh_sach_thanh_pho_nhom_1_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+        } elseif ($stype == 2) {
+            $data = $this->information_model->get_product_for_export_by_stype('product2', $requestYear, $stype);
+            $data_export = $this->product_export_stype_2($data, $requestYear);
+
+            $filename='Danh_sach_BDS_nhom_2_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+        } elseif ($stype == 3) {
+            $data = $this->information_model->get_product_for_export_by_stype('product3', $requestYear, $stype);
+            $data_export = $this->product_export_stype_3($data, $requestYear);
+
+            $filename='Danh_sach_BDS_nhom_3_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+        } else {
+            $data = $this->information_model->get_product_for_export_by_stype('product4', $requestYear, $stype);
+            $data_export = $this->product_export_stype_4($data, $requestYear);
+
+            $filename='Danh_sach_san_pham_nhom_4_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
         }
+
+        // $data = $this->information_model->get_all_product_for_export('product4', null, $requestYear);
+        // foreach($data as $key => $val){
+        //     if(!$this->status_model->check_company_submitted($val['client_id'], $requestYear)){
+        //         unset($data[$key]);
+        //     }
+        // }
 
         // read data to active sheet
         $this->excel->getActiveSheet()->fromArray($data_export);
-
-        $filename='Danh_sach_san_pham_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
 
@@ -476,6 +602,309 @@ class Company extends Admin_Controller{
         //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
+
+    private function product_export_stype_4($data, $requestYear) {
+        $requestYear = (int) $requestYear;
+        $data_export = array(
+            '0' => array(
+                'company' => 'DN',
+                'name' => 'Tên sản phẩm/giải pháp/ứng dụng đăng ký',
+                'service' => 'Đăng ký tham gia lĩnh vực',
+                'functional' => 'Mô tả công năng sản phẩm',
+                'process' => 'Các công nghệ và quy trình chất lượng sử dụng để phát triển SP/GP/ƯD',
+                'security' => 'Tính năng Bảo mật của SP/GP/ƯD',
+                'positive' => 'Các ưu điểm nổi trội của SP/GP/ƯD so với SP cùng loại',
+                'compare' => 'So sánh với các SP/GP/DV khác',
+                'open_date' => 'Ngày thương mại hoá ra thị trường',
+                'price' => 'Giá SP/GP/ƯD',
+                'income_1' => 'Doanh thu của SP/GP/ƯD năm ' . ($requestYear - 3),
+                'income_2016' => 'Doanh thu của SP/GP/ƯD năm ' . ($requestYear - 2),
+                'income_2017' => 'Doanh thu của SP/GP/ƯD năm ' . ($requestYear - 1),
+                'customer' => 'Thông tin khách hàng',
+                'area' => 'Thị phần của SP/GP/ƯD',
+                'after_sale' => 'Dịch vụ sau bán hàng',
+                'team' => 'Đội ngũ phát triển SP/GP/ƯD',
+                'award' => 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được',
+                'copyright_certificate' => 'Số giấy chứng nhận bản quyền',
+                'certificate' => 'Giấy chứng nhận bản quyền/cam kết bản quyền'
+            )
+        );
+
+        foreach($data as $key => $extra_info){
+            if (!empty($extra_info['service'])) {
+                $services = json_decode($extra_info['service']);
+                $s_arr = [];
+                foreach ($services as $k => $v) {
+                    $s_arr[] = $this->data['product_services'][$v];
+                }
+                $s_text = implode(', ', $s_arr);
+            } else {
+                $s_text = '';
+            }
+            $data_export[$key + 1] = array(
+                'company' => $extra_info['company'],
+                'name' => html_entity_decode(strip_tags($extra_info['name'])),
+                'service' => html_entity_decode(strip_tags($s_text)),
+                'functional' => html_entity_decode(strip_tags($extra_info['functional'])),
+                'process' => html_entity_decode(strip_tags($extra_info['process'])),
+                'security' => html_entity_decode(strip_tags($extra_info['security'])),
+                'positive' => html_entity_decode(strip_tags($extra_info['positive'])),
+                'compare' => html_entity_decode(strip_tags($extra_info['compare'])),
+                'open_date' => html_entity_decode(strip_tags($extra_info['open_date'])),
+                'price' => html_entity_decode(strip_tags($extra_info['price'])),
+                'income_1' => html_entity_decode(strip_tags($extra_info['income_1'])),
+                'income_2016' => html_entity_decode(strip_tags($extra_info['income_2016'])),
+                'income_2017' => html_entity_decode(strip_tags($extra_info['income_2017'])),
+                'customer' => html_entity_decode(strip_tags($extra_info['customer'])),
+                'area' => html_entity_decode(strip_tags($extra_info['area'])),
+                'after_sale' => html_entity_decode(strip_tags($extra_info['after_sale'])),
+                'team' => html_entity_decode(strip_tags($extra_info['team'])),
+                'award' => html_entity_decode(strip_tags($extra_info['award'])),
+                'copyright_certificate' => html_entity_decode(strip_tags($extra_info['copyright_certificate'])),
+                'certificate' => html_entity_decode(strip_tags($extra_info['certificate']))
+            );
+        }
+        return $data_export;
+
+    }
+
+    private function product_export_stype_3($data, $requestYear) {
+        $requestYear = (int) $requestYear;
+        $data_export = array(
+            '0' => array(
+                'company' => 'BDS',
+                'field_1' => 'Tên dự án BĐS CN',
+                'field_2' => 'Hạng mục đăng ký tham gia',
+                'field_3' => 'Hồ sơ pháp lý gửi kèm',
+                'field_4' => 'text',
+                'field_5' => 'text',
+                'field_6' => 'text',
+                'field_7' => 'text',
+                'field_8' => 'text',
+                'field_9' => 'text',
+                'field_10' => 'text',
+                'field_11' => 'text',
+                'field_12' => 'text',
+                'field_13' => 'text',
+                'field_14' => 'text',
+                'field_15' => 'text',
+                'field_16' => 'text',
+                'field_17' => 'text',
+                'field_18' => 'text',
+                'field_19' => 'text',
+                'field_20' => 'text',
+                'field_21' => 'text',
+                'field_22' => 'text',
+                'field_23' => 'text',
+                'field_24' => 'text',
+                'field_25' => 'text',
+                'field_26' => 'text',
+                'field_27' => 'text',
+                'field_28' => 'text',
+                'field_29' => 'text',
+                'field_30' => 'text',
+                'field_31' => 'text',
+                'field_32' => 'text',
+                'field_33' => 'text'
+            )
+        );
+
+        foreach($data as $key => $extra_info){
+            if (!empty($extra_info['field_3'])) {
+                $services = json_decode($extra_info['field_3']);
+                $s_arr = [];
+                foreach ($services as $k => $v) {
+                    $s_arr[] = $this->data['attached_legal_documents_stype3'][$v];
+                }
+                $s_text = implode(', ', $s_arr);
+            } else {
+                $s_text = '';
+            }
+            $data_export[$key + 1] = array(
+                'company' => $extra_info['company'],
+                'field_1' => html_entity_decode(strip_tags($extra_info['field_1'])),
+                'field_2' => html_entity_decode(strip_tags($this->data['categories'][$extra_info['field_2']])),
+                'field_3' => html_entity_decode(strip_tags($s_text)),
+                'field_4' => html_entity_decode(strip_tags($extra_info['field_4'])),
+                'field_5' => html_entity_decode(strip_tags($extra_info['field_5'])),
+                'field_6' => html_entity_decode(strip_tags($extra_info['field_6'])),
+                'field_7' => html_entity_decode(strip_tags($extra_info['field_7'])),
+                'field_8' => html_entity_decode(strip_tags($extra_info['field_8'])),
+                'field_9' => html_entity_decode(strip_tags($extra_info['field_9'])),
+                'field_10' => html_entity_decode(strip_tags($extra_info['field_10'])),
+                'field_11' => html_entity_decode(strip_tags($extra_info['field_11'])),
+                'field_12' => html_entity_decode(strip_tags($extra_info['field_12'])),
+                'field_13' => html_entity_decode(strip_tags($extra_info['field_13'])),
+                'field_14' => html_entity_decode(strip_tags($extra_info['field_14'])),
+                'field_15' => html_entity_decode(strip_tags($extra_info['field_15'])),
+                'field_16' => html_entity_decode(strip_tags($extra_info['field_16'])),
+                'field_17' => html_entity_decode(strip_tags($extra_info['field_17'])),
+                'field_18' => html_entity_decode(strip_tags($extra_info['field_18'])),
+                'field_19' => html_entity_decode(strip_tags($extra_info['field_19'])),
+                'field_20' => html_entity_decode(strip_tags($extra_info['field_20'])),
+                'field_21' => html_entity_decode(strip_tags($extra_info['field_21'])),
+                'field_22' => html_entity_decode(strip_tags($extra_info['field_22'])),
+                'field_23' => html_entity_decode(strip_tags($extra_info['field_23'])),
+                'field_24' => html_entity_decode(strip_tags($extra_info['field_24'])),
+                'field_25' => html_entity_decode(strip_tags($extra_info['field_25'])),
+                'field_26' => html_entity_decode(strip_tags($extra_info['field_26'])),
+                'field_27' => html_entity_decode(strip_tags($extra_info['field_27'])),
+                'field_28' => html_entity_decode(strip_tags($extra_info['field_28'])),
+                'field_29' => html_entity_decode(strip_tags($extra_info['field_29'])),
+                'field_30' => html_entity_decode(strip_tags($extra_info['field_30'])),
+                'field_31' => html_entity_decode(strip_tags($extra_info['field_31'])),
+                'field_32' => html_entity_decode(strip_tags($extra_info['field_32'])),
+                'field_33' => html_entity_decode(strip_tags($extra_info['field_33']))
+            );
+        }
+        return $data_export;
+
+    }
+
+    private function product_export_stype_2($data, $requestYear) {
+        $requestYear = (int) $requestYear;
+        $data_export = array(
+            '0' => array(
+                'company' => 'BDS',
+                'field_1' => 'text',
+                'field_2' => 'text',
+                'field_3' => 'text',
+                'field_4' => 'text',
+                'field_5' => 'text',
+                'field_6' => 'text',
+                'field_7' => 'text',
+                'field_8' => 'text',
+                'field_9' => 'text',
+                'field_10' => 'text',
+                'field_11' => 'text',
+                'field_12' => 'text',
+                'field_13' => 'text',
+                'field_14' => 'text',
+                'field_15' => 'text',
+                'field_16' => 'text',
+                'field_17' => 'text',
+                'field_18' => 'text',
+                'field_19' => 'text',
+                'field_20' => 'text',
+                'field_21' => 'text',
+                'field_22' => 'text',
+                'field_23' => 'text',
+                'field_24' => 'text',
+                'field_25' => 'text',
+                'field_26' => 'text',
+                'field_27' => 'text',
+                'field_28' => 'text',
+                'field_29' => 'text',
+                'field_30' => 'text',
+                'field_31' => 'text'
+            )
+        );
+
+        foreach($data as $key => $extra_info){
+            if (!empty($extra_info['field_3'])) {
+                $services = json_decode($extra_info['field_3']);
+                $s_arr = [];
+                foreach ($services as $k => $v) {
+                    $s_arr[] = $this->data['attached_legal_documents_stype2'][$v];
+                }
+                $s_text = implode(', ', $s_arr);
+            } else {
+                $s_text = '';
+            }
+            $data_export[$key + 1] = array(
+                'company' => $extra_info['company'],
+                'field_1' => html_entity_decode(strip_tags($extra_info['field_1'])),
+                'field_2' => html_entity_decode(strip_tags($this->data['categories_bds'][$extra_info['field_2']])),
+                'field_3' => html_entity_decode(strip_tags($s_text)),
+                'field_4' => html_entity_decode(strip_tags($extra_info['field_4'])),
+                'field_5' => html_entity_decode(strip_tags($extra_info['field_5'])),
+                'field_6' => html_entity_decode(strip_tags($extra_info['field_6'])),
+                'field_7' => html_entity_decode(strip_tags($extra_info['field_7'])),
+                'field_8' => html_entity_decode(strip_tags($extra_info['field_8'])),
+                'field_9' => html_entity_decode(strip_tags($extra_info['field_9'])),
+                'field_10' => html_entity_decode(strip_tags($extra_info['field_10'])),
+                'field_11' => html_entity_decode(strip_tags($extra_info['field_11'])),
+                'field_12' => html_entity_decode(strip_tags($extra_info['field_12'])),
+                'field_13' => html_entity_decode(strip_tags($extra_info['field_13'])),
+                'field_14' => html_entity_decode(strip_tags($extra_info['field_14'])),
+                'field_15' => html_entity_decode(strip_tags($extra_info['field_15'])),
+                'field_16' => html_entity_decode(strip_tags($extra_info['field_16'])),
+                'field_17' => html_entity_decode(strip_tags($extra_info['field_17'])),
+                'field_18' => html_entity_decode(strip_tags($extra_info['field_18'])),
+                'field_19' => html_entity_decode(strip_tags($extra_info['field_19'])),
+                'field_20' => html_entity_decode(strip_tags($extra_info['field_20'])),
+                'field_21' => html_entity_decode(strip_tags($extra_info['field_21'])),
+                'field_22' => html_entity_decode(strip_tags($extra_info['field_22'])),
+                'field_23' => html_entity_decode(strip_tags($extra_info['field_23'])),
+                'field_24' => html_entity_decode(strip_tags($extra_info['field_24'])),
+                'field_25' => html_entity_decode(strip_tags($extra_info['field_25'])),
+                'field_26' => html_entity_decode(strip_tags($extra_info['field_26'])),
+                'field_27' => html_entity_decode(strip_tags($extra_info['field_27'])),
+                'field_28' => html_entity_decode(strip_tags($extra_info['field_28'])),
+                'field_29' => html_entity_decode(strip_tags($extra_info['field_29'])),
+                'field_30' => html_entity_decode(strip_tags($extra_info['field_30'])),
+                'field_31' => html_entity_decode(strip_tags($extra_info['field_31'])),
+            );
+        }
+        return $data_export;
+    }
+
+    private function product_export_stype_1($data, $requestYear) {
+        $requestYear = (int) $requestYear;
+        $data_export = array(
+            '0' => array(
+                'company' => 'Thành phố/đô thị',
+                'field_21' => 'Lĩnh vực đăng ký tham gia Giải thưởng',
+                'field_2' => 'Hành lang pháp lý',
+                'field_3' => 'Thực tế triển khai các đề án, dự án, chương trình ứng dụng CNTT',
+                'field_4' => 'Các ứng dụng công nghệ, tiện ích thông minh cho người dân và doanh nghiệp trong lĩnh vực đăng ký xét trao Giải',
+                'field_5' => 'Quy mô và tỉ lệ đầu tư cho xây dựng Hạ tầng dữ liệu/hạ tầng số của tỉnh/thành phố trên tổng mức đầu tư cho xây dựng và phát triển thành phố thông minh; tỉ lệ  CNTT trong các dự án đầu tư',
+                'field_6' => 'Mức độ hoàn thiện của chính quyền điện tử/chính quyền số',
+                'field_7' => 'Bảo mật an toàn thông tin, an ninh cho người dân',
+                'field_8' => 'Khả năng tiếp cận cơ hội số của người dân, cộng đồng và doanh nghiệp tại thành phố',
+                'field_9' => 'Các chính sách, chương trình, hoạt động khuyến khích khởi nghiệp đổi mới sáng tạo của tỉnh, thành phố (cung cấp thông tin nếu đăng ký lĩnh vực “Thành phố hấp dẫn Khởi nghiệp ĐMST”), gồm',
+                'field_10' => 'Số lượng DN thành lập mới năm 2018, 2019',
+                'field_11' => 'Các chính sách của tỉnh/thành phố cho startups',
+                'field_12' => 'Các chương trình hỗ trợ, thúc đẩy startups năm 2018, 2019',
+                'field_13' => 'Tổng ngân sách cho hỗ trợ, thúc đẩy startups năm 2018, 2019',
+                'field_14' => 'Các đơn vị phụ trách, vườn ươm, trung tâm hỗ trợ/thúc đẩy khởi nghiệp',
+                'field_15' => 'Kết quả đạt được trong 2018, 2019',
+                'field_16' => 'Sự chuẩn bị nguồn nhân lực cho xây dựng thành phố thông minh, gồm',
+                'field_17' => 'Các khoá đào tạo liên quan đến thành phố thông minh và số lượng người tham gia năm 2018, 2019',
+                'field_18' => 'Kinh phí cho đào tạo liên quan đến thành phố thông minh năm 2018, 2019',
+                'field_19' => 'Các tiêu chí, tiêu chuẩn chuyên ngành, kỹ thuật riêng của từng lĩnh vực đăng ký (nếu có)',
+                'field_20' => 'Các giải thưởng/danh hiệu/bằng khen/giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh)'
+            )
+        );
+
+        foreach($data as $key => $extra_info){
+            $data_export[$key + 1] = array(
+                'company' => $extra_info['company'],
+                'field_21' => html_entity_decode(strip_tags($this->data['type_smart_city'][$extra_info['field_21']])),
+                'field_2' => html_entity_decode(strip_tags($extra_info['field_2'])),
+                'field_3' => html_entity_decode(strip_tags($extra_info['field_3'])),
+                'field_4' => html_entity_decode(strip_tags($extra_info['field_4'])),
+                'field_5' => html_entity_decode(strip_tags($extra_info['field_5'])),
+                'field_6' => html_entity_decode(strip_tags($extra_info['field_6'])),
+                'field_7' => html_entity_decode(strip_tags($extra_info['field_7'])),
+                'field_8' => html_entity_decode(strip_tags($extra_info['field_8'])),
+                'field_9' => html_entity_decode(strip_tags($extra_info['field_9'])),
+                'field_10' => html_entity_decode(strip_tags($extra_info['field_10'])),
+                'field_11' => html_entity_decode(strip_tags($extra_info['field_11'])),
+                'field_12' => html_entity_decode(strip_tags($extra_info['field_12'])),
+                'field_13' => html_entity_decode(strip_tags($extra_info['field_13'])),
+                'field_14' => html_entity_decode(strip_tags($extra_info['field_14'])),
+                'field_15' => html_entity_decode(strip_tags($extra_info['field_15'])),
+                'field_16' => html_entity_decode(strip_tags($extra_info['field_16'])),
+                'field_17' => html_entity_decode(strip_tags($extra_info['field_17'])),
+                'field_18' => html_entity_decode(strip_tags($extra_info['field_18'])),
+                'field_19' => html_entity_decode(strip_tags($extra_info['field_19'])),
+                'field_20' => html_entity_decode(strip_tags($extra_info['field_20']))
+            );
+        }
+        return $data_export;
+    }
+
     public function export_company_detail($id){
         //activate worksheet number 1
 

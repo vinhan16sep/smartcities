@@ -145,6 +145,9 @@ class Product3 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     $insert = $this->product3_model->insert_product($this->data['ctrl_name'], $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
@@ -217,6 +220,9 @@ class Product3 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     $insert = $this->product3_model->insert_product($this->data['ctrl_name'], $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
@@ -292,6 +298,9 @@ class Product3 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by'],
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     try {
                         $this->product3_model->update_product($this->data['ctrl_name'], $this->data['user']->id, $id, $data);
                         $this->load->model('status_model');
@@ -364,6 +373,9 @@ class Product3 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     try {
                         $this->product3_model->update_product($this->data['ctrl_name'], $this->data['user']->id, $id, $data);
                         $this->session->set_flashdata('message', 'Item updated successfully');
