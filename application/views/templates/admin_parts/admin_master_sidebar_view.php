@@ -51,13 +51,19 @@
                         </ul>
                     </li>
                 <?php } ?>
-                <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
+                <?php //if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
                 <li class="active">
                     <a href=""> THông tin tài khoản
                         <span class="pull-right-container">
                         </span>
                     </a>
                     <ul class="treeview-menu">
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index/3'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Tất cả
+                                </a>
+                            </li>
                             <li class="active">
                                 <a href="<?php echo base_url('admin/users/index/3?stype=1'); ?>">
                                     <i class="fa fa-minus" aria-hidden="true"></i>
@@ -84,7 +90,7 @@
                             </li>
                     </ul>
                 </li>
-                <?php } ?>
+                <?php //} ?>
                 <li class="active">
                     <a href=""> Doanh nghiệp
                         <span class="pull-right-container">

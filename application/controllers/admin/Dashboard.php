@@ -18,9 +18,22 @@ class Dashboard extends Admin_Controller {
     	
     	/* total products */
     	$this->data['total_products1'] = $this->information_model->count_all_current_year_product('product1', $this->data['eventYear']);
+    	
     	$this->data['total_products2'] = $this->information_model->count_all_current_year_product('product2', $this->data['eventYear']);
     	$this->data['total_products3'] = $this->information_model->count_all_current_year_product('product3', $this->data['eventYear']);
     	$this->data['total_products4'] = $this->information_model->count_all_current_year_product('product4', $this->data['eventYear']);
+    	
+    	
+    	$this->data['total_products1'] = $this->information_model->count_all_current_year_product('product1', $this->data['eventYear']);
+    	
+    // 	update data product1,2,3,4
+    // 	$company = $this->information_model->fetch_all1('product4');
+    // 	foreach($company as $key => $value){
+    // 	    foreach($value as $k => $v){
+    // 	        $value[$k] = htmlspecialchars_decode(htmlspecialchars_decode(htmlspecialchars_decode(htmlspecialchars_decode(htmlspecialchars_decode($v)))));
+    // 	    }
+    // 	    $this->information_model->update_by_ids('product4', $value['id'], $value);
+    // 	}
 
     	$this->data['total_companys'] = $total_companys;
     	$this->data['total_users'] = $total_users;

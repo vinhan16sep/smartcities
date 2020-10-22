@@ -146,6 +146,9 @@ class Product2 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     $insert = $this->product2_model->insert_product($this->data['ctrl_name'], $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
@@ -218,6 +221,9 @@ class Product2 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     $insert = $this->product2_model->insert_product($this->data['ctrl_name'], $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
@@ -243,6 +249,11 @@ class Product2 extends Client_Controller {
                 $this->data['product'] = $this->product2_model->fetch_product_by_user_id($this->data['ctrl_name'], $this->data['user']->id, $id);
                 if (!$this->data['product']) {
                     redirect('client/' . $this->data['ctrl_name'] . '/products', 'refresh');
+                }
+                if(!empty($this->data['product'])){
+                    foreach($this->data['product'] as $key => $value){
+                        $this->data['product'][$key] = htmlspecialchars_decode(htmlspecialchars_decode($value));
+                    }
                 }
                 $this->render('client/product2/edit_view');
             } else {
@@ -293,6 +304,9 @@ class Product2 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by'],
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     try {
                         $this->product2_model->update_product($this->data['ctrl_name'], $this->data['user']->id, $id, $data);
                         $this->load->model('status_model');
@@ -365,6 +379,9 @@ class Product2 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     try {
                         $this->product2_model->update_product($this->data['ctrl_name'], $this->data['user']->id, $id, $data);
                         $this->session->set_flashdata('message', 'Item updated successfully');

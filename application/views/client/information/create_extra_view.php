@@ -210,8 +210,29 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-xs-12">
-                            <p>Quý đơn vị vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia (Phiếu đăng ký, Giấy phép kinh doanh (đối với DN), logo, profile DN&SP (nếu có)) vào ô dưới đây</p>
-                            <?php  echo form_error('link', '<div class="error">', '</div>'); ?>
+<?php
+if (isset($user->service_type)) {
+	if ($user->service_type == 1) {
+		echo "<p>Quý đơn vị vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia bao gồm (Đề án về thành phố thông minh (quyết định phê duyệt, chi tiết đề án, Các giải thưởng/ danh hiệu/ bằng khen/ giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh) (nếu có), Logo, Video demo giới thiệu về tỉnh, thành phố, Phiếu đăng ký (theo mẫu)) vào ô dưới đây
+
+</p>";
+	} elseif ($user->service_type == 2) {
+		echo "<p>Quý đơn vị vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia bao gồm (Giấy ĐKKD của Chủ đầu tư, Hồ sơ pháp lý, Video demo dự án, Văn bản hợp tác với các đối tác công nghệ (nếu có), Các giải thưởng/ danh hiệu/ bằng khen/ giấy khen đã đạt được (đặc biệt là liên quan đến lĩnh vực thành phố thông minh) (nếu có), Logo của đơn vị, PĐK (theo mẫu)) vào ô dưới đây
+
+</p>";
+	} elseif ($user->service_type == 3) {
+		echo "<p>Quý đơn vị vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia bao gồm (Giấy ĐKKD/Chứng nhận đầu tư của Chủ đầu tư, Hồ sơ pháp lý, Các bằng khen khác, Video demo dự án, Logo đơn vị, PĐK (theo mẫu)) vào ô dưới đây
+
+</p>";
+	} elseif ($user->service_type == 4) {
+		echo "<p>Quý đơn vị vui lòng khai đầy đủ thông tin PĐK (theo mẫu), chèn link upload (Google Drive, OneDrive, ...) hồ sơ tham gia bao gồm (Phiếu đăng ký, Giấy phép kinh doanh (đối với DN), logo, profile DN&SP (nếu có)) vào ô dưới đây
+
+</p>";
+	} else {
+		echo '';
+	}
+}
+?>                            <?php  echo form_error('link', '<div class="error">', '</div>'); ?>
                             <div class="input-group">
                                 <?php echo form_input('link', set_value('link'), 'class="form-control" aria-describedby="basic-addon2" placeholder="Nhập Link phiếu đăng ký tại đây" '); ?>
                               <span class="input-group-addon" id="basic-addon2" style="background: #f39c12 !important"><a style="color:#fff;font-weight: bold;" class="color-warning" href="<?php echo site_url('PDK_SmartCity.docx') ?>" target="_blank">Tải mẫu Phiếu đăng ký</a></span>

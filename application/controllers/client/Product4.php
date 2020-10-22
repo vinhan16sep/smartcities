@@ -129,6 +129,9 @@ class Product4 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     if(!empty($_FILES['file']['name'])){
                         $data['file'] = $file;
                     }
@@ -187,6 +190,9 @@ class Product4 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     if(!empty($_FILES['file']['name'])){
                         $data['file'] = $file;
                     }
@@ -248,6 +254,9 @@ class Product4 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by'],
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     if(!empty($_FILES['file']['name'])){
                         $data['file'] = $file;
                     }
@@ -304,6 +313,9 @@ class Product4 extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
                     if(!empty($_FILES['file']['name'])){
                         $data['file'] = $file;
                     }

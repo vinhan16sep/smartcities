@@ -80,6 +80,9 @@ class Company extends Client_Controller {
             } else {
                 if ($this->input->post()) {
                     $data = $this->generate_data('create', $this->input->post());
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
 
                     $insert = $this->information_model->insert_company('company', $data);
                     if (!$insert) {
@@ -109,6 +112,9 @@ class Company extends Client_Controller {
             }else{
                 if ($this->input->post()) {
                     $data = $this->generate_data('create', $this->input->post());
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
 
                     $insert = $this->information_model->insert_company('company', $data);
                     if (!$insert) {
@@ -146,7 +152,10 @@ class Company extends Client_Controller {
             } else {
                 if ($this->input->post()) {
                     $data = $this->generate_data('edit', $this->input->post());
-
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
+                    
                     try {
                         $this->information_model->update_by_information_and_year('company', $this->data['user']->username, $this->data['eventYear'], $data);
                         $this->load->model('status_model');
@@ -179,6 +188,11 @@ class Company extends Client_Controller {
                 if ($this->input->post()) {
 
                     $data = $this->generate_data('edit', $this->input->post());
+                    
+                    foreach($data as $key => $value){
+                        $data[$key] = htmlspecialchars_decode($value);
+                    }
+                    
                     try {
                         $this->information_model->update_by_information_and_year('company', $this->data['user']->username, $this->data['eventYear'], $data);
                         $this->session->set_flashdata('message', 'Item updated successfully');

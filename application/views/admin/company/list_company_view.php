@@ -1,9 +1,9 @@
 <!--main content start-->
 <div class="content-wrapper" style="min-height: 916px;">
-    <!-- <div class="box-body pad table-responsive">
-        <h3>Danh sách doanh nghiệp</h3><a type="button" href="<?php echo site_url('admin/company/export/' . $requestYear); ?>" class="btn btn-success">EXPORT DATA DOANH NGHIỆP</a>
-        <a type="button" href="<?php echo site_url('admin/company/export_product/' . $requestYear); ?>" class="btn btn-success">EXPORT DATA SẢN PHẨM</a>
-    </div> -->
+    <div class="box-body pad table-responsive">
+        <h3>Danh sách doanh nghiệp</h3><a type="button" href="<?php echo site_url('admin/company/export/' . $requestYear . '/' . $stype); ?>" class="btn btn-success">EXPORT DATA DOANH NGHIỆP</a>
+        <a type="button" href="<?php echo site_url('admin/company/export_product/' . $requestYear . '/' . $stype); ?>" class="btn btn-success">EXPORT DATA SẢN PHẨM</a>
+    </div>
 
     <section class="content">
 

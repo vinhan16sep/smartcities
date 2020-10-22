@@ -5,7 +5,32 @@ class Information_model extends CI_Model {
     function __construct(){
         parent::__construct();
     }
+    
+    // public function fetch_all1($type){
+    //     $query = $this->db->select('*')
+    //         ->from($type)
+    //         ->get();
 
+    //     if($query->num_rows() > 0){
+    //         return $query->result_array();
+    //     }
+
+    //     return false;
+    // }
+    // public function update_by_ids($type, $id, $data){
+    //     $this->db->set($data)
+    //         ->where('id', $id)
+    //         ->update($type);
+
+    //     if($this->db->affected_rows() == 1){
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+    
+    
+    
     public function fetch_all($type){
         $query = $this->db->select('*')
             ->from($type)
@@ -512,6 +537,7 @@ class Information_model extends CI_Model {
 
         return false;
     }
+    
 
     public function delete($type, $id){
         $this->db->set('is_deleted', 1)
@@ -755,12 +781,46 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_company_for_export_by_stype($requestYear, $stype){
+        $this->db->select('company.*, users.company AS company_name, users.service_type AS stype');
+        $this->db->from('company');
+        $this->db->join('users', 'users.id = company.client_id');
+        $this->db->where('company.year', $requestYear);
+        $this->db->where('users.service_type', $stype);
+        $this->db->order_by("company.id", "asc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
+    public function get_city_for_export_by_stype($requestYear, $stype){
+        $this->db->select('city.*, users.company AS company_name, users.service_type AS stype');
+        $this->db->from('city');
+        $this->db->join('users', 'users.id = city.client_id');
+        $this->db->where('city.year', $requestYear);
+        $this->db->where('users.service_type', $stype);
+        $this->db->order_by("city.id", "asc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function get_all_product_for_export($type, $client_id = null, $year){
         $this->db->select('users.company, product.*');
         $this->db->from($type);
         $this->db->join('users', 'users.id = product.client_id');
         $this->db->where('product.year', $year);
         $this->db->order_by("product.client_id", "asc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
+    public function get_product_for_export_by_stype($table, $year, $stype){
+        $this->db->select("users.company, $table.*");
+        $this->db->from($table);
+        $this->db->join('users', "users.id = $table.client_id");
+        $this->db->join('status', "$table.client_id = status.client_id");
+        $this->db->where("status.is_final", 1);
+        $this->db->where("$table.year", $year);
+        $this->db->order_by("$table.client_id", "asc");
 
         return $result = $this->db->get()->result_array();
     }

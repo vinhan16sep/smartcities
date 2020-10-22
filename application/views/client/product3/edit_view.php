@@ -22,6 +22,7 @@
                 <?php
                 echo form_open_multipart('client/'.$ctrl_name.'/edit_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
+                <input type="hidden" value="<?php echo $product['id'] ?>" name="id">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -893,7 +894,7 @@
         setTimeout(function(){
             $("#submit").attr("disabled", true);
             $("#tmpSubmit").attr("disabled", true);
-        },1000)
+        })
             
     });
 
