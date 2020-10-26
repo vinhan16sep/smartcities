@@ -182,8 +182,6 @@ class Product extends Member_Controller{
             foreach ($clients as $key => $val) {
                 $client_mapping[$val['id']] = $val['company'];
             }
-            // echo '<pre>';
-            // print_r($result);die;
 
             $this->data['number'] = $number;
             $this->data['stype'] = $stype;
