@@ -116,7 +116,7 @@ class Product extends Member_Controller{
                     $result[$key]['team'] = 'Chưa có';
                     $result[$key]['team_id'] = 0;
                 }
-                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id'], $rating_search, $stype);
+                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id'], $stype);
                 $new_rating_medium = array();
                 $total_rating = 0;
                 if ($new_rating_array) {

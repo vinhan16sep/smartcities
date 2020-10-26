@@ -166,15 +166,17 @@ class Team extends Admin_Controller{
             $is_company_submitted = $this->status_model->check_company_submitted($client_id, $this->data['eventYear']);
             if ( $check_product_in_team > 0 || !$is_company_submitted ) {
                 unset($products[$key]);
-            }
-            if($user['service_type'] == 1){
-                $products[$key]['title'] = $this->data['type_smart_city'][$value['field_21']];
-            }elseif($user['service_type'] == 2){
-                $products[$key]['title'] = $value['field_1'];
-            }elseif($user['service_type'] == 3){
-                $products[$key]['title'] = $value['field_1'];
-            }elseif($user['service_type'] == 4){
-                $products[$key]['title'] = $value['name'];
+                continue;
+            } else {
+                if($user['service_type'] == 1){
+                    $products[$key]['title'] = $this->data['type_smart_city'][$value['field_21']];
+                }elseif($user['service_type'] == 2){
+                    $products[$key]['title'] = $value['field_1'];
+                }elseif($user['service_type'] == 3){
+                    $products[$key]['title'] = $value['field_1'];
+                }elseif($user['service_type'] == 4){
+                    $products[$key]['title'] = $value['name'];
+                }
             }
         }
         return $this->output->set_status_header(200)
