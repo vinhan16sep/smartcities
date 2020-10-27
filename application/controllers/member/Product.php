@@ -234,6 +234,22 @@ class Product extends Member_Controller{
         $product = $this->information_model->fetch_by_id('product' . $stype, $product_id);
         $company = $this->information_model->fetch_by_id('users', $product['client_id']);
 
+
+        $rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $product_id, $stype);
+        $total_rating = 0;
+        if ($rating_array) {
+            foreach ($rating_array as $index => $item) {
+                $total_rating += $item['total'];
+            }
+            $rating_medium = round($total_rating / count($rating_array), 2);
+        }
+        if ($total_rating != 0) {
+            $this->data['rating_medium'] = $rating_medium;
+        }else{
+            $this->data['rating_medium'] = 0;   
+            
+        }
+
         $this->data['team'] = $team;
         $this->data['stype'] = $stype;
         $this->data['company'] = $company;
